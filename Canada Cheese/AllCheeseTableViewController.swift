@@ -9,9 +9,20 @@
 import UIKit
 
 class AllCheeseTableViewController: UITableViewController {
+    
+    var allCheeses = [CanadianCheese]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Load the JSON data
+        if let url = Bundle.main.url(forResource: "canadianCheeseDirectory", withExtension: "json") {
+            if let data = try? Data(contentsOf: url) {
+                parse(json: data)
+            } else {
+                print("error")
+            }
+        }
+        
         // set the title and the size of the title in the navigation bar
         let navigationBar = navigationController?.navigationBar
         navigationBar?.prefersLargeTitles = true
@@ -26,6 +37,14 @@ class AllCheeseTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    func parse(json: Data) {
+        let decoder = JSONDecoder()
+        
+        if let jsonCheese = try? decoder.decode(CanadianCheeses.self, from: json) {
+            allCheeses = jsonCheese.CheeseDirectory
+        }
+    }
 
     // MARK: - Table view data source
 
@@ -36,14 +55,36 @@ class AllCheeseTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return allCheeses.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cheeseCell", for: indexPath) as! CheeseTableViewCell
-        cell.cheeseName.text = "test name"
-        // Configure the cell...
-
+        // Default to using the English value for the cell labels
+        var cheeseName = allCheeses[indexPath.row].CheeseNameEn
+        var cheeseManufacturer = allCheeses[indexPath.row].ManufacturerNameEn
+        var cheeseFlavourDesc = allCheeses[indexPath.row].FlavourEn
+        
+        // If the English name is empty check for the French
+        // Note: cheeseName could still be empty after this if the French version is also empty
+        if cheeseName.isEmpty {
+            cheeseName = allCheeses[indexPath.row].CheeseNameFr
+        }
+        // See if the English manufacturer is empty, if so try the French
+        // Note: This does not guarantee that cheeseManufacturer is non-empty
+        if cheeseManufacturer.isEmpty {
+            cheeseManufacturer = allCheeses[indexPath.row].ManufacturerNameFr
+        }
+        // See if the English flavour is empty
+        // Note: This does not guarantee that cheeseFlavourDesc is non-empty
+        if cheeseFlavourDesc.isEmpty {
+            cheeseFlavourDesc = allCheeses[indexPath.row].CharacteristicsEn
+        }
+        
+        cell.cheeseName.text = cheeseName
+        cell.manufacturer.text = cheeseManufacturer
+        cell.flavourDescription.text = cheeseFlavourDesc
+        
         return cell
     }
     
