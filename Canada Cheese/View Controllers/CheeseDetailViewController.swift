@@ -1,21 +1,25 @@
 //
-//  FavouritesTableViewController.swift
+//  CheeseDetailViewController.swift
 //  Canada Cheese
 //
-//  Created by Taylor Young on 2020-09-03.
+//  Created by Taylor Young on 2020-09-08.
 //  Copyright © 2020 Taylor Young. All rights reserved.
 //
 
 import UIKit
 
-class FavouritesTableViewController: UITableViewController {
+class CheeseDetailViewController: UITableViewController {
+    
+    var properties = [
+        ["Cheese", "Manufacturer", "Manufacturer province", "Manufacturing type", "Website"],
+        ["Fat percent", "Moisture percent", "Particularities", "Flavour", "Characteristics", "Ripening", "Organic", "Category type", "Milk type", "Milk treatment type", "Rind type"],
+        ["Last update"]
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.largeTitleDisplayMode = .never
         
-        let navigationBar = navigationController?.navigationBar
-        navigationBar?.topItem?.title = "Favourite Cheeses"
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -27,24 +31,48 @@ class FavouritesTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return properties.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
+        return properties[section].count
     }
 
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "favouriteCheeseCell", for: indexPath) as! FavouriteCheeseCell
-        cell.cheeseName.text = "Test name"
-        cell.favouriteButton.tintColor = .systemYellow
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cheeseDetailCell", for: indexPath) as! CheeseDetailCell
+        cell.propertyName.text = properties[indexPath.section][indexPath.row]
+        cell.propertyValue.text = "Test value"
+        cell.propertyName.adjustsFontSizeToFitWidth = true
 
         // Configure the cell...
 
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Basic Info"
+        case 1:
+            return "Other Info"
+        default:
+            return ""
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
+        headerView.backgroundColor = .secondarySystemBackground
+        return headerView
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 10))
+        footerView.backgroundColor = .secondarySystemBackground
+        return footerView
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

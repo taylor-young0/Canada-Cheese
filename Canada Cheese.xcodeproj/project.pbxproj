@@ -10,6 +10,9 @@
 		EF09DAAF2501757400459D6C /* CanadianCheese.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF09DAAE2501757400459D6C /* CanadianCheese.swift */; };
 		EFA28ACF2502B38A00FF1D0F /* FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA28ACE2502B38A00FF1D0F /* FilterTableViewController.swift */; };
 		EFA28AD12502B84E00FF1D0F /* CheeseFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA28AD02502B84E00FF1D0F /* CheeseFilterCell.swift */; };
+		EFB177D72507CAE100DE2FBA /* FavouriteCheeseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB177D62507CAE100DE2FBA /* FavouriteCheeseCell.swift */; };
+		EFB177D92507D38000DE2FBA /* CheeseDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB177D82507D38000DE2FBA /* CheeseDetailCell.swift */; };
+		EFB177DB2507D6D100DE2FBA /* CheeseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB177DA2507D6D100DE2FBA /* CheeseDetailViewController.swift */; };
 		EFF025AC250138A3007FC111 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF025AB250138A3007FC111 /* AppDelegate.swift */; };
 		EFF025AE250138A3007FC111 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF025AD250138A3007FC111 /* SceneDelegate.swift */; };
 		EFF025B5250138A3007FC111 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFF025B3250138A3007FC111 /* Main.storyboard */; };
@@ -25,6 +28,9 @@
 		EF09DAAE2501757400459D6C /* CanadianCheese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanadianCheese.swift; sourceTree = "<group>"; };
 		EFA28ACE2502B38A00FF1D0F /* FilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewController.swift; sourceTree = "<group>"; };
 		EFA28AD02502B84E00FF1D0F /* CheeseFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeseFilterCell.swift; sourceTree = "<group>"; };
+		EFB177D62507CAE100DE2FBA /* FavouriteCheeseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCheeseCell.swift; sourceTree = "<group>"; };
+		EFB177D82507D38000DE2FBA /* CheeseDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeseDetailCell.swift; sourceTree = "<group>"; };
+		EFB177DA2507D6D100DE2FBA /* CheeseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeseDetailViewController.swift; sourceTree = "<group>"; };
 		EFF025A8250138A3007FC111 /* Canada Cheese.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Canada Cheese.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFF025AB250138A3007FC111 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFF025AD250138A3007FC111 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +61,7 @@
 				EFA28ACE2502B38A00FF1D0F /* FilterTableViewController.swift */,
 				EFF025C325013CDB007FC111 /* FavouritesTableViewController.swift */,
 				EFF025C125013CB1007FC111 /* AllCheeseTableViewController.swift */,
+				EFB177DA2507D6D100DE2FBA /* CheeseDetailViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -62,11 +69,21 @@
 		EFB177D52507C8C100DE2FBA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				EFA28AD02502B84E00FF1D0F /* CheeseFilterCell.swift */,
-				EFF025C52501418C007FC111 /* CheeseCell.swift */,
+				EFB177DC2507E9A300DE2FBA /* Cell */,
 				EF09DAAE2501757400459D6C /* CanadianCheese.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		EFB177DC2507E9A300DE2FBA /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				EFA28AD02502B84E00FF1D0F /* CheeseFilterCell.swift */,
+				EFF025C52501418C007FC111 /* CheeseCell.swift */,
+				EFB177D62507CAE100DE2FBA /* FavouriteCheeseCell.swift */,
+				EFB177D82507D38000DE2FBA /* CheeseDetailCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		EFF0259F250138A3007FC111 = {
@@ -176,9 +193,12 @@
 				EFF025AC250138A3007FC111 /* AppDelegate.swift in Sources */,
 				EFF025C425013CDB007FC111 /* FavouritesTableViewController.swift in Sources */,
 				EFF025C225013CB1007FC111 /* AllCheeseTableViewController.swift in Sources */,
+				EFB177DB2507D6D100DE2FBA /* CheeseDetailViewController.swift in Sources */,
 				EFA28AD12502B84E00FF1D0F /* CheeseFilterCell.swift in Sources */,
 				EFF025C62501418C007FC111 /* CheeseCell.swift in Sources */,
+				EFB177D92507D38000DE2FBA /* CheeseDetailCell.swift in Sources */,
 				EFF025AE250138A3007FC111 /* SceneDelegate.swift in Sources */,
+				EFB177D72507CAE100DE2FBA /* FavouriteCheeseCell.swift in Sources */,
 				EF09DAAF2501757400459D6C /* CanadianCheese.swift in Sources */,
 				EFA28ACF2502B38A00FF1D0F /* FilterTableViewController.swift in Sources */,
 			);
