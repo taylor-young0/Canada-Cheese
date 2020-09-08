@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		EF09DAAF2501757400459D6C /* CanadianCheese.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF09DAAE2501757400459D6C /* CanadianCheese.swift */; };
-		EF09DAB125017B7400459D6C /* CanadianCheeses.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF09DAB025017B7400459D6C /* CanadianCheeses.swift */; };
+		EFA28ACF2502B38A00FF1D0F /* FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA28ACE2502B38A00FF1D0F /* FilterTableViewController.swift */; };
+		EFA28AD12502B84E00FF1D0F /* CheeseFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA28AD02502B84E00FF1D0F /* CheeseFilterCell.swift */; };
 		EFF025AC250138A3007FC111 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF025AB250138A3007FC111 /* AppDelegate.swift */; };
 		EFF025AE250138A3007FC111 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF025AD250138A3007FC111 /* SceneDelegate.swift */; };
 		EFF025B5250138A3007FC111 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFF025B3250138A3007FC111 /* Main.storyboard */; };
@@ -16,13 +17,14 @@
 		EFF025BA250138A5007FC111 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFF025B8250138A5007FC111 /* LaunchScreen.storyboard */; };
 		EFF025C225013CB1007FC111 /* AllCheeseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF025C125013CB1007FC111 /* AllCheeseTableViewController.swift */; };
 		EFF025C425013CDB007FC111 /* FavouritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF025C325013CDB007FC111 /* FavouritesTableViewController.swift */; };
-		EFF025C62501418C007FC111 /* CheeseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF025C52501418C007FC111 /* CheeseTableViewCell.swift */; };
+		EFF025C62501418C007FC111 /* CheeseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF025C52501418C007FC111 /* CheeseCell.swift */; };
 		EFF025C825014CBC007FC111 /* canadianCheeseDirectory.json in Resources */ = {isa = PBXBuildFile; fileRef = EFF025C725014CBC007FC111 /* canadianCheeseDirectory.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EF09DAAE2501757400459D6C /* CanadianCheese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanadianCheese.swift; sourceTree = "<group>"; };
-		EF09DAB025017B7400459D6C /* CanadianCheeses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanadianCheeses.swift; sourceTree = "<group>"; };
+		EFA28ACE2502B38A00FF1D0F /* FilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewController.swift; sourceTree = "<group>"; };
+		EFA28AD02502B84E00FF1D0F /* CheeseFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeseFilterCell.swift; sourceTree = "<group>"; };
 		EFF025A8250138A3007FC111 /* Canada Cheese.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Canada Cheese.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFF025AB250138A3007FC111 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFF025AD250138A3007FC111 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,7 +34,7 @@
 		EFF025BB250138A5007FC111 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFF025C125013CB1007FC111 /* AllCheeseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCheeseTableViewController.swift; sourceTree = "<group>"; };
 		EFF025C325013CDB007FC111 /* FavouritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableViewController.swift; sourceTree = "<group>"; };
-		EFF025C52501418C007FC111 /* CheeseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeseTableViewCell.swift; sourceTree = "<group>"; };
+		EFF025C52501418C007FC111 /* CheeseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeseCell.swift; sourceTree = "<group>"; };
 		EFF025C725014CBC007FC111 /* canadianCheeseDirectory.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = canadianCheeseDirectory.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,6 +49,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EFB177D42507C88900DE2FBA /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EFA28ACE2502B38A00FF1D0F /* FilterTableViewController.swift */,
+				EFF025C325013CDB007FC111 /* FavouritesTableViewController.swift */,
+				EFF025C125013CB1007FC111 /* AllCheeseTableViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		EFB177D52507C8C100DE2FBA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EFA28AD02502B84E00FF1D0F /* CheeseFilterCell.swift */,
+				EFF025C52501418C007FC111 /* CheeseCell.swift */,
+				EF09DAAE2501757400459D6C /* CanadianCheese.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		EFF0259F250138A3007FC111 = {
 			isa = PBXGroup;
 			children = (
@@ -66,15 +88,12 @@
 		EFF025AA250138A3007FC111 /* Canada Cheese */ = {
 			isa = PBXGroup;
 			children = (
+				EFB177D52507C8C100DE2FBA /* Model */,
+				EFB177D42507C88900DE2FBA /* View Controllers */,
 				EFF025AB250138A3007FC111 /* AppDelegate.swift */,
 				EFF025AD250138A3007FC111 /* SceneDelegate.swift */,
 				EFF025B3250138A3007FC111 /* Main.storyboard */,
-				EFF025C52501418C007FC111 /* CheeseTableViewCell.swift */,
 				EFF025C725014CBC007FC111 /* canadianCheeseDirectory.json */,
-				EFF025C325013CDB007FC111 /* FavouritesTableViewController.swift */,
-				EFF025C125013CB1007FC111 /* AllCheeseTableViewController.swift */,
-				EF09DAB025017B7400459D6C /* CanadianCheeses.swift */,
-				EF09DAAE2501757400459D6C /* CanadianCheese.swift */,
 				EFF025B6250138A5007FC111 /* Assets.xcassets */,
 				EFF025B8250138A5007FC111 /* LaunchScreen.storyboard */,
 				EFF025BB250138A5007FC111 /* Info.plist */,
@@ -157,10 +176,11 @@
 				EFF025AC250138A3007FC111 /* AppDelegate.swift in Sources */,
 				EFF025C425013CDB007FC111 /* FavouritesTableViewController.swift in Sources */,
 				EFF025C225013CB1007FC111 /* AllCheeseTableViewController.swift in Sources */,
-				EFF025C62501418C007FC111 /* CheeseTableViewCell.swift in Sources */,
+				EFA28AD12502B84E00FF1D0F /* CheeseFilterCell.swift in Sources */,
+				EFF025C62501418C007FC111 /* CheeseCell.swift in Sources */,
 				EFF025AE250138A3007FC111 /* SceneDelegate.swift in Sources */,
 				EF09DAAF2501757400459D6C /* CanadianCheese.swift in Sources */,
-				EF09DAB125017B7400459D6C /* CanadianCheeses.swift in Sources */,
+				EFA28ACF2502B38A00FF1D0F /* FilterTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

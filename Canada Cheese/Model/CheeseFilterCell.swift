@@ -1,18 +1,17 @@
 //
-//  CheeseTableViewCell.swift
+//  CheeseFilterCell.swift
 //  Canada Cheese
 //
-//  Created by Taylor Young on 2020-09-03.
+//  Created by Taylor Young on 2020-09-04.
 //  Copyright © 2020 Taylor Young. All rights reserved.
 //
 
 import UIKit
 
-class CheeseTableViewCell: UITableViewCell {
+class CheeseFilterCell: UITableViewCell {
 
-    @IBOutlet var cheeseName: UILabel!
-    @IBOutlet var manufacturer: UILabel!
-    @IBOutlet var flavourDescription: UILabel!
+    @IBOutlet var filter: UILabel!
+    @IBOutlet var filterOptions: UIPickerView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

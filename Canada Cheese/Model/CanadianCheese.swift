@@ -40,3 +40,7 @@ struct CanadianCheese: Codable {
     var RindTypeFr: String
     var LastUpdateDate: String
 }
+
+struct CanadianCheeses: Codable {
+    var CheeseDirectory: [CanadianCheese]
+}

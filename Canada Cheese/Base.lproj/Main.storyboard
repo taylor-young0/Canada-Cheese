@@ -15,7 +15,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cheeseCell" rowHeight="92" id="k8v-yj-fRK" customClass="CheeseTableViewCell" customModule="Canada_Cheese" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cheeseCell" rowHeight="92" id="k8v-yj-fRK" customClass="CheeseCell" customModule="Canada_Cheese" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="92"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k8v-yj-fRK" id="Stq-D6-IO5">
@@ -29,14 +29,14 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUM-Y7-jT9">
-                                            <rect key="frame" x="20" y="36" width="355" height="21"/>
-                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                            <rect key="frame" x="20" y="36" width="355" height="18"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bg1-eT-rcS">
-                                            <rect key="frame" x="20" y="60" width="355" height="21"/>
-                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                            <rect key="frame" x="20" y="57" width="355" height="18"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -72,6 +72,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zeA-pm-XIx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2344.9275362318845" y="-320.08928571428572"/>
+        </scene>
+        <!--Filter Table View Controller-->
+        <scene sceneID="Zv0-Id-aqC">
+            <objects>
+                <tableViewController storyboardIdentifier="filter" id="ddi-9P-kya" customClass="FilterTableViewController" customModule="Canada_Cheese" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="7xf-2j-son">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="filterCell" id="Y7h-zj-adi" customClass="CheeseFilterCell" customModule="Canada_Cheese" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y7h-zj-adi" id="WSM-Sd-Rad">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZr-oj-b8p">
+                                            <rect key="frame" x="20" y="11" width="42" height="21.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tmX-ft-IAq">
+                                            <rect key="frame" x="74" y="5" width="320" height="216"/>
+                                        </pickerView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="EZr-oj-b8p" secondAttribute="bottom" constant="11.5" id="29A-HQ-fi3"/>
+                                        <constraint firstItem="EZr-oj-b8p" firstAttribute="leading" secondItem="WSM-Sd-Rad" secondAttribute="leading" constant="20" id="N8q-iD-rvY"/>
+                                        <constraint firstItem="EZr-oj-b8p" firstAttribute="top" secondItem="WSM-Sd-Rad" secondAttribute="top" constant="11" id="aQB-ny-GqR"/>
+                                        <constraint firstItem="tmX-ft-IAq" firstAttribute="top" secondItem="WSM-Sd-Rad" secondAttribute="top" constant="5" id="bYs-zF-wHE"/>
+                                        <constraint firstAttribute="trailing" secondItem="tmX-ft-IAq" secondAttribute="trailing" constant="20" id="kM7-yp-hHM"/>
+                                        <constraint firstItem="tmX-ft-IAq" firstAttribute="leading" secondItem="EZr-oj-b8p" secondAttribute="trailing" constant="12" id="xVO-9F-pHx"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="filter" destination="EZr-oj-b8p" id="P9T-lg-DQd"/>
+                                    <outlet property="filterOptions" destination="tmX-ft-IAq" id="3Yj-iD-3yB"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ddi-9P-kya" id="YRI-Bo-lha"/>
+                            <outlet property="delegate" destination="ddi-9P-kya" id="7sC-7P-VeG"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N81-q3-BRk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3224.6376811594205" y="-320.08928571428572"/>
         </scene>
         <!--Favourites Table View Controller-->
         <scene sceneID="Ss8-QO-0eE">

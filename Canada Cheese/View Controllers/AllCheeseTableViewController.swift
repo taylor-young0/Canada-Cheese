@@ -27,9 +27,10 @@ class AllCheeseTableViewController: UITableViewController {
         let navigationBar = navigationController?.navigationBar
         navigationBar?.prefersLargeTitles = true
         navigationBar?.topItem?.title = "Canada Cheese"
-        // add the search button to the navigation bar
+        // add the filter and search buttons to the navigation bar
+        let filter = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(displayFilters))
         let search = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: nil, action: nil)
-        navigationBar?.topItem?.rightBarButtonItem = search
+        navigationBar?.topItem?.rightBarButtonItems = [search, filter]
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -45,6 +46,11 @@ class AllCheeseTableViewController: UITableViewController {
             allCheeses = jsonCheese.CheeseDirectory
         }
     }
+    
+    @objc func displayFilters() {
+        let vc = FilterTableViewController()
+        present(vc, animated: true)
+    }
 
     // MARK: - Table view data source
 
@@ -59,7 +65,7 @@ class AllCheeseTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cheeseCell", for: indexPath) as! CheeseTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cheeseCell", for: indexPath) as! CheeseCell
         // Default to using the English value for the cell labels
         var cheeseName = allCheeses[indexPath.row].CheeseNameEn
         var cheeseManufacturer = allCheeses[indexPath.row].ManufacturerNameEn
