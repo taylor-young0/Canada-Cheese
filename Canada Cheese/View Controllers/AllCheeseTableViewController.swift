@@ -11,6 +11,7 @@ import UIKit
 class AllCheeseTableViewController: UITableViewController {
     
     var allCheeses = [CanadianCheese]()
+    var selectedRow: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,6 +97,13 @@ class AllCheeseTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = storyboard?.instantiateViewController(identifier: "cheeseDetail") as? CheeseDetailViewController {
+            vc.selectedCheese = allCheeses[indexPath.row]
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
     /*

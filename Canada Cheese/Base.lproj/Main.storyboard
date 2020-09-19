@@ -59,7 +59,6 @@
                                     <outlet property="cheeseName" destination="aeB-wh-1WD" id="Tjb-w2-trh"/>
                                     <outlet property="flavourDescription" destination="bg1-eT-rcS" id="Y4D-18-Ona"/>
                                     <outlet property="manufacturer" destination="jUM-Y7-jT9" id="2YL-4E-e42"/>
-                                    <segue destination="ZBY-ge-by3" kind="show" id="b95-9k-2Rg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -142,26 +141,25 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXs-94-Mkf">
-                                            <rect key="frame" x="20" y="11" width="187" height="22"/>
+                                            <rect key="frame" x="20" y="11" width="42" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3e-1e-hyK">
-                                            <rect key="frame" x="215" y="11" width="179" height="21.5"/>
+                                            <rect key="frame" x="352" y="11" width="42" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="c3e-1e-hyK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CXs-94-Mkf" secondAttribute="trailing" constant="1" id="26G-pO-Tej"/>
                                         <constraint firstItem="CXs-94-Mkf" firstAttribute="top" secondItem="iwh-nM-XTi" secondAttribute="top" constant="11" id="5OO-a3-bwO"/>
                                         <constraint firstAttribute="bottom" secondItem="c3e-1e-hyK" secondAttribute="bottom" constant="12" id="QhX-oT-4vl"/>
-                                        <constraint firstAttribute="bottom" secondItem="CXs-94-Mkf" secondAttribute="bottom" constant="11.5" id="c7j-LS-SfE"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="CXs-94-Mkf" secondAttribute="bottom" constant="11.5" id="c7j-LS-SfE"/>
                                         <constraint firstItem="c3e-1e-hyK" firstAttribute="top" secondItem="iwh-nM-XTi" secondAttribute="top" constant="11" id="fe0-mn-yAU"/>
                                         <constraint firstAttribute="trailing" secondItem="c3e-1e-hyK" secondAttribute="trailing" constant="20" id="g9k-k2-pGx"/>
-                                        <constraint firstAttribute="trailing" secondItem="CXs-94-Mkf" secondAttribute="trailing" constant="207" id="pau-N7-tHH"/>
-                                        <constraint firstItem="c3e-1e-hyK" firstAttribute="leading" secondItem="CXs-94-Mkf" secondAttribute="trailing" constant="8" id="sa4-CZ-XPi"/>
                                         <constraint firstItem="CXs-94-Mkf" firstAttribute="leading" secondItem="iwh-nM-XTi" secondAttribute="leading" constant="20" id="zIn-yg-Tv2"/>
                                     </constraints>
                                 </tableViewCellContentView>

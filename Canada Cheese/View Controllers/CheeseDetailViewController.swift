@@ -10,15 +10,17 @@ import UIKit
 
 class CheeseDetailViewController: UITableViewController {
     
+    var selectedCheese: CanadianCheese?
     var properties = [
         ["Cheese", "Manufacturer", "Manufacturer province", "Manufacturing type", "Website"],
-        ["Fat percent", "Moisture percent", "Particularities", "Flavour", "Characteristics", "Ripening", "Organic", "Category type", "Milk type", "Milk treatment type", "Rind type"],
+        ["Fat", "Moisture", "Particularities", "Flavour", "Characteristics", "Ripening", "Organic", "Category type", "Milk type", "Milk treatment type", "Rind type"],
         ["Last update"]
     ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: nil, action: nil)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -41,15 +43,59 @@ class CheeseDetailViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cheeseDetailCell", for: indexPath) as! CheeseDetailCell
+        let property = properties[indexPath.section][indexPath.row]
+        var propertyValue: String
+        
+        switch property {
+        case "Cheese":
+            propertyValue = selectedCheese!.CheeseNameEn
+        case "Manufacturer":
+            propertyValue = selectedCheese!.ManufacturerNameEn
+        case "Manufacturer province":
+            propertyValue = selectedCheese!.ManufacturerProvCode
+        case "Manufacturing type":
+            propertyValue = selectedCheese!.ManufacturingTypeEn
+        case "Website":
+            propertyValue = selectedCheese!.WebSiteEn
+            cell.propertyValue.textColor = UIColor.systemBlue
+        case "Fat":
+            propertyValue = "\(selectedCheese!.FatContentPercent)%"
+        case "Moisture":
+            propertyValue = "\(selectedCheese!.MoisturePercent)%"
+        case "Particularities":
+            propertyValue = selectedCheese!.ParticularitiesEn
+        case "Flavour":
+            propertyValue = selectedCheese!.FlavourEn
+        case "Characteristics":
+            propertyValue = selectedCheese!.CharacteristicsEn
+        case "Ripening":
+            propertyValue = selectedCheese!.RipeningEn
+        case "Organic":
+            propertyValue = selectedCheese!.Organic
+        case "Category type":
+            propertyValue = selectedCheese!.CategoryTypeEn
+        case "Milk type":
+            propertyValue = selectedCheese!.MilkTypeEn
+        case "Milk treatment type":
+            propertyValue = selectedCheese!.MilkTreatmentTypeEn
+        case "Rind type":
+            propertyValue = selectedCheese!.RindTypeEn
+        case "Last update":
+            propertyValue = selectedCheese!.LastUpdateDate
+        default:
+            propertyValue = ""
+        }
+        
         cell.propertyName.text = properties[indexPath.section][indexPath.row]
-        cell.propertyValue.text = "Test value"
-        cell.propertyName.adjustsFontSizeToFitWidth = true
-
-        // Configure the cell...
-
+        cell.propertyValue.text = propertyValue
+        // Make the cell support multiple lines to avoid truncating
+        cell.propertyValue.numberOfLines = 0
+        cell.propertyValue.sizeToFit()
+        
         return cell
     }
 
+    // TODO: Right now this does nothing because of the custom header below, so fix it
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
@@ -71,6 +117,15 @@ class CheeseDetailViewController: UITableViewController {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 10))
         footerView.backgroundColor = .secondarySystemBackground
         return footerView
+    }
+    
+    // Allow users to click the website cell to load the website
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = self.tableView(tableView, cellForRowAt: indexPath) as! CheeseDetailCell
+        let website = cell.propertyValue.text!
+        if cell.propertyName.text! == "Website" && !website.isEmpty {
+            UIApplication.shared.open(NSURL(string:"\(website)")! as URL)
+        }
     }
     
     /*
