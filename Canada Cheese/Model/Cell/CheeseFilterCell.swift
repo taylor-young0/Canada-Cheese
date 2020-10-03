@@ -11,7 +11,6 @@ import UIKit
 class CheeseFilterCell: UITableViewCell {
 
     @IBOutlet var filter: UILabel!
-    @IBOutlet var filterOptions: UIPickerView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

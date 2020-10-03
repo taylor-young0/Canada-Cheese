@@ -20,13 +20,24 @@ class CheeseDetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: nil, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: selectedCheese!.isFavourite ? "star.fill" : "star"),
+                                                            style: .plain, target: self, action: #selector(toggleFavourite))
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    @objc func toggleFavourite() {
+        if (AppDelegate.favouriteCheeses.contains(selectedCheese!)) {
+            AppDelegate.favouriteCheeses.remove(at: AppDelegate.favouriteCheeses.firstIndex(of: selectedCheese!)!)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(toggleFavourite))
+        } else {
+            AppDelegate.favouriteCheeses.append(selectedCheese!)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star.fill"), style: .plain, target: self, action: #selector(toggleFavourite))
+        }
     }
 
     // MARK: - Table view data source

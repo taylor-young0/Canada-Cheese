@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FilterTableViewController: UITableViewController {
+class FilterViewController: UITableViewController {
 
     var filters = [
         "Manufacturing type": ["Artisan", "Farmstead", "Industrial"],
@@ -21,6 +21,9 @@ class FilterTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(dismissVC))
+        self.navigationItem.leftBarButtonItems = [cancel]
         //tableView.register(CheeseFilterCell.self, forCellReuseIdentifier: "filterCell")
 
         // Uncomment the following line to preserve selection between presentations
@@ -29,12 +32,16 @@ class FilterTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    @objc func dismissVC() {
+        self.dismiss(animated: true, completion: nil)
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return filters.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

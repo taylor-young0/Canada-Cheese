@@ -23,6 +23,10 @@ class FavouritesTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -32,12 +36,14 @@ class FavouritesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return AppDelegate.favouriteCheeses.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favouriteCheeseCell", for: indexPath) as! FavouriteCheeseCell
-        cell.cheeseName.text = "Test name"
+        cell.cheeseName.text = AppDelegate.favouriteCheeses[indexPath.row].CheeseNameEn
+        cell.manufacturer.text = AppDelegate.favouriteCheeses[indexPath.row].ManufacturerNameEn
+        cell.flavourDescription.text = AppDelegate.favouriteCheeses[indexPath.row].FlavourEn
         cell.favouriteButton.tintColor = .systemYellow
 
         // Configure the cell...

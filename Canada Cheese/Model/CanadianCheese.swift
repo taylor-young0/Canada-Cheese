@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CanadianCheese: Codable {
+struct CanadianCheese: Codable, Hashable {
     var CheeseId: String
     var CheeseNameEn: String
     var CheeseNameFr: String
@@ -39,6 +39,12 @@ struct CanadianCheese: Codable {
     var RindTypeEn: String
     var RindTypeFr: String
     var LastUpdateDate: String
+}
+
+extension CanadianCheese {
+    var isFavourite: Bool {
+        return AppDelegate.favouriteCheeses.contains(self)
+    }
 }
 
 struct CanadianCheeses: Codable {

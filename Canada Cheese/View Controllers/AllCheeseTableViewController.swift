@@ -49,8 +49,9 @@ class AllCheeseTableViewController: UITableViewController {
     }
     
     @objc func displayFilters() {
-        let vc = FilterTableViewController()
-        present(vc, animated: true)
+        let vc = storyboard?.instantiateViewController(identifier: "filterViewController") as! FilterViewController
+        let navController = UINavigationController(rootViewController: vc)
+        present(navController, animated: true)
     }
 
     // MARK: - Table view data source
