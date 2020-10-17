@@ -10,7 +10,10 @@ import UIKit
 
 class AllCheeseTableViewController: UITableViewController {
     
+    //static var copyOfAllCheese = [CanadianCheese]()
+    var filterVC: FilterViewController?
     var allCheeses = [CanadianCheese]()
+    var filteredCheeses = [CanadianCheese]()
     var selectedRow: Int?
 
     override func viewDidLoad() {
@@ -24,6 +27,12 @@ class AllCheeseTableViewController: UITableViewController {
             }
         }
         
+        //AllCheeseTableViewController.copyOfAllCheese = allCheeses
+        
+//        FilterViewController.activeFilters["Manufacturing type"] = ["Artisan", "Industrial"]
+        filteredCheeses = allCheeses.filter({filterCheese(named: $0)})
+        allCheeses = filteredCheeses
+        
         // set the title and the size of the title in the navigation bar
         let navigationBar = navigationController?.navigationBar
         navigationBar?.prefersLargeTitles = true
@@ -32,12 +41,21 @@ class AllCheeseTableViewController: UITableViewController {
         let filter = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(displayFilters))
         let search = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: nil, action: nil)
         navigationBar?.topItem?.rightBarButtonItems = [search, filter]
+        
+        filterVC = (storyboard?.instantiateViewController(identifier: "filterViewController") as! FilterViewController)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("did appear")
+        filteredCheeses = allCheeses.filter({filterCheese(named: $0)})
+        allCheeses = filteredCheeses
+        tableView.reloadData()
     }
     
     func parse(json: Data) {
@@ -49,9 +67,49 @@ class AllCheeseTableViewController: UITableViewController {
     }
     
     @objc func displayFilters() {
-        let vc = storyboard?.instantiateViewController(identifier: "filterViewController") as! FilterViewController
-        let navController = UINavigationController(rootViewController: vc)
+        let navController = UINavigationController(rootViewController: filterVC!)
         present(navController, animated: true)
+    }
+    
+    func filterCheese(named cheese: CanadianCheese) -> Bool {
+        var isIncluded = true
+        // loop through each filter category
+        for (filterCategory, filters) in FilterViewController.activeFilters {
+            // exit early if we already don't satisfy the results
+            if isIncluded == false {
+                return isIncluded
+            }
+            
+            // determine which filter to apply
+            var satisfiesAtleastOneFilter = false
+            switch filterCategory {
+            case "Manufacturing type":
+                if filters.isEmpty {
+                    return true;
+                }
+                for filterOption in filters {
+                    if cheese.ManufacturingTypeEn == filterOption {
+                        satisfiesAtleastOneFilter = true
+                        break
+                    }
+                }
+                isIncluded = satisfiesAtleastOneFilter
+            case "Manufacturer province":
+                if filters.isEmpty {
+                    return true
+                }
+                for filterOption in filters {
+                    if cheese.ManufacturerProvCode == filterOption {
+                        satisfiesAtleastOneFilter = true
+                        break
+                    }
+                }
+                isIncluded = satisfiesAtleastOneFilter
+            default:
+                print("default case")
+            }
+        }
+        return isIncluded
     }
 
     // MARK: - Table view data source
