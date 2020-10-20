@@ -48,5 +48,6 @@ extension CanadianCheese {
 }
 
 struct CanadianCheeses: Codable {
+    static var allCheeses: [CanadianCheese]?
     var CheeseDirectory: [CanadianCheese]
 }

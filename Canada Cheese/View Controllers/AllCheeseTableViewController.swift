@@ -10,10 +10,8 @@ import UIKit
 
 class AllCheeseTableViewController: UITableViewController {
     
-    //static var copyOfAllCheese = [CanadianCheese]()
     var filterVC: FilterViewController?
-    var allCheeses = [CanadianCheese]()
-    var filteredCheeses = [CanadianCheese]()
+    var displayedCheese = [CanadianCheese]()
     var selectedRow: Int?
 
     override func viewDidLoad() {
@@ -27,11 +25,10 @@ class AllCheeseTableViewController: UITableViewController {
             }
         }
         
-        //AllCheeseTableViewController.copyOfAllCheese = allCheeses
+        // Filter the cheese given the active filters
+        displayedCheese = CanadianCheeses.allCheeses!.filter({filterCheese(named: $0)})
         
 //        FilterViewController.activeFilters["Manufacturing type"] = ["Artisan", "Industrial"]
-        filteredCheeses = allCheeses.filter({filterCheese(named: $0)})
-        allCheeses = filteredCheeses
         
         // set the title and the size of the title in the navigation bar
         let navigationBar = navigationController?.navigationBar
@@ -43,6 +40,7 @@ class AllCheeseTableViewController: UITableViewController {
         navigationBar?.topItem?.rightBarButtonItems = [search, filter]
         
         filterVC = (storyboard?.instantiateViewController(identifier: "filterViewController") as! FilterViewController)
+        filterVC?.allCheeseVC = self
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -52,9 +50,7 @@ class AllCheeseTableViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("did appear")
-        filteredCheeses = allCheeses.filter({filterCheese(named: $0)})
-        allCheeses = filteredCheeses
+        displayedCheese = CanadianCheeses.allCheeses!.filter({filterCheese(named: $0)})
         tableView.reloadData()
     }
     
@@ -62,7 +58,7 @@ class AllCheeseTableViewController: UITableViewController {
         let decoder = JSONDecoder()
         
         if let jsonCheese = try? decoder.decode(CanadianCheeses.self, from: json) {
-            allCheeses = jsonCheese.CheeseDirectory
+            CanadianCheeses.allCheeses = jsonCheese.CheeseDirectory
         }
     }
     
@@ -105,6 +101,62 @@ class AllCheeseTableViewController: UITableViewController {
                     }
                 }
                 isIncluded = satisfiesAtleastOneFilter
+            // TODO: Organic filtering does not work
+            case "Organic":
+                if filters.isEmpty {
+                    return true
+                }
+                for filterOption in filters {
+                    if cheese.Organic == filterOption {
+                        satisfiesAtleastOneFilter = true
+                        break
+                    }
+                }
+                isIncluded = satisfiesAtleastOneFilter
+            case "Cheese type":
+                if filters.isEmpty {
+                    return true
+                }
+                for filterOption in filters {
+                    if cheese.CategoryTypeEn == filterOption {
+                        satisfiesAtleastOneFilter = true
+                        break
+                    }
+                }
+                isIncluded = satisfiesAtleastOneFilter
+            case "Milk type":
+                if filters.isEmpty {
+                    return true
+                }
+                for filterOption in filters {
+                    if cheese.MilkTypeEn == filterOption {
+                        satisfiesAtleastOneFilter = true
+                        break
+                    }
+                }
+                isIncluded = satisfiesAtleastOneFilter
+            case "Milk treatment":
+                if filters.isEmpty {
+                    return true
+                }
+                for filterOption in filters {
+                    if cheese.MilkTreatmentTypeEn == filterOption {
+                        satisfiesAtleastOneFilter = true
+                        break
+                    }
+                }
+                isIncluded = satisfiesAtleastOneFilter
+            case "Rind type":
+                if filters.isEmpty {
+                    return true
+                }
+                for filterOption in filters {
+                    if cheese.RindTypeEn == filterOption {
+                        satisfiesAtleastOneFilter = true
+                        break
+                    }
+                }
+                isIncluded = satisfiesAtleastOneFilter
             default:
                 print("default case")
             }
@@ -121,30 +173,30 @@ class AllCheeseTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return allCheeses.count
+        return displayedCheese.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cheeseCell", for: indexPath) as! CheeseCell
         // Default to using the English value for the cell labels
-        var cheeseName = allCheeses[indexPath.row].CheeseNameEn
-        var cheeseManufacturer = allCheeses[indexPath.row].ManufacturerNameEn
-        var cheeseFlavourDesc = allCheeses[indexPath.row].FlavourEn
+        var cheeseName = displayedCheese[indexPath.row].CheeseNameEn
+        var cheeseManufacturer = displayedCheese[indexPath.row].ManufacturerNameEn
+        var cheeseFlavourDesc = displayedCheese[indexPath.row].FlavourEn
         
         // If the English name is empty check for the French
         // Note: cheeseName could still be empty after this if the French version is also empty
         if cheeseName.isEmpty {
-            cheeseName = allCheeses[indexPath.row].CheeseNameFr
+            cheeseName = displayedCheese[indexPath.row].CheeseNameFr
         }
         // See if the English manufacturer is empty, if so try the French
         // Note: This does not guarantee that cheeseManufacturer is non-empty
         if cheeseManufacturer.isEmpty {
-            cheeseManufacturer = allCheeses[indexPath.row].ManufacturerNameFr
+            cheeseManufacturer = displayedCheese[indexPath.row].ManufacturerNameFr
         }
         // See if the English flavour is empty
         // Note: This does not guarantee that cheeseFlavourDesc is non-empty
         if cheeseFlavourDesc.isEmpty {
-            cheeseFlavourDesc = allCheeses[indexPath.row].CharacteristicsEn
+            cheeseFlavourDesc = displayedCheese[indexPath.row].CharacteristicsEn
         }
         
         cell.cheeseName.text = cheeseName
@@ -160,7 +212,7 @@ class AllCheeseTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(identifier: "cheeseDetail") as? CheeseDetailViewController {
-            vc.selectedCheese = allCheeses[indexPath.row]
+            vc.selectedCheese = displayedCheese[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         }
     }

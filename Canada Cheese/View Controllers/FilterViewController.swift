@@ -10,8 +10,10 @@ import UIKit
 
 class FilterViewController: UITableViewController {
 
+    var recentlySelectedCells = Set<CheeseFilterCell>()
+    var allCheeseVC: AllCheeseTableViewController?
+    var tempFilters = Dictionary<String, Set<String>>()
     static var activeFilters = Dictionary<String, Set<String>>()
-    static var tempFilters = Dictionary<String, Set<String>>()
     static var filters = [
         0 : ["Manufacturing type": ["Artisan", "Farmstead", "Industrial"]],
         1 : ["Manufacturer province" : ["BC", "AB", "SK", "MB", "ON", "QC", "NL", "NB", "NS", "PE"]],
@@ -25,11 +27,13 @@ class FilterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(dismissVC))
-        let apply = UIBarButtonItem(title: "Apply", style: .plain, target: self, action: #selector(dismissVC))
+        let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(dismissAndCancel))
+        let apply = UIBarButtonItem(title: "Apply", style: .plain, target: self, action: #selector(dismissAndApply))
+        // TODO: apply.isEnabled
+        
         self.navigationItem.leftBarButtonItems = [cancel]
+        self.navigationItem.title = "Filter"
         self.navigationItem.rightBarButtonItems = [apply]
-        //tableView.register(CheeseFilterCell.self, forCellReuseIdentifier: "filterCell")
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -38,8 +42,25 @@ class FilterViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    @objc func dismissVC(andApplyFilters apply: Bool) {
-        self.dismiss(animated: true, completion: nil)
+    @objc func dismissAndCancel() {
+        // Toggle the cell accessory as we actually don't want to apply these filters
+        // Otherwise it will give the user the visual impression that a filter is (or isn't) applied when it really isn't (or is)
+        for filterCell in recentlySelectedCells {
+            let currAccessory = filterCell.accessoryType
+            filterCell.accessoryType = (currAccessory == .none ? .checkmark : .none)
+        }
+        // Since the filter VC is about to be dismissed there are no longer any recently selected cells in the current viewing of the filter VC
+        recentlySelectedCells.removeAll()
+        
+        dismiss(animated: true, completion: {self.allCheeseVC!.viewDidAppear(true)})
+    }
+    
+    @objc func dismissAndApply() {
+        FilterViewController.activeFilters = tempFilters
+        // Since the filter VC is about to be dismissed there are no longer any recently selected cells in the current viewing of the filter VC
+        recentlySelectedCells.removeAll()
+        // Display all the cheese with the new filters
+        dismiss(animated: true, completion: {self.allCheeseVC!.viewDidAppear(true)})
     }
 
     // MARK: - Table view data source
@@ -73,24 +94,27 @@ class FilterViewController: UITableViewController {
         let sectionTitle = (tableView.headerView(forSection: indexPath.section)?.textLabel?.text)!
         // if the filter is already applied, remove it
         if (currentAccessory == .checkmark) {
-            FilterViewController.activeFilters["\(sectionTitle)"]?.remove(selectedFilter)
+            tempFilters["\(sectionTitle)"]?.remove(selectedFilter)
             //TODO: Reset the allCheeses in AllCheeseTableViewController to allow for more filtering, right now it breaks if you remove all a filter, it should revert to as it was before to allow the next added filters the full cheese set. This breaks because allCheeses is constantly changed, so each time a filter is added the array is smaller than before
             print("removed")
         } else {
             // if the section does not already have a set storing the applied filters we must create an empty set
-            if FilterViewController.activeFilters["\(sectionTitle)"] == nil {
-                FilterViewController.activeFilters["\(sectionTitle)"] = Set<String>()
+            if tempFilters["\(sectionTitle)"] == nil {
+                tempFilters["\(sectionTitle)"] = Set<String>()
             }
-            FilterViewController.activeFilters["\(sectionTitle)"]?.insert(selectedFilter)
+            tempFilters["\(sectionTitle)"]?.insert(selectedFilter)
         }
-        for (filter, v) in FilterViewController.activeFilters {
-            print(filter)
-            for f in v {
-                print("\t\(f)")
-            }
-        }
+//        for (filter, v) in tempFilters {
+//            print(filter)
+//            for f in v {
+//                print("\t\(f)")
+//            }
+//        }
         // change the cell accessory to be the opposite of what it currently is
         cell.accessoryType = (currentAccessory == .none ? .checkmark : .none)
+        // Add this selected cell to the set of recently selected cells,
+        // allowing us to toggle the cell's accessory if the user presses cancel
+        recentlySelectedCells.insert(cell)
     }
 
     /*
