@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AllCheeseTableViewController: UITableViewController {
+class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
     
     var filterVC: FilterViewController?
     var displayedCheese = [CanadianCheese]()
@@ -16,6 +16,14 @@ class AllCheeseTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Add the search bar to the view controller
+        let searchBar = UISearchController(searchResultsController: nil)
+        searchBar.searchResultsUpdater = self
+        searchBar.obscuresBackgroundDuringPresentation = false
+        searchBar.searchBar.placeholder = "Search cheese"
+        navigationItem.searchController = searchBar
+        
         // Load the JSON data
         if let url = Bundle.main.url(forResource: "canadianCheeseDirectory", withExtension: "json") {
             if let data = try? Data(contentsOf: url) {
@@ -34,10 +42,9 @@ class AllCheeseTableViewController: UITableViewController {
         let navigationBar = navigationController?.navigationBar
         navigationBar?.prefersLargeTitles = true
         navigationBar?.topItem?.title = "Canada Cheese"
-        // add the filter and search buttons to the navigation bar
+        // add the filter button to the navigation bar
         let filter = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(displayFilters))
-        let search = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: nil, action: nil)
-        navigationBar?.topItem?.rightBarButtonItems = [search, filter]
+        navigationBar?.topItem?.rightBarButtonItems = [filter]
         
         filterVC = (storyboard?.instantiateViewController(identifier: "filterViewController") as! FilterViewController)
         filterVC?.allCheeseVC = self
@@ -107,7 +114,7 @@ class AllCheeseTableViewController: UITableViewController {
                     return true
                 }
                 for filterOption in filters {
-                    if cheese.Organic == filterOption {
+                    if filterOption == "Organic" && cheese.isOrganic || filterOption == "Non-organic" && !cheese.isOrganic {
                         satisfiesAtleastOneFilter = true
                         break
                     }
@@ -162,6 +169,34 @@ class AllCheeseTableViewController: UITableViewController {
             }
         }
         return isIncluded
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {
+            displayedCheese = CanadianCheeses.allCheeses!
+            tableView.reloadData()
+            return
+        }
+        
+        // TO DO: Make this search on the currently filtered cheese, that way you can search and filter at the same time
+        displayedCheese = CanadianCheeses.allCheeses!.filter({searchCheese(forText: text, on: $0)})
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        //TO DO: update the tableView when the search bar is exited
+        displayedCheese = CanadianCheeses.allCheeses!
+        tableView.reloadData()
+    }
+    
+    func searchCheese(forText searchText: String, on cheese: CanadianCheese) -> Bool {
+        let searchableAttributes = [cheese.CheeseNameEn, cheese.CheeseNameFr, cheese.FlavourEn, cheese.FlavourFr, cheese.CharacteristicsEn, cheese.CharacteristicsFr, cheese.ManufacturerNameEn, cheese.ManufacturerNameFr, cheese.ParticularitiesEn, cheese.ParticularitiesFr]
+        for attribute in searchableAttributes {
+            if attribute.lowercased().contains(searchText.lowercased()) {
+                return true
+            }
+        }
+        return false
     }
 
     // MARK: - Table view data source

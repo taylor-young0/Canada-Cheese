@@ -82,7 +82,7 @@ class CheeseDetailViewController: UITableViewController {
         case "Ripening":
             propertyValue = selectedCheese!.RipeningEn
         case "Organic":
-            propertyValue = selectedCheese!.Organic
+            propertyValue = (selectedCheese!.Organic == "1" ? "Organic" : "Non-organic" )
         case "Category type":
             propertyValue = selectedCheese!.CategoryTypeEn
         case "Milk type":

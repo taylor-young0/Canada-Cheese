@@ -39,6 +39,10 @@ struct CanadianCheese: Codable, Hashable {
     var RindTypeEn: String
     var RindTypeFr: String
     var LastUpdateDate: String
+    
+    var isOrganic: Bool {
+        return self.Organic == "1"
+    }
 }
 
 extension CanadianCheese {
