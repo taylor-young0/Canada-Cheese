@@ -128,14 +128,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cheeseDetailCell" id="qqX-uO-Nbd" customClass="CheeseDetailCell" customModule="Canada_Cheese" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cheeseDetailCell" id="qqX-uO-Nbd" customClass="CheeseDetailCell" customModule="Canada_Cheese" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qqX-uO-Nbd" id="iwh-nM-XTi">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXs-94-Mkf">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXs-94-Mkf">
                                             <rect key="frame" x="20" y="11" width="42" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -149,7 +149,7 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="c3e-1e-hyK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CXs-94-Mkf" secondAttribute="trailing" constant="1" id="26G-pO-Tej"/>
+                                        <constraint firstItem="c3e-1e-hyK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CXs-94-Mkf" secondAttribute="trailing" constant="3" id="26G-pO-Tej"/>
                                         <constraint firstItem="CXs-94-Mkf" firstAttribute="top" secondItem="iwh-nM-XTi" secondAttribute="top" constant="11" id="5OO-a3-bwO"/>
                                         <constraint firstAttribute="bottom" secondItem="c3e-1e-hyK" secondAttribute="bottom" constant="12" id="QhX-oT-4vl"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="CXs-94-Mkf" secondAttribute="bottom" constant="11.5" id="c7j-LS-SfE"/>

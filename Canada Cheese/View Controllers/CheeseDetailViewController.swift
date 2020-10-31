@@ -97,6 +97,7 @@ class CheeseDetailViewController: UITableViewController {
             propertyValue = ""
         }
         
+        cell.propertyName.sizeToFit()
         cell.propertyName.text = properties[indexPath.section][indexPath.row]
         cell.propertyValue.text = propertyValue
         // Make the cell support multiple lines to avoid truncating
