@@ -96,7 +96,6 @@ class FilterViewController: UITableViewController {
         if (currentAccessory == .checkmark) {
             tempFilters["\(sectionTitle)"]?.remove(selectedFilter)
             //TODO: Reset the allCheeses in AllCheeseTableViewController to allow for more filtering, right now it breaks if you remove all a filter, it should revert to as it was before to allow the next added filters the full cheese set. This breaks because allCheeses is constantly changed, so each time a filter is added the array is smaller than before
-            print("removed")
         } else {
             // if the section does not already have a set storing the applied filters we must create an empty set
             if tempFilters["\(sectionTitle)"] == nil {
@@ -104,12 +103,6 @@ class FilterViewController: UITableViewController {
             }
             tempFilters["\(sectionTitle)"]?.insert(selectedFilter)
         }
-//        for (filter, v) in tempFilters {
-//            print(filter)
-//            for f in v {
-//                print("\t\(f)")
-//            }
-//        }
         // change the cell accessory to be the opposite of what it currently is
         cell.accessoryType = (currentAccessory == .none ? .checkmark : .none)
         // Add this selected cell to the set of recently selected cells,

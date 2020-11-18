@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SafariServices
 
-class CheeseDetailViewController: UITableViewController {
+class CheeseDetailViewController: UITableViewController, SFSafariViewControllerDelegate {
     
     var selectedCheese: CanadianCheese?
     var properties = [
@@ -31,13 +32,16 @@ class CheeseDetailViewController: UITableViewController {
     }
     
     @objc func toggleFavourite() {
-        if (AppDelegate.favouriteCheeses.contains(selectedCheese!)) {
-            AppDelegate.favouriteCheeses.remove(at: AppDelegate.favouriteCheeses.firstIndex(of: selectedCheese!)!)
+        if (CanadianCheeses.favouriteCheeses.contains(selectedCheese!)) {
+            CanadianCheeses.favouriteCheeses.remove(at: CanadianCheeses.favouriteCheeses.firstIndex(of: selectedCheese!)!)
+            CanadianCheeses.favouriteCheesesIDs.remove(at: CanadianCheeses.favouriteCheesesIDs.firstIndex(of: selectedCheese!.CheeseId)!)
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(toggleFavourite))
         } else {
-            AppDelegate.favouriteCheeses.append(selectedCheese!)
+            CanadianCheeses.favouriteCheeses.append(selectedCheese!)
+            CanadianCheeses.favouriteCheesesIDs.append(selectedCheese!.CheeseId)
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star.fill"), style: .plain, target: self, action: #selector(toggleFavourite))
         }
+        UserDefaults.standard.setValue(CanadianCheeses.favouriteCheesesIDs, forKey: "favouriteCheesesIDs")
     }
 
     // MARK: - Table view data source
@@ -136,7 +140,12 @@ class CheeseDetailViewController: UITableViewController {
         let cell = self.tableView(tableView, cellForRowAt: indexPath) as! CheeseDetailCell
         let website = cell.propertyValue.text!
         if cell.propertyName.text! == "Website" && !website.isEmpty {
-            UIApplication.shared.open(NSURL(string:"\(website)")! as URL)
+            if let url = URL(string: website) {
+                let vc = SFSafariViewController(url: url)
+                vc.delegate = self
+
+                present(vc, animated: true)
+            }
         }
     }
     

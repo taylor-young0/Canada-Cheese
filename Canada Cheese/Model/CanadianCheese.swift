@@ -47,11 +47,13 @@ struct CanadianCheese: Codable, Hashable {
 
 extension CanadianCheese {
     var isFavourite: Bool {
-        return AppDelegate.favouriteCheeses.contains(self)
+        return CanadianCheeses.favouriteCheeses.contains(self)
     }
 }
 
 struct CanadianCheeses: Codable {
     static var allCheeses: [CanadianCheese]?
+    static var favouriteCheesesIDs = [String]()
+    static var favouriteCheeses = [CanadianCheese]()
     var CheeseDirectory: [CanadianCheese]
 }

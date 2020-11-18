@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
+class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdating {
     
     var filterVC: FilterViewController?
     var displayedCheese = [CanadianCheese]()
@@ -33,10 +33,15 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
             }
         }
         
-        // Filter the cheese given the active filters
-        displayedCheese = CanadianCheeses.allCheeses!.filter({filterCheese(named: $0)})
+        let userDefaults = UserDefaults.standard
+        let allCheeses = CanadianCheeses.allCheeses
+        // load the favourite cheeses, or just use an empty String array if there are currently none saved
+        CanadianCheeses.favouriteCheesesIDs = userDefaults.array(forKey: "favouriteCheesesIDs") as? [String] ?? [String]()
+        // create the favourite cheeses array from the cheese ids
+        CanadianCheeses.favouriteCheeses = allCheeses?.filter({CanadianCheeses.favouriteCheesesIDs.contains($0.CheeseId)}) ?? [CanadianCheese]()
         
-//        FilterViewController.activeFilters["Manufacturing type"] = ["Artisan", "Industrial"]
+        // Filter the cheese given the active filters
+        displayedCheese = CanadianCheeses.allCheeses!.filter({filterCheese($0)})
         
         // set the title and the size of the title in the navigation bar
         let navigationBar = navigationController?.navigationBar
@@ -46,6 +51,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         let filter = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(displayFilters))
         navigationBar?.topItem?.rightBarButtonItems = [filter]
         
+        // prepare a filterViewController for filtering through the cheeses
         filterVC = (storyboard?.instantiateViewController(identifier: "filterViewController") as! FilterViewController)
         filterVC?.allCheeseVC = self
 
@@ -57,7 +63,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        displayedCheese = CanadianCheeses.allCheeses!.filter({filterCheese(named: $0)})
+        displayedCheese = CanadianCheeses.allCheeses!.filter({filterCheese($0)})
         tableView.reloadData()
     }
     
@@ -74,7 +80,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         present(navController, animated: true)
     }
     
-    func filterCheese(named cheese: CanadianCheese) -> Bool {
+    func filterCheese(_ cheese: CanadianCheese) -> Bool {
         var isIncluded = true
         // loop through each filter category
         for (filterCategory, filters) in FilterViewController.activeFilters {
@@ -108,7 +114,6 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
                     }
                 }
                 isIncluded = satisfiesAtleastOneFilter
-            // TODO: Organic filtering does not work
             case "Organic":
                 if filters.isEmpty {
                     return true
@@ -171,6 +176,8 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         return isIncluded
     }
     
+    // MARK: - Search Bar
+    
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else {
             displayedCheese = CanadianCheeses.allCheeses!
@@ -184,13 +191,17 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        //TO DO: update the tableView when the search bar is exited
         displayedCheese = CanadianCheeses.allCheeses!
         tableView.reloadData()
     }
     
     func searchCheese(forText searchText: String, on cheese: CanadianCheese) -> Bool {
         let searchableAttributes = [cheese.CheeseNameEn, cheese.CheeseNameFr, cheese.FlavourEn, cheese.FlavourFr, cheese.CharacteristicsEn, cheese.CharacteristicsFr, cheese.ManufacturerNameEn, cheese.ManufacturerNameFr, cheese.ParticularitiesEn, cheese.ParticularitiesFr]
+        // if search is empty, every search is fine
+        if searchText.isEmpty {
+            return true
+        }
+        // else look through each attribute, if the searchText is in there, we include this cheese
         for attribute in searchableAttributes {
             if attribute.lowercased().contains(searchText.lowercased()) {
                 return true

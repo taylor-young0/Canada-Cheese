@@ -36,14 +36,14 @@ class FavouritesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return AppDelegate.favouriteCheeses.count
+        return CanadianCheeses.favouriteCheeses.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favouriteCheeseCell", for: indexPath) as! FavouriteCheeseCell
-        cell.cheeseName.text = AppDelegate.favouriteCheeses[indexPath.row].CheeseNameEn
-        cell.manufacturer.text = AppDelegate.favouriteCheeses[indexPath.row].ManufacturerNameEn
-        cell.flavourDescription.text = AppDelegate.favouriteCheeses[indexPath.row].FlavourEn
+        cell.cheeseName.text = CanadianCheeses.favouriteCheeses[indexPath.row].CheeseNameEn
+        cell.manufacturer.text = CanadianCheeses.favouriteCheeses[indexPath.row].ManufacturerNameEn
+        cell.flavourDescription.text = CanadianCheeses.favouriteCheeses[indexPath.row].FlavourEn
         cell.favouriteButton.tintColor = .systemYellow
 
         // Configure the cell...
@@ -51,14 +51,30 @@ class FavouritesTableViewController: UITableViewController {
         return cell
     }
 
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+    
 
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let remove = UIContextualAction(style: .destructive, title: "Remove") { action, view, completionHandler in
+            // make sure to remove the cheese from the array of favourites
+            // note that because the cell at the given indexPath is defined as favouriteCheeses[indexPath.row] (see cellForRowAt indexPath)
+            // we can simply remove the objects at that index
+            CanadianCheeses.favouriteCheeses.remove(at: indexPath.row)
+            CanadianCheeses.favouriteCheesesIDs.remove(at: indexPath.row)
+            UserDefaults.standard.setValue(CanadianCheeses.favouriteCheesesIDs, forKey: "favouriteCheesesIDs")
+            // remove the cell
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+
+        let config = UISwipeActionsConfiguration(actions: [remove])
+        config.performsFirstActionWithFullSwipe = false
+        return config
+    }
     /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
