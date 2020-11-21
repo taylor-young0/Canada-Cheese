@@ -40,15 +40,46 @@ class FavouritesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let favouriteCheeses = CanadianCheeses.favouriteCheeses
         let cell = tableView.dequeueReusableCell(withIdentifier: "favouriteCheeseCell", for: indexPath) as! FavouriteCheeseCell
-        cell.cheeseName.text = CanadianCheeses.favouriteCheeses[indexPath.row].CheeseNameEn
-        cell.manufacturer.text = CanadianCheeses.favouriteCheeses[indexPath.row].ManufacturerNameEn
-        cell.flavourDescription.text = CanadianCheeses.favouriteCheeses[indexPath.row].FlavourEn
+        // Default to using the English value for the cell labels
+        var cheeseName = favouriteCheeses[indexPath.row].CheeseNameEn
+        var cheeseManufacturer = favouriteCheeses[indexPath.row].ManufacturerNameEn
+        var cheeseFlavourDesc = favouriteCheeses[indexPath.row].FlavourEn
+        
+        // If the English name is empty check for the French
+        // Note: cheeseName could still be empty after this if the French version is also empty
+        if cheeseName.isEmpty {
+            cheeseName = favouriteCheeses[indexPath.row].CheeseNameFr
+        }
+        // See if the English manufacturer is empty, if so try the French
+        // Note: This does not guarantee that cheeseManufacturer is non-empty
+        if cheeseManufacturer.isEmpty {
+            cheeseManufacturer = favouriteCheeses[indexPath.row].ManufacturerNameFr
+        }
+        // See if the English flavour is empty
+        // Note: This does not guarantee that cheeseFlavourDesc is non-empty
+        if cheeseFlavourDesc.isEmpty {
+            cheeseFlavourDesc = favouriteCheeses[indexPath.row].CharacteristicsEn
+        }
+        
+        cell.cheeseName.text = cheeseName
+        cell.manufacturer.text = cheeseManufacturer
+        cell.flavourDescription.text = cheeseFlavourDesc
         cell.favouriteButton.tintColor = .systemYellow
 
         // Configure the cell...
 
         return cell
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let favouriteCheeses = CanadianCheeses.favouriteCheeses
+        if let vc = storyboard?.instantiateViewController(identifier: "cheeseDetail") as? CheeseDetailViewController {
+            vc.selectedCheese = favouriteCheeses[indexPath.row]
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
     
