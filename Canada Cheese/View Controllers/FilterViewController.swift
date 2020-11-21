@@ -10,9 +10,12 @@ import UIKit
 
 class FilterViewController: UITableViewController {
 
+    // cells that were selected in the current viewing of the vc, used to apply filter
     var recentlySelectedCells = Set<CheeseFilterCell>()
     var allCheeseVC: AllCheeseTableViewController?
+    // filters that have been selected, but have not yet been applied because the "apply" button has yet to be pressed
     var tempFilters = Dictionary<String, Set<String>>()
+    // filters that are currently active
     static var activeFilters = Dictionary<String, Set<String>>()
     static var filters = [
         0 : ["Manufacturing type": ["Artisan", "Farmstead", "Industrial"]],
@@ -27,19 +30,14 @@ class FilterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // cancel button to disregard recently selected filters and go back to the main app screen
         let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(dismissAndCancel))
+        // apply button to apply filters and go back to main app screen
         let apply = UIBarButtonItem(title: "Apply", style: .plain, target: self, action: #selector(dismissAndApply))
-        // TODO: apply.isEnabled
         
         self.navigationItem.leftBarButtonItems = [cancel]
         self.navigationItem.title = "Filter"
         self.navigationItem.rightBarButtonItems = [apply]
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     @objc func dismissAndCancel() {
@@ -66,12 +64,10 @@ class FilterViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return FilterViewController.filters.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return (FilterViewController.filters[section]?.first?.value.count)!
     }
 
@@ -89,13 +85,13 @@ class FilterViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! CheeseFilterCell
+        // .checkmark or .none
         let currentAccessory = cell.accessoryType
         let selectedFilter = cell.filter.text!
         let sectionTitle = (tableView.headerView(forSection: indexPath.section)?.textLabel?.text)!
         // if the filter is already applied, remove it
         if (currentAccessory == .checkmark) {
             tempFilters["\(sectionTitle)"]?.remove(selectedFilter)
-            //TODO: Reset the allCheeses in AllCheeseTableViewController to allow for more filtering, right now it breaks if you remove all a filter, it should revert to as it was before to allow the next added filters the full cheese set. This breaks because allCheeses is constantly changed, so each time a filter is added the array is smaller than before
         } else {
             // if the section does not already have a set storing the applied filters we must create an empty set
             if tempFilters["\(sectionTitle)"] == nil {
@@ -109,50 +105,4 @@ class FilterViewController: UITableViewController {
         // allowing us to toggle the cell's accessory if the user presses cancel
         recentlySelectedCells.insert(cell)
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

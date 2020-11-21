@@ -52,8 +52,11 @@ extension CanadianCheese {
 }
 
 struct CanadianCheeses: Codable {
+    // all the default cheese from the JSON file
     static var allCheeses: [CanadianCheese]?
+    // the ids of the favourite cheese, this is what is written to UserDefaults
     static var favouriteCheesesIDs = [String]()
+    // the favourite cheese
     static var favouriteCheeses = [CanadianCheese]()
     var CheeseDirectory: [CanadianCheese]
 }

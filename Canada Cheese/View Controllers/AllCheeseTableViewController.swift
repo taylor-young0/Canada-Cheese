@@ -11,8 +11,8 @@ import UIKit
 class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdating {
     
     var filterVC: FilterViewController?
+    // all the cheese that is currently displayed, i.e., might be filtered, searched, etc
     var displayedCheese = [CanadianCheese]()
-    var selectedRow: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,15 +54,10 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         // prepare a filterViewController for filtering through the cheeses
         filterVC = (storyboard?.instantiateViewController(identifier: "filterViewController") as! FilterViewController)
         filterVC?.allCheeseVC = self
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        // filter cheese, as we might have just gotten back from filtering vc!
         displayedCheese = CanadianCheeses.allCheeses!.filter({filterCheese($0)})
         tableView.reloadData()
     }
@@ -179,23 +174,26 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     // MARK: - Search Bar
     
     func updateSearchResults(for searchController: UISearchController) {
+        // if there is no text then all cheese match because there's no text!
         guard let text = searchController.searchBar.text else {
             displayedCheese = CanadianCheeses.allCheeses!
             tableView.reloadData()
             return
         }
         
-        // TO DO: Make this search on the currently filtered cheese, that way you can search and filter at the same time
+        // search the cheese for the given text
         displayedCheese = CanadianCheeses.allCheeses!.filter({searchCheese(forText: text, on: $0)})
         tableView.reloadData()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        // no search to apply so reset the displayed cheese
         displayedCheese = CanadianCheeses.allCheeses!
         tableView.reloadData()
     }
     
     func searchCheese(forText searchText: String, on cheese: CanadianCheese) -> Bool {
+        // These are our searchable cheese attributes
         let searchableAttributes = [cheese.CheeseNameEn, cheese.CheeseNameFr, cheese.FlavourEn, cheese.FlavourFr, cheese.CharacteristicsEn, cheese.CharacteristicsFr, cheese.ManufacturerNameEn, cheese.ManufacturerNameFr, cheese.ParticularitiesEn, cheese.ParticularitiesFr]
         // if search is empty, every search is fine
         if searchText.isEmpty {
@@ -213,12 +211,10 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return displayedCheese.count
     }
 
@@ -257,55 +253,10 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // load up a cheese detail vc
         if let vc = storyboard?.instantiateViewController(identifier: "cheeseDetail") as? CheeseDetailViewController {
             vc.selectedCheese = displayedCheese[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
