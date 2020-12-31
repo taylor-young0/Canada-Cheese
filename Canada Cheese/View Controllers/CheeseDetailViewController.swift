@@ -31,12 +31,12 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
         // if the cheese is already a favourite, remove it
         if (CanadianCheeses.favouriteCheeses.contains(selectedCheese!)) {
             CanadianCheeses.favouriteCheeses.remove(at: CanadianCheeses.favouriteCheeses.firstIndex(of: selectedCheese!)!)
-            CanadianCheeses.favouriteCheesesIDs.remove(at: CanadianCheeses.favouriteCheesesIDs.firstIndex(of: selectedCheese!.CheeseId)!)
+            CanadianCheeses.favouriteCheesesIDs.remove(at: CanadianCheeses.favouriteCheesesIDs.firstIndex(of: selectedCheese!.cheeseId)!)
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(toggleFavourite))
         } else {
             // else cheese must not be a favourite, so we can add it now
             CanadianCheeses.favouriteCheeses.append(selectedCheese!)
-            CanadianCheeses.favouriteCheesesIDs.append(selectedCheese!.CheeseId)
+            CanadianCheeses.favouriteCheesesIDs.append(selectedCheese!.cheeseId)
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star.fill"), style: .plain, target: self, action: #selector(toggleFavourite))
         }
         // write the favourite cheese to UserDefaults
@@ -64,42 +64,42 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
         // being a blank string.
         switch property {
         case "Cheese":
-            propertyValue = selectedCheese!.CheeseNameEn != "" ? selectedCheese!.CheeseNameEn : selectedCheese!.CheeseNameFr
+            propertyValue = selectedCheese!.cheeseNameEn != "" ? selectedCheese!.cheeseNameEn : selectedCheese!.cheeseNameFr
         case "Manufacturer":
-            propertyValue = selectedCheese!.ManufacturerNameEn != "" ? selectedCheese!.ManufacturerNameEn : selectedCheese!.ManufacturerNameFr
+            propertyValue = selectedCheese!.manufacturerNameEn != "" ? selectedCheese!.manufacturerNameEn : selectedCheese!.manufacturerNameFr
         case "Manufacturer province":
-            propertyValue = selectedCheese!.ManufacturerProvCode
+            propertyValue = selectedCheese!.manufacturerProvCode
         case "Manufacturing type":
-            propertyValue = selectedCheese!.ManufacturingTypeEn
+            propertyValue = selectedCheese!.manufacturingTypeEn
         case "Website":
-            propertyValue = selectedCheese!.WebSiteEn
+            propertyValue = selectedCheese!.websiteEn
             cell.propertyValue.textColor = UIColor.systemBlue
         case "Fat":
             // no fat % given? Don't display anything
-            propertyValue = selectedCheese!.FatContentPercent != "" ? "\(selectedCheese!.FatContentPercent)%" : ""
+            propertyValue = selectedCheese!.fatContentPercent != "" ? "\(selectedCheese!.fatContentPercent)%" : ""
         case "Moisture":
             // no moisture % given? Don't display anything
-            propertyValue = selectedCheese!.MoisturePercent != "" ? "\(selectedCheese!.MoisturePercent)%" : ""
+            propertyValue = selectedCheese!.moisturePercent != "" ? "\(selectedCheese!.moisturePercent)%" : ""
         case "Particularities":
-            propertyValue = selectedCheese!.ParticularitiesEn != "" ? selectedCheese!.ParticularitiesEn : selectedCheese!.ParticularitiesFr
+            propertyValue = selectedCheese!.particularitiesEn != "" ? selectedCheese!.particularitiesEn : selectedCheese!.particularitiesFr
         case "Flavour":
-            propertyValue = selectedCheese!.FlavourEn != "" ? selectedCheese!.FlavourEn : selectedCheese!.FlavourFr
+            propertyValue = selectedCheese!.flavourEn != "" ? selectedCheese!.flavourEn : selectedCheese!.flavourFr
         case "Characteristics":
-            propertyValue = selectedCheese!.CharacteristicsEn != "" ? selectedCheese!.CharacteristicsEn : selectedCheese!.CharacteristicsFr
+            propertyValue = selectedCheese!.characteristicsEn != "" ? selectedCheese!.characteristicsEn : selectedCheese!.characteristicsFr
         case "Ripening":
-            propertyValue = selectedCheese!.RipeningEn != "" ? selectedCheese!.RipeningEn : selectedCheese!.RipeningFr
+            propertyValue = selectedCheese!.ripeningEn != "" ? selectedCheese!.ripeningEn : selectedCheese!.ripeningFr
         case "Organic":
-            propertyValue = (selectedCheese!.Organic == "1" ? "Organic" : "Non-organic" )
+            propertyValue = (selectedCheese!.organic == "1" ? "Organic" : "Non-organic" )
         case "Category type":
-            propertyValue = selectedCheese!.CategoryTypeEn != "" ? selectedCheese!.CategoryTypeEn : selectedCheese!.CategoryTypeFr
+            propertyValue = selectedCheese!.categoryTypeEn != "" ? selectedCheese!.categoryTypeEn : selectedCheese!.categoryTypeFr
         case "Milk type":
-            propertyValue = selectedCheese!.MilkTypeEn != "" ? selectedCheese!.MilkTypeEn : selectedCheese!.MilkTypeFr
+            propertyValue = selectedCheese!.milkTypeEn != "" ? selectedCheese!.milkTypeEn : selectedCheese!.milkTypeFr
         case "Milk treatment type":
-            propertyValue = selectedCheese!.MilkTreatmentTypeEn != "" ? selectedCheese!.MilkTreatmentTypeEn : selectedCheese!.MilkTreatmentTypeFr
+            propertyValue = selectedCheese!.milkTreatmentTypeEn != "" ? selectedCheese!.milkTreatmentTypeEn : selectedCheese!.milkTreatmentTypeFr
         case "Rind type":
-            propertyValue = selectedCheese!.RindTypeEn != "" ? selectedCheese!.RindTypeEn : selectedCheese!.RindTypeFr
+            propertyValue = selectedCheese!.rindTypeEn != "" ? selectedCheese!.rindTypeEn : selectedCheese!.rindTypeFr
         case "Last update":
-            propertyValue = selectedCheese!.LastUpdateDate
+            propertyValue = selectedCheese!.lastUpdateDate
         default:
             propertyValue = ""
         }

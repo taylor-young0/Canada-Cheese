@@ -9,39 +9,74 @@
 import Foundation
 
 struct CanadianCheese: Codable, Hashable {
-    var CheeseId: String
-    var CheeseNameEn: String
-    var CheeseNameFr: String
-    var ManufacturerNameEn: String
-    var ManufacturerNameFr: String
-    var ManufacturerProvCode: String
-    var ManufacturingTypeEn: String
-    var ManufacturingTypeFr: String
-    var WebSiteEn: String
-    var WebSiteFr: String
-    var FatContentPercent: String
-    var MoisturePercent: String
-    var ParticularitiesEn: String
-    var ParticularitiesFr: String
-    var FlavourEn: String
-    var FlavourFr: String
-    var CharacteristicsEn: String
-    var CharacteristicsFr: String
-    var RipeningEn: String
-    var RipeningFr: String
-    var Organic: String
-    var CategoryTypeEn: String
-    var CategoryTypeFr: String
-    var MilkTypeEn: String
-    var MilkTypeFr: String
-    var MilkTreatmentTypeEn: String
-    var MilkTreatmentTypeFr: String
-    var RindTypeEn: String
-    var RindTypeFr: String
-    var LastUpdateDate: String
+    var cheeseId: String
+    var cheeseNameEn: String
+    var cheeseNameFr: String
+    var manufacturerNameEn: String
+    var manufacturerNameFr: String
+    var manufacturerProvCode: String
+    var manufacturingTypeEn: String
+    var manufacturingTypeFr: String
+    var websiteEn: String
+    var websiteFr: String
+    var fatContentPercent: String
+    var moisturePercent: String
+    var particularitiesEn: String
+    var particularitiesFr: String
+    var flavourEn: String
+    var flavourFr: String
+    var characteristicsEn: String
+    var characteristicsFr: String
+    var ripeningEn: String
+    var ripeningFr: String
+    var organic: String
+    var categoryTypeEn: String
+    var categoryTypeFr: String
+    var milkTypeEn: String
+    var milkTypeFr: String
+    var milkTreatmentTypeEn: String
+    var milkTreatmentTypeFr: String
+    var rindTypeEn: String
+    var rindTypeFr: String
+    var lastUpdateDate: String
     
     var isOrganic: Bool {
-        return self.Organic == "1"
+        return self.organic == "1"
+    }
+}
+
+extension CanadianCheese {
+    enum CodingKeys: String, CodingKey {
+        case cheeseId = "CheeseId"
+        case cheeseNameEn = "CheeseNameEn"
+        case cheeseNameFr = "CheeseNameFr"
+        case manufacturerNameEn = "ManufacturerNameEn"
+        case manufacturerNameFr = "ManufacturerNameFr"
+        case manufacturerProvCode = "ManufacturerProvCode"
+        case manufacturingTypeEn = "ManufacturingTypeEn"
+        case manufacturingTypeFr = "ManufacturingTypeFr"
+        case websiteEn = "WebSiteEn"
+        case websiteFr = "WebSiteFr"
+        case fatContentPercent = "FatContentPercent"
+        case moisturePercent = "MoisturePercent"
+        case particularitiesEn = "ParticularitiesEn"
+        case particularitiesFr = "ParticularitiesFr"
+        case flavourEn = "FlavourEn"
+        case flavourFr = "FlavourFr"
+        case characteristicsEn = "CharacteristicsEn"
+        case characteristicsFr = "CharacteristicsFr"
+        case ripeningEn = "RipeningEn"
+        case ripeningFr = "RipeningFr"
+        case organic = "Organic"
+        case categoryTypeEn = "CategoryTypeEn"
+        case categoryTypeFr = "CategoryTypeFr"
+        case milkTypeEn = "MilkTypeEn"
+        case milkTypeFr = "MilkTypeFr"
+        case milkTreatmentTypeEn = "MilkTreatmentTypeEn"
+        case milkTreatmentTypeFr = "MilkTreatmentTypeFr"
+        case rindTypeEn = "RindTypeEn"
+        case rindTypeFr = "RindTypeFr"
+        case lastUpdateDate = "LastUpdateDate"
     }
 }
 
@@ -58,5 +93,9 @@ struct CanadianCheeses: Codable {
     static var favouriteCheesesIDs = [String]()
     // the favourite cheese
     static var favouriteCheeses = [CanadianCheese]()
-    var CheeseDirectory: [CanadianCheese]
+    var cheeseDirectory: [CanadianCheese]
+    
+    enum CodingKeys: String, CodingKey {
+        case cheeseDirectory = "CheeseDirectory"
+    }
 }

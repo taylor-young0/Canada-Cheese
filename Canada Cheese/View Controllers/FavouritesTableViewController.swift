@@ -35,24 +35,24 @@ class FavouritesTableViewController: UITableViewController {
         let favouriteCheeses = CanadianCheeses.favouriteCheeses
         let cell = tableView.dequeueReusableCell(withIdentifier: "favouriteCheeseCell", for: indexPath) as! FavouriteCheeseCell
         // Default to using the English value for the cell labels
-        var cheeseName = favouriteCheeses[indexPath.row].CheeseNameEn
-        var cheeseManufacturer = favouriteCheeses[indexPath.row].ManufacturerNameEn
-        var cheeseFlavourDesc = favouriteCheeses[indexPath.row].FlavourEn
+        var cheeseName = favouriteCheeses[indexPath.row].cheeseNameEn
+        var cheeseManufacturer = favouriteCheeses[indexPath.row].manufacturerNameEn
+        var cheeseFlavourDesc = favouriteCheeses[indexPath.row].flavourEn
         
         // If the English name is empty check for the French
         // Note: cheeseName could still be empty after this if the French version is also empty
         if cheeseName.isEmpty {
-            cheeseName = favouriteCheeses[indexPath.row].CheeseNameFr
+            cheeseName = favouriteCheeses[indexPath.row].cheeseNameFr
         }
         // See if the English manufacturer is empty, if so try the French
         // Note: This does not guarantee that cheeseManufacturer is non-empty
         if cheeseManufacturer.isEmpty {
-            cheeseManufacturer = favouriteCheeses[indexPath.row].ManufacturerNameFr
+            cheeseManufacturer = favouriteCheeses[indexPath.row].manufacturerNameFr
         }
         // See if the English flavour is empty
         // Note: This does not guarantee that cheeseFlavourDesc is non-empty
         if cheeseFlavourDesc.isEmpty {
-            cheeseFlavourDesc = favouriteCheeses[indexPath.row].CharacteristicsEn
+            cheeseFlavourDesc = favouriteCheeses[indexPath.row].characteristicsEn
         }
         
         cell.cheeseName.text = cheeseName

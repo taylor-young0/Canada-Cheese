@@ -38,10 +38,10 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         // load the favourite cheeses, or just use an empty String array if there are currently none saved
         CanadianCheeses.favouriteCheesesIDs = userDefaults.array(forKey: "favouriteCheesesIDs") as? [String] ?? [String]()
         // create the favourite cheeses array from the cheese ids
-        CanadianCheeses.favouriteCheeses = allCheeses?.filter({CanadianCheeses.favouriteCheesesIDs.contains($0.CheeseId)}) ?? [CanadianCheese]()
+        CanadianCheeses.favouriteCheeses = allCheeses?.filter({CanadianCheeses.favouriteCheesesIDs.contains($0.cheeseId)}) ?? [CanadianCheese]()
         
         // Filter the cheese given the active filters
-        displayedCheese = CanadianCheeses.allCheeses!.filter({filterCheese($0)})
+        displayedCheese = filterCheese()
         
         // set the title and the size of the title in the navigation bar
         let navigationBar = navigationController?.navigationBar
@@ -58,7 +58,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     
     override func viewDidAppear(_ animated: Bool) {
         // filter cheese, as we might have just gotten back from filtering vc!
-        displayedCheese = CanadianCheeses.allCheeses!.filter({filterCheese($0)})
+        displayedCheese = filterCheese()
         tableView.reloadData()
     }
     
@@ -66,7 +66,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         let decoder = JSONDecoder()
         
         if let jsonCheese = try? decoder.decode(CanadianCheeses.self, from: json) {
-            CanadianCheeses.allCheeses = jsonCheese.CheeseDirectory
+            CanadianCheeses.allCheeses = jsonCheese.cheeseDirectory
         }
     }
     
@@ -75,100 +75,29 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         present(navController, animated: true)
     }
     
-    func filterCheese(_ cheese: CanadianCheese) -> Bool {
-        var isIncluded = true
-        // loop through each filter category
-        for (filterCategory, filters) in FilterViewController.activeFilters {
-            // exit early if we already don't satisfy the results
-            if isIncluded == false {
-                return isIncluded
-            }
-            
-            // determine which filter to apply
-            var satisfiesAtleastOneFilter = false
-            switch filterCategory {
-            case "Manufacturing type":
-                if filters.isEmpty {
-                    return true;
-                }
-                for filterOption in filters {
-                    if cheese.ManufacturingTypeEn == filterOption {
-                        satisfiesAtleastOneFilter = true
-                        break
-                    }
-                }
-                isIncluded = satisfiesAtleastOneFilter
-            case "Manufacturer province":
-                if filters.isEmpty {
-                    return true
-                }
-                for filterOption in filters {
-                    if cheese.ManufacturerProvCode == filterOption {
-                        satisfiesAtleastOneFilter = true
-                        break
-                    }
-                }
-                isIncluded = satisfiesAtleastOneFilter
-            case "Organic":
-                if filters.isEmpty {
-                    return true
-                }
-                for filterOption in filters {
-                    if filterOption == "Organic" && cheese.isOrganic || filterOption == "Non-organic" && !cheese.isOrganic {
-                        satisfiesAtleastOneFilter = true
-                        break
-                    }
-                }
-                isIncluded = satisfiesAtleastOneFilter
-            case "Cheese type":
-                if filters.isEmpty {
-                    return true
-                }
-                for filterOption in filters {
-                    if cheese.CategoryTypeEn == filterOption {
-                        satisfiesAtleastOneFilter = true
-                        break
-                    }
-                }
-                isIncluded = satisfiesAtleastOneFilter
-            case "Milk type":
-                if filters.isEmpty {
-                    return true
-                }
-                for filterOption in filters {
-                    if cheese.MilkTypeEn == filterOption {
-                        satisfiesAtleastOneFilter = true
-                        break
-                    }
-                }
-                isIncluded = satisfiesAtleastOneFilter
-            case "Milk treatment":
-                if filters.isEmpty {
-                    return true
-                }
-                for filterOption in filters {
-                    if cheese.MilkTreatmentTypeEn == filterOption {
-                        satisfiesAtleastOneFilter = true
-                        break
-                    }
-                }
-                isIncluded = satisfiesAtleastOneFilter
-            case "Rind type":
-                if filters.isEmpty {
-                    return true
-                }
-                for filterOption in filters {
-                    if cheese.RindTypeEn == filterOption {
-                        satisfiesAtleastOneFilter = true
-                        break
-                    }
-                }
-                isIncluded = satisfiesAtleastOneFilter
-            default:
-                print("default case")
-            }
-        }
-        return isIncluded
+    func filterCheese() -> [CanadianCheese] {
+        let activeFilters = FilterViewController.activeFilters
+        
+        let manufacturingTypeFilters = activeFilters["Manufacturing type"]!
+        let manufacturingProvFilters = activeFilters["Manufacturer province"]!
+        let organicFilters = activeFilters["Organic"]!
+        let cheeseTypeFilters = activeFilters["Cheese type"]!
+        let milkTypeFilters = activeFilters["Milk type"]!
+        let milkTreatmentFilters = activeFilters["Milk treatment"]!
+        let rindTypeFilters = activeFilters["Rind type"]!
+        
+        // cheese is included if either
+        //      1. the applied filters contain the cheese's appropriate property value
+        //      2. or that property has no applied filters
+        return CanadianCheeses.allCheeses!.filter({
+            (manufacturingTypeFilters.count == 0 || manufacturingTypeFilters.contains($0.manufacturingTypeEn)) &&
+            (manufacturingProvFilters.count == 0 || manufacturingProvFilters.contains($0.manufacturerProvCode)) &&
+            (organicFilters.count == 0 || organicFilters.contains($0.organic == "1" ? "Organic" : "Non-organic")) &&
+            (cheeseTypeFilters.count == 0 || cheeseTypeFilters.contains($0.categoryTypeEn)) &&
+            (milkTypeFilters.count == 0 || milkTypeFilters.contains($0.milkTypeEn)) &&
+            (milkTreatmentFilters.count == 0 || milkTreatmentFilters.contains($0.milkTreatmentTypeEn)) &&
+            (rindTypeFilters.count == 0 || rindTypeFilters.contains($0.rindTypeEn))
+        })
     }
     
     // MARK: - Search Bar
@@ -194,7 +123,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     
     func searchCheese(forText searchText: String, on cheese: CanadianCheese) -> Bool {
         // These are our searchable cheese attributes
-        let searchableAttributes = [cheese.CheeseNameEn, cheese.CheeseNameFr, cheese.FlavourEn, cheese.FlavourFr, cheese.CharacteristicsEn, cheese.CharacteristicsFr, cheese.ManufacturerNameEn, cheese.ManufacturerNameFr, cheese.ParticularitiesEn, cheese.ParticularitiesFr]
+        let searchableAttributes = [cheese.cheeseNameEn, cheese.cheeseNameFr, cheese.flavourEn, cheese.flavourFr, cheese.characteristicsEn, cheese.characteristicsFr, cheese.manufacturerNameEn, cheese.manufacturerNameFr, cheese.particularitiesEn, cheese.particularitiesFr]
         // if search is empty, every search is fine
         if searchText.isEmpty {
             return true
@@ -221,24 +150,24 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cheeseCell", for: indexPath) as! CheeseCell
         // Default to using the English value for the cell labels
-        var cheeseName = displayedCheese[indexPath.row].CheeseNameEn
-        var cheeseManufacturer = displayedCheese[indexPath.row].ManufacturerNameEn
-        var cheeseFlavourDesc = displayedCheese[indexPath.row].FlavourEn
+        var cheeseName = displayedCheese[indexPath.row].cheeseNameEn
+        var cheeseManufacturer = displayedCheese[indexPath.row].manufacturerNameEn
+        var cheeseFlavourDesc = displayedCheese[indexPath.row].flavourEn
         
         // If the English name is empty check for the French
         // Note: cheeseName could still be empty after this if the French version is also empty
         if cheeseName.isEmpty {
-            cheeseName = displayedCheese[indexPath.row].CheeseNameFr
+            cheeseName = displayedCheese[indexPath.row].cheeseNameFr
         }
         // See if the English manufacturer is empty, if so try the French
         // Note: This does not guarantee that cheeseManufacturer is non-empty
         if cheeseManufacturer.isEmpty {
-            cheeseManufacturer = displayedCheese[indexPath.row].ManufacturerNameFr
+            cheeseManufacturer = displayedCheese[indexPath.row].manufacturerNameFr
         }
         // See if the English flavour is empty
         // Note: This does not guarantee that cheeseFlavourDesc is non-empty
         if cheeseFlavourDesc.isEmpty {
-            cheeseFlavourDesc = displayedCheese[indexPath.row].CharacteristicsEn
+            cheeseFlavourDesc = displayedCheese[indexPath.row].characteristicsEn
         }
         
         cell.cheeseName.text = cheeseName

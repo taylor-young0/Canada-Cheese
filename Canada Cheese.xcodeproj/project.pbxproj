@@ -29,8 +29,19 @@
 		EFF025C825014CBC007FC111 /* canadianCheeseDirectory.json in Resources */ = {isa = PBXBuildFile; fileRef = EFF025C725014CBC007FC111 /* canadianCheeseDirectory.json */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		EF786CD3259E22F3007C4F23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EFF025A0250138A3007FC111 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EFF025A7250138A3007FC111;
+			remoteInfo = "Canada Cheese";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		EF09DAAE2501757400459D6C /* CanadianCheese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanadianCheese.swift; sourceTree = "<group>"; };
+		EF786CCE259E22F3007C4F23 /* Canada Cheese Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Canada Cheese Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA28ACE2502B38A00FF1D0F /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		EFA28AD02502B84E00FF1D0F /* CheeseFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeseFilterCell.swift; sourceTree = "<group>"; };
 		EFAED6BB25696B6000894081 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -56,6 +67,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EF786CCB259E22F3007C4F23 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFF025A5250138A3007FC111 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -123,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				EFF025A8250138A3007FC111 /* Canada Cheese.app */,
+				EF786CCE259E22F3007C4F23 /* Canada Cheese Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -146,6 +165,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EF786CCD259E22F3007C4F23 /* Canada Cheese Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF786CD7259E22F3007C4F23 /* Build configuration list for PBXNativeTarget "Canada Cheese Tests" */;
+			buildPhases = (
+				EF786CCA259E22F3007C4F23 /* Sources */,
+				EF786CCB259E22F3007C4F23 /* Frameworks */,
+				EF786CCC259E22F3007C4F23 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF786CD4259E22F3007C4F23 /* PBXTargetDependency */,
+			);
+			name = "Canada Cheese Tests";
+			productName = "Canada Cheese Tests";
+			productReference = EF786CCE259E22F3007C4F23 /* Canada Cheese Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		EFF025A7250138A3007FC111 /* Canada Cheese */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EFF025BE250138A5007FC111 /* Build configuration list for PBXNativeTarget "Canada Cheese" */;
@@ -169,10 +206,14 @@
 		EFF025A0250138A3007FC111 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1170;
+				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Taylor Young";
 				TargetAttributes = {
+					EF786CCD259E22F3007C4F23 = {
+						CreatedOnToolsVersion = 12.3;
+						TestTargetID = EFF025A7250138A3007FC111;
+					};
 					EFF025A7250138A3007FC111 = {
 						CreatedOnToolsVersion = 11.7;
 					};
@@ -192,11 +233,19 @@
 			projectRoot = "";
 			targets = (
 				EFF025A7250138A3007FC111 /* Canada Cheese */,
+				EF786CCD259E22F3007C4F23 /* Canada Cheese Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EF786CCC259E22F3007C4F23 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFF025A6250138A3007FC111 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -216,6 +265,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EF786CCA259E22F3007C4F23 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFF025A4250138A3007FC111 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -235,6 +291,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EF786CD4259E22F3007C4F23 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EFF025A7250138A3007FC111 /* Canada Cheese */;
+			targetProxy = EF786CD3259E22F3007C4F23 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		EFF025B3250138A3007FC111 /* Main.storyboard */ = {
@@ -256,6 +320,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		EF786CD5259E22F3007C4F23 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6JTMH9S5KE;
+				INFOPLIST_FILE = "Canada Cheese Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.taylor-young0.Canada-Cheese-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Canada Cheese.app/Canada Cheese";
+			};
+			name = Debug;
+		};
+		EF786CD6259E22F3007C4F23 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6JTMH9S5KE;
+				INFOPLIST_FILE = "Canada Cheese Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.taylor-young0.Canada-Cheese-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Canada Cheese.app/Canada Cheese";
+			};
+			name = Release;
+		};
 		EFF025BC250138A5007FC111 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -417,6 +523,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EF786CD7259E22F3007C4F23 /* Build configuration list for PBXNativeTarget "Canada Cheese Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF786CD5259E22F3007C4F23 /* Debug */,
+				EF786CD6259E22F3007C4F23 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EFF025A3250138A3007FC111 /* Build configuration list for PBXProject "Canada Cheese" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

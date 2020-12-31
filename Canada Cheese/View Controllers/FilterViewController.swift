@@ -14,9 +14,21 @@ class FilterViewController: UITableViewController {
     var recentlySelectedCells = Set<CheeseFilterCell>()
     var allCheeseVC: AllCheeseTableViewController?
     // filters that have been selected, but have not yet been applied because the "apply" button has yet to be pressed
-    var tempFilters = Dictionary<String, Set<String>>()
+    var tempFilters = ["Manufacturing type": Set<String>(),
+                       "Manufacturer province": Set<String>(),
+                       "Organic": Set<String>(),
+                       "Cheese type": Set<String>(),
+                       "Milk type": Set<String>(),
+                       "Milk treatment": Set<String>(),
+                       "Rind type": Set<String>()]
     // filters that are currently active
-    static var activeFilters = Dictionary<String, Set<String>>()
+    static var activeFilters = ["Manufacturing type": Set<String>(),
+                                "Manufacturer province": Set<String>(),
+                                "Organic": Set<String>(),
+                                "Cheese type": Set<String>(),
+                                "Milk type": Set<String>(),
+                                "Milk treatment": Set<String>(),
+                                "Rind type": Set<String>()]
     static var filters = [
         0 : ["Manufacturing type": ["Artisan", "Farmstead", "Industrial"]],
         1 : ["Manufacturer province" : ["BC", "AB", "SK", "MB", "ON", "QC", "NL", "NB", "NS", "PE"]],
@@ -90,14 +102,10 @@ class FilterViewController: UITableViewController {
         let selectedFilter = cell.filter.text!
         let sectionTitle = (tableView.headerView(forSection: indexPath.section)?.textLabel?.text)!
         // if the filter is already applied, remove it
-        if (currentAccessory == .checkmark) {
-            tempFilters["\(sectionTitle)"]?.remove(selectedFilter)
+        if currentAccessory == .checkmark {
+            tempFilters["\(sectionTitle)"]!.remove(selectedFilter)
         } else {
-            // if the section does not already have a set storing the applied filters we must create an empty set
-            if tempFilters["\(sectionTitle)"] == nil {
-                tempFilters["\(sectionTitle)"] = Set<String>()
-            }
-            tempFilters["\(sectionTitle)"]?.insert(selectedFilter)
+            tempFilters["\(sectionTitle)"]!.insert(selectedFilter)
         }
         // change the cell accessory to be the opposite of what it currently is
         cell.accessoryType = (currentAccessory == .none ? .checkmark : .none)
