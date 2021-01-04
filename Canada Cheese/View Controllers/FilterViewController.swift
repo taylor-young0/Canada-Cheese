@@ -52,6 +52,7 @@ class FilterViewController: UITableViewController {
         self.navigationItem.rightBarButtonItems = [apply]
     }
     
+    /// Dismis the FilterViewController and cancels the newly applied filters.
     @objc func dismissAndCancel() {
         // Toggle the cell accessory as we actually don't want to apply these filters
         // Otherwise it will give the user the visual impression that a filter is (or isn't) applied when it really isn't (or is)
@@ -65,6 +66,7 @@ class FilterViewController: UITableViewController {
         dismiss(animated: true, completion: {self.allCheeseVC!.viewDidAppear(true)})
     }
     
+    /// Dismis the FilterViewController and applies the new filters.
     @objc func dismissAndApply() {
         FilterViewController.activeFilters = tempFilters
         // Since the filter VC is about to be dismissed there are no longer any recently selected cells in the current viewing of the filter VC

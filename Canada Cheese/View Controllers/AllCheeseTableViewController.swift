@@ -75,6 +75,8 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         present(navController, animated: true)
     }
     
+    /// Filters through all the cheese in CanadianCheeses.allCheese using the filters
+    /// given in FilterViewController.activeFilters
     func filterCheese() -> [CanadianCheese] {
         let activeFilters = FilterViewController.activeFilters
         
@@ -111,7 +113,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         }
         
         // search the cheese for the given text
-        displayedCheese = CanadianCheeses.allCheeses!.filter({searchCheese(forText: text, on: $0)})
+        displayedCheese = CanadianCheeses.allCheeses!.filter({searchCheese(for: text, on: $0)})
         tableView.reloadData()
     }
     
@@ -121,7 +123,13 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         tableView.reloadData()
     }
     
-    func searchCheese(forText searchText: String, on cheese: CanadianCheese) -> Bool {
+    
+    /// Searches the cheese's properties and returns a boolean representing whether or not
+    /// the cheese contains the string
+    /// - parameter searchText: string to search for
+    /// - parameter cheese: the cheese whose properties are being searched
+    /// - returns: true if the search text is found
+    func searchCheese(for searchText: String, on cheese: CanadianCheese) -> Bool {
         // These are our searchable cheese attributes
         let searchableAttributes = [cheese.cheeseNameEn, cheese.cheeseNameFr, cheese.flavourEn, cheese.flavourFr, cheese.characteristicsEn, cheese.characteristicsFr, cheese.manufacturerNameEn, cheese.manufacturerNameFr, cheese.particularitiesEn, cheese.particularitiesFr]
         // if search is empty, every search is fine
