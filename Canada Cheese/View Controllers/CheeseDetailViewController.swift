@@ -72,7 +72,7 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
         case "Manufacturing type":
             propertyValue = selectedCheese!.manufacturingTypeEn
         case "Website":
-            propertyValue = selectedCheese!.websiteEn
+            propertyValue = selectedCheese!.websiteEn != "" ? selectedCheese!.websiteEn : selectedCheese!.websiteFr
             cell.propertyValue.textColor = UIColor.systemBlue
         case "Fat":
             // no fat % given? Don't display anything
