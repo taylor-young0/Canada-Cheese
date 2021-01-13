@@ -44,16 +44,16 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         displayedCheese = filterCheese()
         
         // set the title and the size of the title in the navigation bar
-        let navigationBar = navigationController?.navigationBar
-        navigationBar?.prefersLargeTitles = true
-        navigationBar?.topItem?.title = "Canada Cheese"
+        let navigationBar = navigationController!.navigationBar
+        navigationBar.prefersLargeTitles = true
+        navigationBar.topItem!.title = "Canada Cheese"
         // add the filter button to the navigation bar
         let filter = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(displayFilters))
-        navigationBar?.topItem?.rightBarButtonItems = [filter]
+        navigationBar.topItem!.rightBarButtonItems = [filter]
         
         // prepare a filterViewController for filtering through the cheeses
-        filterVC = (storyboard?.instantiateViewController(identifier: "filterViewController") as! FilterViewController)
-        filterVC?.allCheeseVC = self
+        filterVC = (storyboard!.instantiateViewController(identifier: "filterViewController") as! FilterViewController)
+        filterVC!.allCheeseVC = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,6 +62,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         tableView.reloadData()
     }
     
+    /// Parses and saves the JSON cheese directory to CanadianCheeses.allCheeses
     func parse(json: Data) {
         let decoder = JSONDecoder()
         
@@ -70,6 +71,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         }
     }
     
+    /// Displays the filter view controller
     @objc func displayFilters() {
         let navController = UINavigationController(rootViewController: filterVC!)
         present(navController, animated: true)
@@ -124,18 +126,20 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     }
     
     
-    /// Searches the cheese's properties and returns a boolean representing whether or not
-    /// the cheese contains the string
+    /// Returns a boolean representing whether any of the cheese's searchable attributes
+    /// contains the search text
     /// - parameter searchText: string to search for
     /// - parameter cheese: the cheese whose properties are being searched
     /// - returns: true if the search text is found
     func searchCheese(for searchText: String, on cheese: CanadianCheese) -> Bool {
         // These are our searchable cheese attributes
         let searchableAttributes = [cheese.cheeseNameEn, cheese.cheeseNameFr, cheese.flavourEn, cheese.flavourFr, cheese.characteristicsEn, cheese.characteristicsFr, cheese.manufacturerNameEn, cheese.manufacturerNameFr, cheese.particularitiesEn, cheese.particularitiesFr]
+        
         // if search is empty, every search is fine
         if searchText.isEmpty {
             return true
         }
+        
         // else look through each attribute, if the searchText is in there, we include this cheese
         for attribute in searchableAttributes {
             if attribute.lowercased().contains(searchText.lowercased()) {

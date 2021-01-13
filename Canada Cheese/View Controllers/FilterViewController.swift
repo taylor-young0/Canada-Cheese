@@ -52,7 +52,7 @@ class FilterViewController: UITableViewController {
         self.navigationItem.rightBarButtonItems = [apply]
     }
     
-    /// Dismis the FilterViewController and cancels the newly applied filters.
+    /// Dismiss the FilterViewController and cancels the newly applied filters.
     @objc func dismissAndCancel() {
         // Toggle the cell accessory as we actually don't want to apply these filters
         // Otherwise it will give the user the visual impression that a filter is (or isn't) applied when it really isn't (or is)
@@ -66,7 +66,7 @@ class FilterViewController: UITableViewController {
         dismiss(animated: true, completion: {self.allCheeseVC!.viewDidAppear(true)})
     }
     
-    /// Dismis the FilterViewController and applies the new filters.
+    /// Dismiss the FilterViewController and applies the new filters.
     @objc func dismissAndApply() {
         FilterViewController.activeFilters = tempFilters
         // Since the filter VC is about to be dismissed there are no longer any recently selected cells in the current viewing of the filter VC
@@ -103,12 +103,14 @@ class FilterViewController: UITableViewController {
         let currentAccessory = cell.accessoryType
         let selectedFilter = cell.filter.text!
         let sectionTitle = (tableView.headerView(forSection: indexPath.section)?.textLabel?.text)!
+        
         // if the filter is already applied, remove it
         if currentAccessory == .checkmark {
             tempFilters["\(sectionTitle)"]!.remove(selectedFilter)
         } else {
             tempFilters["\(sectionTitle)"]!.insert(selectedFilter)
         }
+        
         // change the cell accessory to be the opposite of what it currently is
         cell.accessoryType = (currentAccessory == .none ? .checkmark : .none)
         // Add this selected cell to the set of recently selected cells,

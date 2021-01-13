@@ -75,6 +75,7 @@ class Canada_CheeseTests: XCTestCase {
         vc.displayedCheese = vc.filterCheese()
         
         XCTAssert(vc.displayedCheese.count == 1, "There should only be one cheese from Saskatchewan")
+        XCTAssert(vc.displayedCheese[0].manufacturerProvCode == "SK", "The one cheese should be from Saskatchewan")
         
         FilterViewController.activeFilters = defaultFilters
         FilterViewController.activeFilters["Manufacturer province"] = ["NS"]
@@ -83,6 +84,8 @@ class Canada_CheeseTests: XCTestCase {
         vc.displayedCheese = vc.filterCheese()
         
         XCTAssert(vc.displayedCheese.count == 1, "There should only be one hard organic cheese from Nova Scotia")
+        XCTAssert((vc.displayedCheese[0].manufacturerProvCode == "NS" && vc.displayedCheese[0].organic == "1" &&
+                    vc.displayedCheese[0].categoryTypeEn == "Hard Cheese"), "Cheese properties don't match the applied filters")
     }
     
     /// Test that all cheese satisfy the given filters
