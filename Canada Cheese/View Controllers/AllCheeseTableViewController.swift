@@ -22,6 +22,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         searchBar.searchResultsUpdater = self
         searchBar.obscuresBackgroundDuringPresentation = false
         searchBar.searchBar.placeholder = "Search cheese"
+        searchBar.searchBar.tintColor = .systemRed
         navigationItem.searchController = searchBar
         
         // Load the JSON data
@@ -62,7 +63,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         tableView.reloadData()
     }
     
-    /// Parses and saves the JSON cheese directory to CanadianCheeses.allCheeses
+    /// Parses and saves the JSON cheese directory to `CanadianCheeses.allCheeses`
     func parse(json: Data) {
         let decoder = JSONDecoder()
         
@@ -77,8 +78,8 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         present(navController, animated: true)
     }
     
-    /// Filters through all the cheese in CanadianCheeses.allCheese using the filters
-    /// given in FilterViewController.activeFilters
+    /// Filters through all the cheese in `CanadianCheeses.allCheese` using the filters
+    /// given in `FilterViewController.activeFilters`
     func filterCheese() -> [CanadianCheese] {
         let activeFilters = FilterViewController.activeFilters
         
@@ -114,6 +115,12 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
             return
         }
         
+        // if there is text but it is just an empty string
+        if searchController.searchBar.text!.isEmpty {
+            displayedCheese = CanadianCheeses.allCheeses!
+            tableView.reloadData()
+            return
+        }
         // search the cheese for the given text
         displayedCheese = CanadianCheeses.allCheeses!.filter({searchCheese(for: text, on: $0)})
         tableView.reloadData()

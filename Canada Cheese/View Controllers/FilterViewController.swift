@@ -33,10 +33,10 @@ class FilterViewController: UITableViewController {
         0 : ["Manufacturing type": ["Artisan", "Farmstead", "Industrial"]],
         1 : ["Manufacturer province" : ["BC", "AB", "SK", "MB", "ON", "QC", "NL", "NB", "NS", "PE"]],
         2 : ["Organic": ["Organic", "Non-organic"]],
-        3 : ["Cheese type": ["Soft Cheese", "Semi-soft Cheese", "Firm Cheese", "Hard Cheese", "Veined Cheese", "Fresh Cheese"]],
-        4 : ["Milk type": ["Ewe", "Ewe and Goat", "Goat", "Cow", "Cow and Goat", "Buffalo Cow"]],
+        3 : ["Cheese type": ["Soft Cheese", "Semi-soft Cheese", "Firm Cheese", "Hard Cheese", "Veined Cheeses", "Fresh Cheese"]],
+        4 : ["Milk type": ["Ewe", "Ewe and Goat", "Ewe and Cow", "Goat", "Cow", "Cow and Goat", "Buffalo Cow", "Cow, Goat and Ewe", "Cow and Goat"]],
         5 : ["Milk treatment": ["Raw Milk", "Pasteurized", "Thermised"]],
-        6 : ["Rind type": ["Washed Rind", "Brushed Rind", "No Rind"]]
+        6 : ["Rind type": ["Washed Rind", "Brushed Rind", "No Rind", "Bloomy Rind"]]
     ]
     
     override func viewDidLoad() {
@@ -44,8 +44,10 @@ class FilterViewController: UITableViewController {
         
         // cancel button to disregard recently selected filters and go back to the main app screen
         let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(dismissAndCancel))
+        cancel.tintColor = .systemRed
         // apply button to apply filters and go back to main app screen
         let apply = UIBarButtonItem(title: "Apply", style: .plain, target: self, action: #selector(dismissAndApply))
+        apply.tintColor = .systemRed
         
         self.navigationItem.leftBarButtonItems = [cancel]
         self.navigationItem.title = "Filter"

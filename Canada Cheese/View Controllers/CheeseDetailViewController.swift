@@ -73,7 +73,7 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
             propertyValue = selectedCheese!.manufacturingTypeEn
         case "Website":
             propertyValue = selectedCheese!.websiteEn != "" ? selectedCheese!.websiteEn : selectedCheese!.websiteFr
-            cell.propertyValue.textColor = UIColor.systemBlue
+            cell.propertyValue.textColor = UIColor.systemRed
         case "Fat":
             // no fat % given? Don't display anything
             propertyValue = selectedCheese!.fatContentPercent != "" ? "\(selectedCheese!.fatContentPercent)%" : ""
@@ -102,6 +102,11 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
             propertyValue = selectedCheese!.lastUpdateDate
         default:
             propertyValue = ""
+        }
+        
+        if propertyValue.isEmpty {
+            propertyValue = "-"
+            cell.propertyValue.textColor = .systemGray
         }
         
         cell.propertyName.sizeToFit()
@@ -136,7 +141,7 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = self.tableView(tableView, cellForRowAt: indexPath) as! CheeseDetailCell
         let website = cell.propertyValue.text!
-        if cell.propertyName.text! == "Website" && !website.isEmpty {
+        if cell.propertyName.text! == "Website" && !website.isEmpty && website.hasPrefix("http") {
             if let url = URL(string: website) {
                 let vc = SFSafariViewController(url: url)
                 vc.delegate = self

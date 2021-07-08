@@ -15,6 +15,7 @@ class FavouritesTableViewController: UITableViewController {
         
         let navigationBar = navigationController?.navigationBar
         navigationBar?.topItem?.title = "Favourite Cheeses"
+        navigationBar?.tintColor = .systemRed
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +59,7 @@ class FavouritesTableViewController: UITableViewController {
         cell.cheeseName.text = cheeseName
         cell.manufacturer.text = cheeseManufacturer
         cell.flavourDescription.text = cheeseFlavourDesc
-        cell.favouriteButton.tintColor = .systemYellow
+        cell.favouriteButton.tintColor = .systemRed
         
         return cell
     }
