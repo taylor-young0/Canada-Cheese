@@ -34,7 +34,7 @@ class FilterViewController: UITableViewController {
         1 : ["Manufacturer province" : ["BC", "AB", "SK", "MB", "ON", "QC", "NL", "NB", "NS", "PE"]],
         2 : ["Organic": ["Organic", "Non-organic"]],
         3 : ["Cheese type": ["Soft Cheese", "Semi-soft Cheese", "Firm Cheese", "Hard Cheese", "Veined Cheeses", "Fresh Cheese"]],
-        4 : ["Milk type": ["Ewe", "Ewe and Goat", "Ewe and Cow", "Goat", "Cow", "Cow and Goat", "Buffalo Cow", "Cow, Goat and Ewe", "Cow and Goat"]],
+        4 : ["Milk type": ["Ewe", "Ewe and Goat", "Ewe and Cow", "Goat", "Cow", "Cow and Goat", "Buffalo Cow", "Cow, Goat and Ewe"]],
         5 : ["Milk treatment": ["Raw Milk", "Pasteurized", "Thermised"]],
         6 : ["Rind type": ["Washed Rind", "Brushed Rind", "No Rind", "Bloomy Rind"]]
     ]
