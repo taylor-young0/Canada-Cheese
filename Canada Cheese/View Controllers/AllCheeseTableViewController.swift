@@ -26,7 +26,9 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         navigationItem.searchController = searchBar
         
         // Load the JSON data
-        if let url = Bundle.main.url(forResource: "canadianCheeseDirectory", withExtension: "json") {
+        let urlString = "https://od-do.agr.gc.ca/canadianCheeseDirectory.json"
+        
+        if let url = URL(string: urlString) {
             if let data = try? Data(contentsOf: url) {
                 parse(json: data)
             } else {
