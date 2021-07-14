@@ -118,30 +118,12 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
         
         return cell
     }
-
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Cheese info"
-    }
-    
-    // change the background between the cell sections
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
-        headerView.backgroundColor = .secondarySystemBackground
-        return headerView
-    }
-    
-    // change the background between the cell sections
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 10))
-        footerView.backgroundColor = .secondarySystemBackground
-        return footerView
-    }
     
     // Allow users to click the website cell to load the website
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = self.tableView(tableView, cellForRowAt: indexPath) as! CheeseDetailCell
         let website = cell.propertyValue.text!
-        if cell.propertyName.text! == "Website" && !website.isEmpty && website.hasPrefix("http") {
+        if cell.propertyName.text! == "Website" && website.hasPrefix("http") {
             if let url = URL(string: website) {
                 let vc = SFSafariViewController(url: url)
                 vc.delegate = self
