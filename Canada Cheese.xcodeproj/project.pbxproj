@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EF09DAAF2501757400459D6C /* CanadianCheese.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF09DAAE2501757400459D6C /* CanadianCheese.swift */; };
+		EF7C485026A0934F00AA41FE /* Localizable.strings in Sources */ = {isa = PBXBuildFile; fileRef = EF389D1226A0815D00316E3F /* Localizable.strings */; };
 		EFA28ACF2502B38A00FF1D0F /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA28ACE2502B38A00FF1D0F /* FilterViewController.swift */; };
 		EFA28AD12502B84E00FF1D0F /* CheeseFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA28AD02502B84E00FF1D0F /* CheeseFilterCell.swift */; };
 		EFAED6C225696E0500894081 /* Canada Cheese screenshots.003.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EFAED6BD25696E0500894081 /* Canada Cheese screenshots.003.jpeg */; };
@@ -42,6 +43,8 @@
 
 /* Begin PBXFileReference section */
 		EF09DAAE2501757400459D6C /* CanadianCheese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanadianCheese.swift; sourceTree = "<group>"; };
+		EF389D0E26A07EBB00316E3F /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Main.strings"; sourceTree = "<group>"; };
+		EF389D1126A0815D00316E3F /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		EFA28ACE2502B38A00FF1D0F /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		EFA28AD02502B84E00FF1D0F /* CheeseFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeseFilterCell.swift; sourceTree = "<group>"; };
 		EFAED6BB25696B6000894081 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -153,6 +156,7 @@
 		EFF025AA250138A3007FC111 /* Canada Cheese */ = {
 			isa = PBXGroup;
 			children = (
+				EF389D1226A0815D00316E3F /* Localizable.strings */,
 				EFB177D52507C8C100DE2FBA /* Model */,
 				EFB177D42507C88900DE2FBA /* View Controllers */,
 				EFF025AB250138A3007FC111 /* AppDelegate.swift */,
@@ -239,6 +243,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"fr-CA",
 			);
 			mainGroup = EFF0259F250138A3007FC111;
 			productRefGroup = EFF025A9250138A3007FC111 /* Products */;
@@ -282,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF7C485026A0934F00AA41FE /* Localizable.strings in Sources */,
 				EFF025AC250138A3007FC111 /* AppDelegate.swift in Sources */,
 				EFF025C425013CDB007FC111 /* FavouritesTableViewController.swift in Sources */,
 				EFF025C225013CB1007FC111 /* AllCheeseTableViewController.swift in Sources */,
@@ -315,10 +321,19 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		EF389D1226A0815D00316E3F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF389D1126A0815D00316E3F /* fr-CA */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		EFF025B3250138A3007FC111 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				EFF025B4250138A3007FC111 /* Base */,
+				EF389D0E26A07EBB00316E3F /* fr-CA */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -338,6 +353,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -399,6 +415,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

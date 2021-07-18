@@ -1,0 +1,36 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "4J8-4c-edo"; */
+"4J8-4c-edo.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "CXs-94-Mkf"; */
+"CXs-94-Mkf.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "All Cheese"; ObjectID = "D7k-oG-j8p"; */
+"D7k-oG-j8p.title" = "Tous les Fromages";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "PRc-mi-yiz"; */
+"PRc-mi-yiz.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "aeB-wh-1WD"; */
+"aeB-wh-1WD.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "bg1-eT-rcS"; */
+"bg1-eT-rcS.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "c3e-1e-hyK"; */
+"c3e-1e-hyK.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "eBt-j1-Uff"; */
+"eBt-j1-Uff.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "fqY-LB-vBk"; */
+"fqY-LB-vBk.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "jUM-Y7-jT9"; */
+"jUM-Y7-jT9.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "rGZ-jG-BLo"; */
+"rGZ-jG-BLo.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "Favourites"; ObjectID = "ymL-hf-qaW"; */
+"ymL-hf-qaW.title" = "Fromages Préférés";

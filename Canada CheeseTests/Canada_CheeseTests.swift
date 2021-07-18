@@ -79,7 +79,7 @@ class Canada_CheeseTests: XCTestCase {
     }
     
     /// Test filtering that should result in a few cheeses
-    func testFewResults() throws {
+    func testFewFilterResults() throws {
         let vc = AllCheeseTableViewController()
         
         FilterViewController.activeFilters["Manufacturing type"] = ["Farmstead"]
@@ -112,7 +112,7 @@ class Canada_CheeseTests: XCTestCase {
     }
     
     /// Test filtering that should result in many cheeses
-    func testManyResults() throws {
+    func testManyFilterResults() throws {
         let vc = AllCheeseTableViewController()
         
         FilterViewController.activeFilters["Milk type"] = ["Goat", "Cow", "Buffalo Cow"]

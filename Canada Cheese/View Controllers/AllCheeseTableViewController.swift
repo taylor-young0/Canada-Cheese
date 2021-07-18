@@ -21,7 +21,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         let searchBar = UISearchController(searchResultsController: nil)
         searchBar.searchResultsUpdater = self
         searchBar.obscuresBackgroundDuringPresentation = false
-        searchBar.searchBar.placeholder = "Search cheese"
+        searchBar.searchBar.placeholder = NSLocalizedString("Search cheese", comment: "Cheese search bar placeholder text")
         searchBar.searchBar.tintColor = .systemRed
         navigationItem.searchController = searchBar
         
@@ -85,25 +85,25 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     func filterCheese() -> [CanadianCheese] {
         let activeFilters = FilterViewController.activeFilters
         
-        let manufacturingTypeFilters = activeFilters["Manufacturing type"]!
-        let manufacturingProvFilters = activeFilters["Manufacturer province"]!
-        let organicFilters = activeFilters["Organic"]!
-        let cheeseTypeFilters = activeFilters["Cheese type"]!
-        let milkTypeFilters = activeFilters["Milk type"]!
-        let milkTreatmentFilters = activeFilters["Milk treatment"]!
-        let rindTypeFilters = activeFilters["Rind type"]!
+        let manufacturingTypeFilters = activeFilters[NSLocalizedString("Manufacturing type", comment: "")]!
+        let manufacturingProvFilters = activeFilters[NSLocalizedString("Manufacturer province", comment: "")]!
+        let organicFilters = activeFilters[NSLocalizedString("Organic", comment: "")]!
+        let cheeseTypeFilters = activeFilters[NSLocalizedString("Cheese type", comment: "")]!
+        let milkTypeFilters = activeFilters[NSLocalizedString("Milk type", comment: "")]!
+        let milkTreatmentFilters = activeFilters[NSLocalizedString("Milk treatment", comment: "")]!
+        let rindTypeFilters = activeFilters[NSLocalizedString("Rind type", comment: "")]!
         
         // cheese is included if either
         //      1. the applied filters contain the cheese's appropriate property value
         //      2. or that property has no applied filters
         return CanadianCheeses.allCheeses!.filter({
-            (manufacturingTypeFilters.count == 0 || manufacturingTypeFilters.contains($0.manufacturingTypeEn)) &&
+            (manufacturingTypeFilters.count == 0 || manufacturingTypeFilters.contains($0.manufacturingTypeEn) || manufacturingTypeFilters.contains($0.manufacturingTypeFr)) &&
             (manufacturingProvFilters.count == 0 || manufacturingProvFilters.contains($0.manufacturerProvCode)) &&
-            (organicFilters.count == 0 || organicFilters.contains($0.organic == "1" ? "Organic" : "Non-organic")) &&
-            (cheeseTypeFilters.count == 0 || cheeseTypeFilters.contains($0.categoryTypeEn)) &&
-            (milkTypeFilters.count == 0 || milkTypeFilters.contains($0.milkTypeEn)) &&
-            (milkTreatmentFilters.count == 0 || milkTreatmentFilters.contains($0.milkTreatmentTypeEn)) &&
-            (rindTypeFilters.count == 0 || rindTypeFilters.contains($0.rindTypeEn))
+            (organicFilters.count == 0 || organicFilters.contains($0.organic == "1" ? NSLocalizedString("Organic", comment: "") : NSLocalizedString("Non-organic", comment: ""))) &&
+            (cheeseTypeFilters.count == 0 || cheeseTypeFilters.contains($0.categoryTypeEn) || cheeseTypeFilters.contains($0.categoryTypeFr)) &&
+            (milkTypeFilters.count == 0 || milkTypeFilters.contains($0.milkTypeEn) || milkTypeFilters.contains($0.milkTypeFr)) &&
+            (milkTreatmentFilters.count == 0 || milkTreatmentFilters.contains($0.milkTreatmentTypeEn) || milkTreatmentFilters.contains($0.milkTreatmentTypeFr)) &&
+            (rindTypeFilters.count == 0 || rindTypeFilters.contains($0.rindTypeEn) || rindTypeFilters.contains($0.rindTypeFr))
         })
     }
     
@@ -170,25 +170,17 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cheeseCell", for: indexPath) as! CheeseCell
+        let cheese = displayedCheese[indexPath.row]
+        let locale = Bundle.main.preferredLocalizations.first ?? ""
         // Default to using the English value for the cell labels
-        var cheeseName = displayedCheese[indexPath.row].cheeseNameEn
-        var cheeseManufacturer = displayedCheese[indexPath.row].manufacturerNameEn
-        var cheeseFlavourDesc = displayedCheese[indexPath.row].flavourEn
+        let cheeseName = CheeseDetailViewController.propertyValue(for: NSLocalizedString("Cheese", comment: ""), on: cheese, inLocale: locale)
+        let cheeseManufacturer = CheeseDetailViewController.propertyValue(for: NSLocalizedString("Manufacturer", comment: ""), on: cheese, inLocale: locale)
+        var cheeseFlavourDesc = CheeseDetailViewController.propertyValue(for: NSLocalizedString("Flavour", comment: ""), on: cheese, inLocale: locale)
         
-        // If the English name is empty check for the French
-        // Note: cheeseName could still be empty after this if the French version is also empty
-        if cheeseName.isEmpty {
-            cheeseName = displayedCheese[indexPath.row].cheeseNameFr
-        }
-        // See if the English manufacturer is empty, if so try the French
-        // Note: This does not guarantee that cheeseManufacturer is non-empty
-        if cheeseManufacturer.isEmpty {
-            cheeseManufacturer = displayedCheese[indexPath.row].manufacturerNameFr
-        }
-        // See if the English flavour is empty
-        // Note: This does not guarantee that cheeseFlavourDesc is non-empty
+        // See if the flavour is empty
+        // Note: This does not guarantee that cheeseFlavourDesc is non-empty as characteristics could still be empty
         if cheeseFlavourDesc.isEmpty {
-            cheeseFlavourDesc = displayedCheese[indexPath.row].characteristicsEn
+            cheeseFlavourDesc = CheeseDetailViewController.propertyValue(for: NSLocalizedString("Characteristics", comment: ""), on: cheese, inLocale: locale)
         }
         
         cell.cheeseName.text = cheeseName

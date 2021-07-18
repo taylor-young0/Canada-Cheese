@@ -14,7 +14,7 @@ class FavouritesTableViewController: UITableViewController {
         super.viewDidLoad()
         
         let navigationBar = navigationController?.navigationBar
-        navigationBar?.topItem?.title = "Favourite Cheeses"
+        navigationBar?.topItem?.title = NSLocalizedString("Favourite Cheese", comment: "Favourite cheese view navigation bar title")
         navigationBar?.tintColor = .systemRed
     }
 
@@ -35,25 +35,18 @@ class FavouritesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let favouriteCheeses = CanadianCheeses.favouriteCheeses
         let cell = tableView.dequeueReusableCell(withIdentifier: "favouriteCheeseCell", for: indexPath) as! FavouriteCheeseCell
-        // Default to using the English value for the cell labels
-        var cheeseName = favouriteCheeses[indexPath.row].cheeseNameEn
-        var cheeseManufacturer = favouriteCheeses[indexPath.row].manufacturerNameEn
-        var cheeseFlavourDesc = favouriteCheeses[indexPath.row].flavourEn
         
-        // If the English name is empty check for the French
-        // Note: cheeseName could still be empty after this if the French version is also empty
-        if cheeseName.isEmpty {
-            cheeseName = favouriteCheeses[indexPath.row].cheeseNameFr
-        }
-        // See if the English manufacturer is empty, if so try the French
-        // Note: This does not guarantee that cheeseManufacturer is non-empty
-        if cheeseManufacturer.isEmpty {
-            cheeseManufacturer = favouriteCheeses[indexPath.row].manufacturerNameFr
-        }
-        // See if the English flavour is empty
-        // Note: This does not guarantee that cheeseFlavourDesc is non-empty
+        let cheese = favouriteCheeses[indexPath.row]
+        let locale = Bundle.main.preferredLocalizations.first ?? ""
+        // Default to using the English value for the cell labels
+        let cheeseName = CheeseDetailViewController.propertyValue(for: NSLocalizedString("Cheese", comment: ""), on: cheese, inLocale: locale)
+        let cheeseManufacturer = CheeseDetailViewController.propertyValue(for: NSLocalizedString("Manufacturer", comment: ""), on: cheese, inLocale: locale)
+        var cheeseFlavourDesc = CheeseDetailViewController.propertyValue(for: NSLocalizedString("Flavour", comment: ""), on: cheese, inLocale: locale)
+        
+        // See if the flavour is empty
+        // Note: This does not guarantee that cheeseFlavourDesc is non-empty as characteristics could still be empty
         if cheeseFlavourDesc.isEmpty {
-            cheeseFlavourDesc = favouriteCheeses[indexPath.row].characteristicsEn
+            cheeseFlavourDesc = CheeseDetailViewController.propertyValue(for: NSLocalizedString("Characteristics", comment: ""), on: cheese, inLocale: locale)
         }
         
         cell.cheeseName.text = cheeseName
@@ -80,7 +73,7 @@ class FavouritesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let remove = UIContextualAction(style: .destructive, title: "Remove") { action, view, completionHandler in
+        let remove = UIContextualAction(style: .destructive, title: NSLocalizedString("Remove", comment: "Remove cheese from favourites button")) { action, view, completionHandler in
             // make sure to remove the cheese from the array of favourites
             // note that because the cell at the given indexPath is defined as favouriteCheeses[indexPath.row] (see cellForRowAt indexPath)
             // we can simply remove the objects at that index
