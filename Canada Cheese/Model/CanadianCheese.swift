@@ -43,6 +43,24 @@ struct CanadianCheese: Codable, Hashable {
     var isOrganic: Bool {
         return self.organic == "1"
     }
+    
+    /// Returns the last updated date formatted nicely, removing unnecessary parts (e.g. time), and making it more human readable
+    var lastUpdated: String {
+        let formatter = DateFormatter()
+        // 2020-03-10T14:52:18-05:00
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssxxx"
+        
+        if let date = formatter.date(from: lastUpdateDate) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .long
+            dateFormatter.timeStyle = .none
+            
+            // note that this is also automatically localized into the current locale
+            return dateFormatter.string(from: date)
+        }
+        
+        return lastUpdateDate
+    }
 }
 
 extension CanadianCheese {

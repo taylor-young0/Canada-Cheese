@@ -204,7 +204,7 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
             case NSLocalizedString("Rind type", comment: ""):
                 return cheese.rindTypeFr != "" ? cheese.rindTypeFr : cheese.rindTypeEn
             case NSLocalizedString("Last update", comment: ""):
-                return cheese.lastUpdateDate
+                return cheese.lastUpdated
             default:
                 return ""
             }
@@ -248,7 +248,7 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
             case NSLocalizedString("Rind type", comment: ""):
                 return cheese.rindTypeEn != "" ? cheese.rindTypeEn : cheese.rindTypeFr
             case NSLocalizedString("Last update", comment: ""):
-                return cheese.lastUpdateDate
+                return cheese.lastUpdated
             default:
                 return ""
             }
