@@ -10,6 +10,7 @@ import UIKit
 
 class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdating {
     
+    var settingsVC: SettingsViewController?
     var filterVC: FilterViewController?
     // all the cheese that is currently displayed, i.e., might be filtered, searched, etc
     var displayedCheese = [CanadianCheese]()
@@ -50,12 +51,19 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         let navigationBar = navigationController!.navigationBar
         navigationBar.prefersLargeTitles = true
         navigationBar.topItem!.title = "Canada Cheese"
+        // add the settings button to the navigation bar
+        let settings = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(displaySettings))
+        navigationBar.topItem?.leftBarButtonItems = [settings]
+        
         // add the filter button to the navigation bar
         let filter = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(displayFilters))
         navigationBar.topItem!.rightBarButtonItems = [filter]
         
+        // prepare a settings view controller
+        settingsVC = (storyboard?.instantiateViewController(identifier: "settingsViewController"))! as SettingsViewController
+        
         // prepare a filterViewController for filtering through the cheeses
-        filterVC = (storyboard!.instantiateViewController(identifier: "filterViewController") as! FilterViewController)
+        filterVC = (storyboard?.instantiateViewController(identifier: "filterViewController"))! as FilterViewController
         filterVC!.allCheeseVC = self
     }
     
@@ -77,6 +85,11 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     /// Displays the filter view controller
     @objc func displayFilters() {
         let navController = UINavigationController(rootViewController: filterVC!)
+        present(navController, animated: true)
+    }
+    
+    @objc func displaySettings() {
+        let navController = UINavigationController(rootViewController: settingsVC!)
         present(navController, animated: true)
     }
     
