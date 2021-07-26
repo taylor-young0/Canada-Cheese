@@ -61,6 +61,22 @@ struct CanadianCheese: Codable, Hashable {
         
         return lastUpdateDate
     }
+    
+    /// Returns the proper website url for the cheese by removing any extra http://.
+    /// As of July 2021 some 200+ cheese in the database have invalid urls
+    /// e.g. http://http://agropur.com instead of http://agropur.com
+    var websiteFixed: String {
+        let locale = Bundle.main.preferredLocalizations.first
+        let website: String
+        
+        if locale == "fr-CA" {
+            website = websiteFr.isEmpty ? websiteEn : websiteFr
+        } else {
+            website = websiteEn.isEmpty ? websiteFr : websiteEn
+        }
+        
+        return website.replacingOccurrences(of: "http://http://", with: "http://")
+    }
 }
 
 extension CanadianCheese {

@@ -177,7 +177,7 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
             case NSLocalizedString("Manufacturing type", comment: ""):
                 return cheese.manufacturingTypeFr != "" ? cheese.manufacturingTypeFr : cheese.manufacturingTypeEn
             case NSLocalizedString("Website", comment: ""):
-                return cheese.websiteFr != "" ? cheese.websiteFr : cheese.websiteEn
+                return cheese.websiteFixed
                 //cell.propertyValue.textColor = UIColor.systemRed
             case NSLocalizedString("Fat", comment: ""):
                 // no fat % given? Don't display anything
@@ -221,7 +221,7 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
             case NSLocalizedString("Manufacturing type", comment: ""):
                 return cheese.manufacturingTypeEn != "" ? cheese.manufacturingTypeEn : cheese.manufacturingTypeFr
             case NSLocalizedString("Website", comment: ""):
-                return cheese.websiteEn != "" ? cheese.websiteEn : cheese.websiteFr
+                return cheese.websiteFixed
                 //cell.propertyValue.textColor = UIColor.systemRed
             case NSLocalizedString("Fat", comment: ""):
                 // no fat % given? Don't display anything
