@@ -67,7 +67,7 @@ struct CanadianCheese: Codable, Hashable {
     /// e.g. http://http://agropur.com instead of http://agropur.com
     var websiteFixed: String {
         let locale = Bundle.main.preferredLocalizations.first
-        let website: String
+        var website: String
         
         if locale == "fr-CA" {
             website = websiteFr.isEmpty ? websiteEn : websiteFr
@@ -75,6 +75,7 @@ struct CanadianCheese: Codable, Hashable {
             website = websiteEn.isEmpty ? websiteFr : websiteEn
         }
         
+        website = website.replacingOccurrences(of: "http://https://", with: "https://")
         return website.replacingOccurrences(of: "http://http://", with: "http://")
     }
 }
