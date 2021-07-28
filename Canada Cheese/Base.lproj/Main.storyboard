@@ -85,14 +85,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="filterCell" id="QZJ-9f-bwS" customClass="CheeseFilterCell" customModule="Canada_Cheese" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QZJ-9f-bwS" id="D7c-cb-wiQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="373.5" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="373.5" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGZ-jG-BLo">
-                                            <rect key="frame" x="20" y="11" width="41.5" height="21"/>
+                                            <rect key="frame" x="20" y="11" width="41.5" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -100,6 +100,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="rGZ-jG-BLo" secondAttribute="trailing" constant="352.5" id="06B-TJ-Z9l"/>
+                                        <constraint firstAttribute="bottom" secondItem="rGZ-jG-BLo" secondAttribute="bottom" constant="11.5" id="VVp-Od-z6Y"/>
                                         <constraint firstItem="rGZ-jG-BLo" firstAttribute="top" secondItem="D7c-cb-wiQ" secondAttribute="top" constant="11" id="qg1-gQ-SUh"/>
                                         <constraint firstItem="rGZ-jG-BLo" firstAttribute="leading" secondItem="D7c-cb-wiQ" secondAttribute="leading" constant="20" symbolic="YES" id="wuK-oW-JPm"/>
                                     </constraints>
