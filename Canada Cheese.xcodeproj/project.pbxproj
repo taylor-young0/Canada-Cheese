@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		EF09DAAF2501757400459D6C /* CanadianCheese.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF09DAAE2501757400459D6C /* CanadianCheese.swift */; };
 		EF7C485026A0934F00AA41FE /* Localizable.strings in Sources */ = {isa = PBXBuildFile; fileRef = EF389D1226A0815D00316E3F /* Localizable.strings */; };
+		EF7D010226B2FCAF00DC9A5E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D010126B2FCAF00DC9A5E /* TabBarController.swift */; };
 		EF8D6E3826A866DF0070AE80 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8D6E3726A866DF0070AE80 /* SettingsViewController.swift */; };
 		EFA28ACF2502B38A00FF1D0F /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA28ACE2502B38A00FF1D0F /* FilterViewController.swift */; };
 		EFA28AD12502B84E00FF1D0F /* CheeseFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA28AD02502B84E00FF1D0F /* CheeseFilterCell.swift */; };
@@ -46,6 +47,7 @@
 		EF09DAAE2501757400459D6C /* CanadianCheese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanadianCheese.swift; sourceTree = "<group>"; };
 		EF389D0E26A07EBB00316E3F /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Main.strings"; sourceTree = "<group>"; };
 		EF389D1126A0815D00316E3F /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		EF7D010126B2FCAF00DC9A5E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EF8D6E3726A866DF0070AE80 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EFA28ACE2502B38A00FF1D0F /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		EFA28AD02502B84E00FF1D0F /* CheeseFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeseFilterCell.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				EFF025C125013CB1007FC111 /* AllCheeseTableViewController.swift */,
 				EFB177DA2507D6D100DE2FBA /* CheeseDetailViewController.swift */,
 				EF8D6E3726A866DF0070AE80 /* SettingsViewController.swift */,
+				EF7D010126B2FCAF00DC9A5E /* TabBarController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				EFF025AE250138A3007FC111 /* SceneDelegate.swift in Sources */,
 				EFB177D72507CAE100DE2FBA /* FavouriteCheeseCell.swift in Sources */,
 				EF8D6E3826A866DF0070AE80 /* SettingsViewController.swift in Sources */,
+				EF7D010226B2FCAF00DC9A5E /* TabBarController.swift in Sources */,
 				EF09DAAF2501757400459D6C /* CanadianCheese.swift in Sources */,
 				EFA28ACF2502B38A00FF1D0F /* FilterViewController.swift in Sources */,
 			);

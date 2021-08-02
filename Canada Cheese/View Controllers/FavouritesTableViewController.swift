@@ -8,7 +8,9 @@
 
 import UIKit
 
-class FavouritesTableViewController: UITableViewController {
+class FavouritesTableViewController: UITableViewController, TabBarReselectHandling {
+    
+    var navigationBarOffset: CGFloat = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,6 +18,8 @@ class FavouritesTableViewController: UITableViewController {
         let navigationBar = navigationController?.navigationBar
         navigationBar?.topItem?.title = NSLocalizedString("Favourite Cheese", comment: "Favourite cheese view navigation bar title")
         navigationBar?.tintColor = .systemRed
+        
+        navigationBarOffset = self.navigationController!.navigationBar.frame.height + (navigationController?.view.window?.windowScene?.statusBarManager?.statusBarFrame.height)!
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -72,6 +76,10 @@ class FavouritesTableViewController: UITableViewController {
         return true
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
+    }
+    
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let remove = UIContextualAction(style: .destructive, title: NSLocalizedString("Remove", comment: "Remove cheese from favourites button")) { action, view, completionHandler in
             // make sure to remove the cheese from the array of favourites
@@ -87,5 +95,9 @@ class FavouritesTableViewController: UITableViewController {
         let config = UISwipeActionsConfiguration(actions: [remove])
         config.performsFirstActionWithFullSwipe = false
         return config
+    }
+    
+    func handleReselect() {
+        tableView?.setContentOffset(CGPoint(x: 0.0, y: 0 - navigationBarOffset), animated: true)
     }
 }

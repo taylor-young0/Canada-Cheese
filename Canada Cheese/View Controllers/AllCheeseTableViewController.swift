@@ -8,12 +8,13 @@
 
 import UIKit
 
-class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdating {
+class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdating, TabBarReselectHandling {
     
     var settingsVC: SettingsViewController?
     var filterVC: FilterViewController?
     // all the cheese that is currently displayed, i.e., might be filtered, searched, etc
     var displayedCheese = [CanadianCheese]()
+    var navigationBarOffset: CGFloat = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +66,11 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         // prepare a filterViewController for filtering through the cheeses
         filterVC = (storyboard?.instantiateViewController(identifier: "filterViewController"))! as FilterViewController
         filterVC!.allCheeseVC = self
+
+        // this navigation bar offset is used to help scroll our view back up to the top
+        // it is equal to nav bar height + status bar height
+//        navigationBarOffset = max(self.navigationController!.navigationBar.frame.height + (navigationController?.view.window?.windowScene?.statusBarManager?.statusBarFrame.height)!, 0.0)
+        navigationBarOffset = self.navigationController!.navigationBar.frame.height + (navigationController?.view.window?.windowScene?.statusBarManager?.statusBarFrame.height)!
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -213,5 +219,9 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
             vc.selectedCheese = displayedCheese[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    func handleReselect() {
+        tableView?.setContentOffset(CGPoint(x: 0.0, y: 0 - navigationBarOffset), animated: true)
     }
 }
