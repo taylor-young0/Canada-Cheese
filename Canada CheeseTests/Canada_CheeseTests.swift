@@ -50,8 +50,8 @@ class Canada_CheeseTests: XCTestCase {
         // veined, nb
         let vc = AllCheeseTableViewController()
         
-        FilterViewController.activeFilters["Cheese type"] = ["Veined Cheeses"]
-        FilterViewController.activeFilters["Manufacturer province"] = ["NB"]
+        FilterViewController.activeFilters[NSLocalizedString("Cheese type", comment: "")] = [NSLocalizedString("Veined Cheeses", comment: "")]
+        FilterViewController.activeFilters[NSLocalizedString("Manufacturer province", comment: "")] = ["NB"]
         vc.displayedCheese = vc.filterCheese()
         
         allCheese = allCheese.filter({
@@ -64,8 +64,8 @@ class Canada_CheeseTests: XCTestCase {
         
         // cow and goat, thermised
         FilterViewController.activeFilters = defaultFilters
-        FilterViewController.activeFilters["Milk type"] = ["Cow and Goat"]
-        FilterViewController.activeFilters["Milk treatment"] = ["Thermised"]
+        FilterViewController.activeFilters[NSLocalizedString("Milk type", comment: "")] = [NSLocalizedString("Cow and Goat", comment: "")]
+        FilterViewController.activeFilters[NSLocalizedString("Milk treatment", comment: "")] = [NSLocalizedString("Thermised", comment: "")]
         vc.displayedCheese = vc.filterCheese()
         
         allCheese = CanadianCheeses.allCheeses!
@@ -82,9 +82,9 @@ class Canada_CheeseTests: XCTestCase {
     func testFewFilterResults() throws {
         let vc = AllCheeseTableViewController()
         
-        FilterViewController.activeFilters["Manufacturing type"] = ["Farmstead"]
-        FilterViewController.activeFilters["Manufacturer province"] = ["MB", "NB"]
-        FilterViewController.activeFilters["Organic"] = ["Organic"]
+        FilterViewController.activeFilters[NSLocalizedString("Manufacturing type", comment: "")] = [NSLocalizedString("Farmstead", comment: "")]
+        FilterViewController.activeFilters[NSLocalizedString("Manufacturer province", comment: "")] = ["MB", "NB"]
+        FilterViewController.activeFilters[NSLocalizedString("Organic", comment: "")] = [NSLocalizedString("Organic", comment: "")]
         vc.displayedCheese = vc.filterCheese()
         
         allCheese = allCheese.filter({
@@ -96,9 +96,9 @@ class Canada_CheeseTests: XCTestCase {
         XCTAssert(allCheese == vc.displayedCheese, "Got unexepected filter results when filtering for New Brunswick or Manitoba organic farmstead cheese")
         
         FilterViewController.activeFilters = defaultFilters
-        FilterViewController.activeFilters["Cheese type"] = ["Soft Cheese"]
-        FilterViewController.activeFilters["Milk type"] = ["Ewe"]
-        FilterViewController.activeFilters["Milk treatment"] = ["Raw Milk"]
+        FilterViewController.activeFilters[NSLocalizedString("Cheese type", comment: "")] = [NSLocalizedString("Soft Cheese", comment: "")]
+        FilterViewController.activeFilters[NSLocalizedString("Milk type", comment: "")] = [NSLocalizedString("Ewe", comment: "")]
+        FilterViewController.activeFilters[NSLocalizedString("Milk treatment", comment: "")] = [NSLocalizedString("Raw Milk", comment: "")]
         vc.displayedCheese = vc.filterCheese()
         
         allCheese = CanadianCheeses.allCheeses!
@@ -115,7 +115,11 @@ class Canada_CheeseTests: XCTestCase {
     func testManyFilterResults() throws {
         let vc = AllCheeseTableViewController()
         
-        FilterViewController.activeFilters["Milk type"] = ["Goat", "Cow", "Buffalo Cow"]
+        FilterViewController.activeFilters[NSLocalizedString("Milk type", comment: "")] = [
+            NSLocalizedString("Goat", comment: ""),
+            NSLocalizedString("Cow", comment: ""),
+            NSLocalizedString("Buffalo Cow", comment: "")
+        ]
         vc.displayedCheese = vc.filterCheese()
         
         allCheese = allCheese.filter({
@@ -127,8 +131,14 @@ class Canada_CheeseTests: XCTestCase {
         XCTAssert(allCheese == vc.displayedCheese, "Got unexpected filter results when filtering for goat, cow, or buffalo cow cheese")
         
         FilterViewController.activeFilters = defaultFilters
-        FilterViewController.activeFilters["Manufacturing type"] = ["Farmstead", "Industrial"]
-        FilterViewController.activeFilters["Rind type"] = ["Washed Rind", "Brushed Rind"]
+        FilterViewController.activeFilters[NSLocalizedString("Manufacturing type", comment: "")] = [
+            NSLocalizedString("Farmstead", comment: ""),
+            NSLocalizedString("Industrial", comment: "")
+        ]
+        FilterViewController.activeFilters[NSLocalizedString("Rind type", comment: "")] = [
+            NSLocalizedString("Washed Rind", comment: ""),
+            NSLocalizedString("Brushed Rind", comment: "")
+        ]
         vc.displayedCheese = vc.filterCheese()
         
         allCheese = CanadianCheeses.allCheeses!
