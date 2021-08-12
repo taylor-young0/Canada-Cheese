@@ -15,6 +15,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     // all the cheese that is currently displayed, i.e., might be filtered, searched, etc
     var displayedCheese = [CanadianCheese]()
     var navigationBarOffset: CGFloat = 0.0
+    var activeFilters = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         if let url = URL(string: urlString) {
             if let data = try? Data(contentsOf: url) {
                 parse(json: data)
+                displayedCheese = filterCheese()
             } else {
                 print("error")
             }
@@ -43,22 +45,18 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         // load the favourite cheeses, or just use an empty String array if there are currently none saved
         CanadianCheeses.favouriteCheesesIDs = userDefaults.array(forKey: "favouriteCheesesIDs") as? [String] ?? [String]()
         // create the favourite cheeses array from the cheese ids
-        CanadianCheeses.favouriteCheeses = allCheeses?.filter({CanadianCheeses.favouriteCheesesIDs.contains($0.cheeseId)}) ?? [CanadianCheese]()
-        
-        // Filter the cheese given the active filters
-        displayedCheese = filterCheese()
+        CanadianCheeses.favouriteCheeses = allCheeses?.filter({ CanadianCheeses.favouriteCheesesIDs.contains($0.cheeseId) }) ?? [CanadianCheese]()
         
         // set the title and the size of the title in the navigation bar
         let navigationBar = navigationController!.navigationBar
-        navigationBar.prefersLargeTitles = true
-        navigationBar.topItem!.title = "Canada Cheese"
-        // add the settings button to the navigation bar
-        let settings = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(displaySettings))
-        navigationBar.topItem?.leftBarButtonItems = [settings]
         
-        // add the filter button to the navigation bar
+        let settings = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(displaySettings))
         let filter = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(displayFilters))
-        navigationBar.topItem!.rightBarButtonItems = [filter]
+        
+        navigationBar.topItem?.leftBarButtonItems = [settings]
+        navigationBar.topItem?.title = "Canada Cheese"
+        navigationBar.prefersLargeTitles = true
+        navigationBar.topItem?.rightBarButtonItems = [filter]
         
         // prepare a settings view controller
         settingsVC = (storyboard?.instantiateViewController(identifier: "settingsViewController"))! as SettingsViewController
@@ -69,14 +67,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
 
         // this navigation bar offset is used to help scroll our view back up to the top
         // it is equal to nav bar height + status bar height
-//        navigationBarOffset = max(self.navigationController!.navigationBar.frame.height + (navigationController?.view.window?.windowScene?.statusBarManager?.statusBarFrame.height)!, 0.0)
-        navigationBarOffset = self.navigationController!.navigationBar.frame.height + (navigationController?.view.window?.windowScene?.statusBarManager?.statusBarFrame.height)!
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        // filter cheese, as we might have just gotten back from filtering vc!
-        displayedCheese = filterCheese()
-        tableView.reloadData()
+        navigationBarOffset = navigationBar.frame.height + (navigationController?.view.window?.windowScene?.statusBarManager?.statusBarFrame.height)!
     }
     
     /// Parses and saves the JSON cheese directory to `CanadianCheeses.allCheeses`
@@ -91,6 +82,14 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     /// Displays the filter view controller
     @objc func displayFilters() {
         let navController = UINavigationController(rootViewController: filterVC!)
+        
+        filterVC?.isModalInPresentation = true
+        // tempFilters is used to store the previously applied filters
+        // i.e., if filters have been applied n times, activeFilters is the nth filters applied and tempFilters is the (n-1)th filters applied
+        // tempFilters helps to revert recently applied filters when the user presses 'cancel' on the FilterViewController
+        filterVC?.tempFilters = FilterViewController.activeFilters
+        filterVC?.tableView.reloadData()
+        
         present(navController, animated: true)
     }
     
@@ -219,6 +218,10 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
             vc.selectedCheese = displayedCheese[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return activeFilters.joined(separator: ", ")
     }
     
     func handleReselect() {

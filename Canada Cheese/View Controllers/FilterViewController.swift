@@ -93,13 +93,13 @@ class FilterViewController: UITableViewController {
         // cancel button to disregard recently selected filters and go back to the main app screen
         let cancel = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: "Cancel button text"), style: .plain, target: self, action: #selector(dismissAndCancel))
         cancel.tintColor = .systemRed
-        // apply button to apply filters and go back to main app screen
-        let apply = UIBarButtonItem(title: NSLocalizedString("Apply", comment: "Apply filters button text"), style: .plain, target: self, action: #selector(dismissAndApply))
-        apply.tintColor = .systemRed
+        // done button to apply filters and go back to main app screen
+        let done = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .plain, target: self, action: #selector(dismissAndApply))
+        done.tintColor = .systemRed
         
         self.navigationItem.leftBarButtonItems = [cancel]
-        self.navigationItem.title = NSLocalizedString("Filter", comment: "Filter sheet navigation header text")
-        self.navigationItem.rightBarButtonItems = [apply]
+        self.navigationItem.titleView = setTitle(title: NSLocalizedString("Filter", comment: "Filter sheet navigation header text"), subtitle: "\(allCheeseVC!.displayedCheese.count) \(NSLocalizedString("Results", comment: "Follows the cheese filter results count"))")
+        self.navigationItem.rightBarButtonItems = [done]
     }
     
     /// Dismiss the FilterViewController and cancels the newly applied filters.
@@ -109,22 +109,77 @@ class FilterViewController: UITableViewController {
         for filterCell in recentlySelectedCells {
             let currAccessory = filterCell.accessoryType
             filterCell.accessoryType = (currAccessory == .none ? .checkmark : .none)
+            
+            if filterCell.accessoryType == .checkmark {
+                // activeFilters is a String array of the applied filters that is displayed to the user
+                // we need to remove these recent filters that are no longer active
+                //allCheeseVC?.activeFilters.removeAll(where: { $0 == filterCell.filter.text })
+                allCheeseVC?.activeFilters.append(filterCell.filter.text!)
+            } else {
+                // must be .none
+                allCheeseVC?.activeFilters.removeAll(where: { $0 == filterCell.filter.text })
+            }
         }
         // Since the filter VC is about to be dismissed there are no longer any recently selected cells in the current viewing of the filter VC
         recentlySelectedCells.removeAll()
+        FilterViewController.activeFilters = tempFilters
         
-        dismiss(animated: true, completion: {self.allCheeseVC!.viewDidAppear(true)})
+        dismiss(animated: true, completion: { [self] in
+            allCheeseVC?.displayedCheese = allCheeseVC!.filterCheese()
+            allCheeseVC?.tableView.reloadData()
+            navigationItem.titleView = setTitle(title: NSLocalizedString("Filter", comment: ""), subtitle: "\(allCheeseVC!.displayedCheese.count) \(NSLocalizedString("Results", comment: ""))")
+        })
     }
     
     /// Dismiss the FilterViewController and applies the new filters.
     @objc func dismissAndApply() {
-        FilterViewController.activeFilters = tempFilters
+//        FilterViewController.activeFilters = tempFilters
         // Since the filter VC is about to be dismissed there are no longer any recently selected cells in the current viewing of the filter VC
         recentlySelectedCells.removeAll()
         // Display all the cheese with the new filters
-        dismiss(animated: true, completion: {self.allCheeseVC!.viewDidAppear(true)})
+        dismiss(animated: true, completion: { [self] in
+            allCheeseVC?.displayedCheese = allCheeseVC!.filterCheese()
+            allCheeseVC!.viewDidAppear(true)
+            navigationItem.titleView = setTitle(title: NSLocalizedString("Filter", comment: ""), subtitle: "\(allCheeseVC!.displayedCheese.count) \(NSLocalizedString("Results", comment: ""))")
+        })
     }
-
+    
+    // Modified from https://gist.github.com/nazywamsiepawel/0166e8a71d74e96c7898 and https://stackoverflow.com/a/38628080
+    func setTitle(title:String, subtitle:String) -> UIView {
+        let titleLabel = UILabel(frame: CGRect(x:0, y:-5, width:0, height:0))
+        
+        titleLabel.backgroundColor = .clear
+        titleLabel.textColor = .black
+        titleLabel.font = .boldSystemFont(ofSize: 17)
+        titleLabel.text = title
+        titleLabel.sizeToFit()
+        
+        let subtitleLabel = UILabel(frame: CGRect(x:0, y:18, width:0, height:0))
+        subtitleLabel.backgroundColor = .clear
+        subtitleLabel.textColor = .black
+        subtitleLabel.font = .systemFont(ofSize: 12)
+        subtitleLabel.text = subtitle
+        subtitleLabel.sizeToFit()
+        
+        let titleView = UIView(frame: CGRect(x:0, y:0, width:max(titleLabel.frame.size.width, subtitleLabel.frame.size.width), height:30))
+        titleView.addSubview(titleLabel)
+        titleView.addSubview(subtitleLabel)
+        
+        let widthDiff = subtitleLabel.frame.size.width - titleLabel.frame.size.width
+        
+        if widthDiff > 0 {
+            var frame = titleLabel.frame
+            frame.origin.x = widthDiff / 2
+            titleLabel.frame = frame.integral
+        } else {
+            var frame = subtitleLabel.frame
+            frame.origin.x = abs(widthDiff) / 2
+            titleLabel.frame = frame.integral
+        }
+        
+        return titleView
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -137,8 +192,10 @@ class FilterViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell", for: indexPath) as! CheeseFilterCell
+        let sectionHeader = FilterViewController.filters[indexPath.section]?.first?.key
+        
         cell.filter.text = FilterViewController.filters[indexPath.section]!.first?.value[indexPath.row]
-        cell.accessoryType = .none
+        cell.accessoryType = FilterViewController.activeFilters[sectionHeader!]!.contains(cell.filter.text!) ? .checkmark : .none
 
         return cell
     }
@@ -156,13 +213,26 @@ class FilterViewController: UITableViewController {
         
         // if the filter is already applied, remove it
         if currentAccessory == .checkmark {
-            tempFilters["\(sectionTitle)"]!.remove(selectedFilter)
+//            tempFilters["\(sectionTitle)"]!.remove(selectedFilter)
+            allCheeseVC?.activeFilters.removeAll(where: { $0 == selectedFilter })
+            FilterViewController.activeFilters[sectionTitle]?.remove(selectedFilter)
+            allCheeseVC?.displayedCheese = allCheeseVC!.filterCheese()
+            allCheeseVC?.tableView.reloadData()
+            
+            self.navigationItem.titleView = setTitle(title: NSLocalizedString("Filter", comment: "Filter sheet navigation header text"), subtitle: "\(allCheeseVC!.displayedCheese.count) \(NSLocalizedString("Results", comment: ""))")
         } else {
-            tempFilters["\(sectionTitle)"]!.insert(selectedFilter)
+//            tempFilters["\(sectionTitle)"]!.insert(selectedFilter)
+            allCheeseVC?.activeFilters.append(selectedFilter)
+            FilterViewController.activeFilters[sectionTitle]?.insert(selectedFilter)
+            allCheeseVC?.displayedCheese = allCheeseVC!.filterCheese()
+            allCheeseVC?.tableView.reloadData()
+            
+            self.navigationItem.titleView = setTitle(title: NSLocalizedString("Filter", comment: "Filter sheet navigation header text"), subtitle: "\(allCheeseVC!.displayedCheese.count) \(NSLocalizedString("Results", comment: ""))")
         }
         
         // change the cell accessory to be the opposite of what it currently is
         cell.accessoryType = (currentAccessory == .none ? .checkmark : .none)
+        tableView.reloadData()
         // Add this selected cell to the set of recently selected cells,
         // allowing us to toggle the cell's accessory if the user presses cancel
         recentlySelectedCells.insert(cell)
