@@ -149,14 +149,14 @@ class FilterViewController: UITableViewController {
         let titleLabel = UILabel(frame: CGRect(x:0, y:-5, width:0, height:0))
         
         titleLabel.backgroundColor = .clear
-        titleLabel.textColor = .black
+        titleLabel.textColor = .label
         titleLabel.font = .boldSystemFont(ofSize: 17)
         titleLabel.text = title
         titleLabel.sizeToFit()
         
         let subtitleLabel = UILabel(frame: CGRect(x:0, y:18, width:0, height:0))
         subtitleLabel.backgroundColor = .clear
-        subtitleLabel.textColor = .black
+        subtitleLabel.textColor = .label
         subtitleLabel.font = .systemFont(ofSize: 12)
         subtitleLabel.text = subtitle
         subtitleLabel.sizeToFit()
