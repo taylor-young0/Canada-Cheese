@@ -37,8 +37,11 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
                 displayedCheese = filterCheese()
             } else {
                 print("error")
+                displayedCheese = [CanadianCheese]()
             }
         }
+        
+        refreshControl?.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         
         let userDefaults = UserDefaults.standard
         let allCheeses = CanadianCheeses.allCheeses
@@ -68,6 +71,32 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         // this navigation bar offset is used to help scroll our view back up to the top
         // it is equal to nav bar height + status bar height
         navigationBarOffset = navigationBar.frame.height + (navigationController?.view.window?.windowScene?.statusBarManager?.statusBarFrame.height)!
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        DispatchQueue.global().async { [self] in
+            // Load the JSON data
+            let urlString = "https://od-do.agr.gc.ca/canadianCheeseDirectory.json"
+            
+            if let url = URL(string: urlString) {
+                if let data = try? Data(contentsOf: url) {
+                    parse(json: data)
+                    
+                    // filter the cheese and find the user's favourites
+                    displayedCheese = filterCheese()
+                    CanadianCheeses.favouriteCheeses = CanadianCheeses.allCheeses?.filter({ CanadianCheeses.favouriteCheesesIDs.contains($0.cheeseId) }) ?? [CanadianCheese]()
+                } else {
+                    print("error")
+                    displayedCheese = [CanadianCheese]()
+                }
+            }
+            
+            // reload the table view after data has been fetched and parsed
+            DispatchQueue.main.async {
+                tableView.reloadData()
+                self.refreshControl?.endRefreshing()
+            }
+        }
     }
     
     /// Parses and saves the JSON cheese directory to `CanadianCheeses.allCheeses`
