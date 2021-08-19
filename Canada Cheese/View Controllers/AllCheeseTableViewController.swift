@@ -28,6 +28,35 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         searchBar.searchBar.tintColor = .systemRed
         navigationItem.searchController = searchBar
         
+        // set the title and the size of the title in the navigation bar
+        let navigationBar = navigationController!.navigationBar
+        
+        let settings = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(displaySettings))
+        let filter = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(displayFilters))
+        
+        navigationBar.topItem?.leftBarButtonItems = [settings]
+        navigationBar.topItem?.title = "Canada Cheese"
+        navigationBar.prefersLargeTitles = true
+        navigationBar.topItem?.rightBarButtonItems = [filter]
+        
+        // this navigation bar offset is used to help scroll our view back up to the top
+        // it is equal to nav bar height + status bar height
+        navigationBarOffset = navigationBar.frame.height + (navigationController?.view.window?.windowScene?.statusBarManager?.statusBarFrame.height)!
+        
+        refreshControl?.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        
+        // load up the favourite cheeses or use an empty String array if there are none
+        let userDefaults = UserDefaults.standard
+        let allCheeses = CanadianCheeses.allCheeses
+
+        CanadianCheeses.favouriteCheesesIDs = userDefaults.array(forKey: "favouriteCheesesIDs") as? [String] ?? [String]()
+        CanadianCheeses.favouriteCheeses = allCheeses?.filter({ CanadianCheeses.favouriteCheesesIDs.contains($0.cheeseId) }) ?? [CanadianCheese]()
+        
+        // prepare a settings and filtering view controllers
+        settingsVC = (storyboard?.instantiateViewController(identifier: "settingsViewController"))! as SettingsViewController
+        filterVC = (storyboard?.instantiateViewController(identifier: "filterViewController"))! as FilterViewController
+        filterVC!.allCheeseVC = self
+        
         // Load the JSON data
         let urlString = "https://od-do.agr.gc.ca/canadianCheeseDirectory.json"
         
@@ -40,37 +69,6 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
                 displayedCheese = [CanadianCheese]()
             }
         }
-        
-        refreshControl?.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        
-        let userDefaults = UserDefaults.standard
-        let allCheeses = CanadianCheeses.allCheeses
-        // load the favourite cheeses, or just use an empty String array if there are currently none saved
-        CanadianCheeses.favouriteCheesesIDs = userDefaults.array(forKey: "favouriteCheesesIDs") as? [String] ?? [String]()
-        // create the favourite cheeses array from the cheese ids
-        CanadianCheeses.favouriteCheeses = allCheeses?.filter({ CanadianCheeses.favouriteCheesesIDs.contains($0.cheeseId) }) ?? [CanadianCheese]()
-        
-        // set the title and the size of the title in the navigation bar
-        let navigationBar = navigationController!.navigationBar
-        
-        let settings = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(displaySettings))
-        let filter = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(displayFilters))
-        
-        navigationBar.topItem?.leftBarButtonItems = [settings]
-        navigationBar.topItem?.title = "Canada Cheese"
-        navigationBar.prefersLargeTitles = true
-        navigationBar.topItem?.rightBarButtonItems = [filter]
-        
-        // prepare a settings view controller
-        settingsVC = (storyboard?.instantiateViewController(identifier: "settingsViewController"))! as SettingsViewController
-        
-        // prepare a filterViewController for filtering through the cheeses
-        filterVC = (storyboard?.instantiateViewController(identifier: "filterViewController"))! as FilterViewController
-        filterVC!.allCheeseVC = self
-
-        // this navigation bar offset is used to help scroll our view back up to the top
-        // it is equal to nav bar height + status bar height
-        navigationBarOffset = navigationBar.frame.height + (navigationController?.view.window?.windowScene?.statusBarManager?.statusBarFrame.height)!
     }
     
     @objc func refresh(_ sender: AnyObject) {
@@ -252,6 +250,8 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return activeFilters.joined(separator: ", ")
     }
+    
+    // MARK: - Tab bar reselect
     
     func handleReselect() {
         tableView?.setContentOffset(CGPoint(x: 0.0, y: 0 - navigationBarOffset), animated: true)

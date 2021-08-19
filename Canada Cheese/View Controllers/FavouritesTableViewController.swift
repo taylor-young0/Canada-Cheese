@@ -15,11 +15,11 @@ class FavouritesTableViewController: UITableViewController, TabBarReselectHandli
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let navigationBar = navigationController?.navigationBar
-        navigationBar?.topItem?.title = NSLocalizedString("Favourite Cheese", comment: "Favourite cheese view navigation bar title")
-        navigationBar?.tintColor = .systemRed
+        let navigationBar = navigationController!.navigationBar
+        navigationBar.topItem?.title = NSLocalizedString("Favourite Cheese", comment: "Favourite cheese view navigation bar title")
+        navigationBar.tintColor = .systemRed
         
-        navigationBarOffset = self.navigationController!.navigationBar.frame.height + (navigationController?.view.window?.windowScene?.statusBarManager?.statusBarFrame.height)!
+        navigationBarOffset = navigationBar.frame.height + (navigationController?.view.window?.windowScene?.statusBarManager?.statusBarFrame.height)!
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +64,7 @@ class FavouritesTableViewController: UITableViewController, TabBarReselectHandli
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // load up a cheese detail vc
         let favouriteCheeses = CanadianCheeses.favouriteCheeses
+        
         if let vc = storyboard?.instantiateViewController(identifier: "cheeseDetail") as? CheeseDetailViewController {
             vc.selectedCheese = favouriteCheeses[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
@@ -88,6 +89,7 @@ class FavouritesTableViewController: UITableViewController, TabBarReselectHandli
             CanadianCheeses.favouriteCheeses.remove(at: indexPath.row)
             CanadianCheeses.favouriteCheesesIDs.remove(at: indexPath.row)
             UserDefaults.standard.setValue(CanadianCheeses.favouriteCheesesIDs, forKey: "favouriteCheesesIDs")
+            
             // remove the cell
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
@@ -96,6 +98,8 @@ class FavouritesTableViewController: UITableViewController, TabBarReselectHandli
         config.performsFirstActionWithFullSwipe = false
         return config
     }
+    
+    // MARK: - Tab bar reselect
     
     func handleReselect() {
         tableView?.setContentOffset(CGPoint(x: 0.0, y: 0 - navigationBarOffset), animated: true)

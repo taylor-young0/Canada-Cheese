@@ -59,6 +59,7 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
             CanadianCheeses.favouriteCheesesIDs.append(selectedCheese!.cheeseId)
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star.fill"), style: .plain, target: self, action: #selector(toggleFavourite))
         }
+        
         // write the favourite cheese to UserDefaults
         UserDefaults.standard.setValue(CanadianCheeses.favouriteCheesesIDs, forKey: "favouriteCheesesIDs")
     }
@@ -72,7 +73,6 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return properties[section].count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cheeseDetailCell", for: indexPath) as! CheeseDetailCell
@@ -82,47 +82,6 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
         // Note that for some properties this can still lead to the propertyValue
         // being a blank string.
         var propertyValue = CheeseDetailViewController.propertyValue(for: property, on: selectedCheese!, inLocale: Bundle.main.preferredLocalizations.first ?? "")
-//        switch property {
-//        case NSLocalizedString("Cheese", comment: ""):
-//            propertyValue = selectedCheese!.cheeseNameEn != "" ? selectedCheese!.cheeseNameEn : selectedCheese!.cheeseNameFr
-//        case NSLocalizedString("Manufacturer", comment: ""):
-//            propertyValue = selectedCheese!.manufacturerNameEn != "" ? selectedCheese!.manufacturerNameEn : selectedCheese!.manufacturerNameFr
-//        case NSLocalizedString("Manufacturer province", comment: ""):
-//            propertyValue = selectedCheese!.manufacturerProvCode
-//        case NSLocalizedString("Manufacturing type", comment: ""):
-//            propertyValue = selectedCheese!.manufacturingTypeEn
-//        case NSLocalizedString("Website", comment: ""):
-//            propertyValue = selectedCheese!.websiteEn != "" ? selectedCheese!.websiteEn : selectedCheese!.websiteFr
-//            cell.propertyValue.textColor = UIColor.systemRed
-//        case NSLocalizedString("Fat", comment: ""):
-//            // no fat % given? Don't display anything
-//            propertyValue = selectedCheese!.fatContentPercent != "" ? "\(selectedCheese!.fatContentPercent)%" : ""
-//        case NSLocalizedString("Moisture", comment: ""):
-//            // no moisture % given? Don't display anything
-//            propertyValue = selectedCheese!.moisturePercent != "" ? "\(selectedCheese!.moisturePercent)%" : ""
-//        case NSLocalizedString("Particularities", comment: ""):
-//            propertyValue = selectedCheese!.particularitiesEn != "" ? selectedCheese!.particularitiesEn : selectedCheese!.particularitiesFr
-//        case NSLocalizedString("Flavour", comment: ""):
-//            propertyValue = selectedCheese!.flavourEn != "" ? selectedCheese!.flavourEn : selectedCheese!.flavourFr
-//        case NSLocalizedString("Characteristics", comment: ""):
-//            propertyValue = selectedCheese!.characteristicsEn != "" ? selectedCheese!.characteristicsEn : selectedCheese!.characteristicsFr
-//        case NSLocalizedString("Ripening", comment: ""):
-//            propertyValue = selectedCheese!.ripeningEn != "" ? selectedCheese!.ripeningEn : selectedCheese!.ripeningFr
-//        case NSLocalizedString("Organic", comment: ""):
-//            propertyValue = (selectedCheese!.organic == "1" ? "Organic" : "Non-organic" )
-//        case NSLocalizedString("Cheese type", comment: ""):
-//            propertyValue = selectedCheese!.categoryTypeEn != "" ? selectedCheese!.categoryTypeEn : selectedCheese!.categoryTypeFr
-//        case NSLocalizedString("Milk type", comment: ""):
-//            propertyValue = selectedCheese!.milkTypeEn != "" ? selectedCheese!.milkTypeEn : selectedCheese!.milkTypeFr
-//        case NSLocalizedString("Milk treatment", comment: ""):
-//            propertyValue = selectedCheese!.milkTreatmentTypeEn != "" ? selectedCheese!.milkTreatmentTypeEn : selectedCheese!.milkTreatmentTypeFr
-//        case NSLocalizedString("Rind type", comment: ""):
-//            propertyValue = selectedCheese!.rindTypeEn != "" ? selectedCheese!.rindTypeEn : selectedCheese!.rindTypeFr
-//        case NSLocalizedString("Last update", comment: ""):
-//            propertyValue = selectedCheese!.lastUpdateDate
-//        default:
-//            propertyValue = ""
-//        }
         
         if propertyValue.isEmpty {
             propertyValue = "-"
@@ -163,7 +122,6 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
         }
     }
     
-    // clean up !!!
     static func propertyValue(for property: String, on cheese: CanadianCheese, inLocale locale: String) -> String {
         // if French (Canada), prefer French before English values
         if locale == "fr-CA" {
@@ -178,12 +136,11 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
                 return cheese.manufacturingTypeFr != "" ? cheese.manufacturingTypeFr : cheese.manufacturingTypeEn
             case NSLocalizedString("Website", comment: ""):
                 return cheese.websiteFixed
-                //cell.propertyValue.textColor = UIColor.systemRed
             case NSLocalizedString("Fat", comment: ""):
-                // no fat % given? Don't display anything
+                // no fat % given? Don't display the percentage sign!
                 return cheese.fatContentPercent != "" ? "\(cheese.fatContentPercent)%" : ""
             case NSLocalizedString("Moisture", comment: ""):
-                // no moisture % given? Don't display anything
+                // no moisture % given? Don't display the percentage sign!
                 return cheese.moisturePercent != "" ? "\(cheese.moisturePercent)%" : ""
             case NSLocalizedString("Particularities", comment: ""):
                 return cheese.particularitiesFr != "" ? cheese.particularitiesFr : cheese.particularitiesEn
@@ -222,12 +179,11 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
                 return cheese.manufacturingTypeEn != "" ? cheese.manufacturingTypeEn : cheese.manufacturingTypeFr
             case NSLocalizedString("Website", comment: ""):
                 return cheese.websiteFixed
-                //cell.propertyValue.textColor = UIColor.systemRed
             case NSLocalizedString("Fat", comment: ""):
-                // no fat % given? Don't display anything
+                // no fat % given? Don't display the percentage sign!
                 return cheese.fatContentPercent != "" ? "\(cheese.fatContentPercent)%" : ""
             case NSLocalizedString("Moisture", comment: ""):
-                // no moisture % given? Don't display anything
+                // no moisture % given? Don't display the percentage sign!
                 return cheese.moisturePercent != "" ? "\(cheese.moisturePercent)%" : ""
             case NSLocalizedString("Particularities", comment: ""):
                 return cheese.particularitiesEn != "" ? cheese.particularitiesEn : cheese.particularitiesFr

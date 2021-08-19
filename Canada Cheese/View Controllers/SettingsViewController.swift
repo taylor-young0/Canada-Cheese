@@ -13,10 +13,10 @@ class SettingsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = NSLocalizedString("Settings", comment: "")
-        
         let done = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .done, target: self, action: #selector(dismissVC))
         done.tintColor = .systemRed
+        
+        self.navigationItem.title = NSLocalizedString("Settings", comment: "")
         self.navigationItem.rightBarButtonItems = [done]
     }
 

@@ -10,10 +10,13 @@ import UIKit
 
 class FilterViewController: UITableViewController {
     
-    // cells that were selected in the current viewing of the vc, used to apply filter
+    // cells that were selected in the current viewing of the vc, used to revert cell selection upon canceling
     var recentlySelectedCells = Set<CheeseFilterCell>()
     var allCheeseVC: AllCheeseTableViewController?
-    // filters that have been selected, but have not yet been applied because the "apply" button has yet to be pressed
+    
+    // tempFilters is used to store the previously applied filters
+    // i.e., if filters have been applied n times, activeFilters is the nth filters applied and tempFilters is the (n-1)th filters applied
+    // tempFilters helps to revert recently applied filters when the user presses 'cancel' on the FilterViewController
     var tempFilters = [
         NSLocalizedString("Manufacturing type", comment: "Defines the method used by the cheese processor to make the cheese. (Artisan, Farmstead, Industrial)"): Set<String>(),
         NSLocalizedString("Manufacturer province", comment: "Province of manufacturer"): Set<String>(),
@@ -23,6 +26,7 @@ class FilterViewController: UITableViewController {
         NSLocalizedString("Milk treatment", comment: "How the milk is transformed in order to make cheese. Cheese Milk Treatment Type sample values: Raw Milk Cheese, Pasteurized, Thermised"): Set<String>(),
         NSLocalizedString("Rind type", comment: "Type of Rind. Typical Cheese Rind Type values: Washed Rind, Brushed Rind, Boomy Rind, No Rind"): Set<String>()
     ]
+    
     // filters that are currently active
     static var activeFilters = [
         NSLocalizedString("Manufacturing type", comment: ""): Set<String>(),
@@ -33,6 +37,7 @@ class FilterViewController: UITableViewController {
         NSLocalizedString("Milk treatment", comment: ""): Set<String>(),
         NSLocalizedString("Rind type", comment: ""): Set<String>()
     ]
+    
     static var filters = [
         0 : [NSLocalizedString("Manufacturing type", comment: ""):
                 [
@@ -90,10 +95,10 @@ class FilterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // cancel button to disregard recently selected filters and go back to the main app screen
+        // cancel and done buttons to disregard or apply recently selected filters and go back to the main app screen
         let cancel = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: "Cancel button text"), style: .plain, target: self, action: #selector(dismissAndCancel))
         cancel.tintColor = .systemRed
-        // done button to apply filters and go back to main app screen
+        
         let done = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .plain, target: self, action: #selector(dismissAndApply))
         done.tintColor = .systemRed
         
@@ -102,6 +107,8 @@ class FilterViewController: UITableViewController {
         self.navigationItem.rightBarButtonItems = [done]
     }
     
+    // TODO: this messes up when user spams a cell a multiple of two times (enabling, then disabling) the filter
+    // reverse also breaks it too, enable one, done, disable, enable, cancel results in it being applied (as expected), but doesn't have up to date header
     /// Dismiss the FilterViewController and cancels the newly applied filters.
     @objc func dismissAndCancel() {
         // Toggle the cell accessory as we actually don't want to apply these filters
@@ -120,6 +127,7 @@ class FilterViewController: UITableViewController {
                 allCheeseVC?.activeFilters.removeAll(where: { $0 == filterCell.filter.text })
             }
         }
+        
         // Since the filter VC is about to be dismissed there are no longer any recently selected cells in the current viewing of the filter VC
         recentlySelectedCells.removeAll()
         FilterViewController.activeFilters = tempFilters
@@ -133,13 +141,12 @@ class FilterViewController: UITableViewController {
     
     /// Dismiss the FilterViewController and applies the new filters.
     @objc func dismissAndApply() {
-//        FilterViewController.activeFilters = tempFilters
         // Since the filter VC is about to be dismissed there are no longer any recently selected cells in the current viewing of the filter VC
         recentlySelectedCells.removeAll()
+        
         // Display all the cheese with the new filters
         dismiss(animated: true, completion: { [self] in
             allCheeseVC?.displayedCheese = allCheeseVC!.filterCheese()
-            allCheeseVC!.viewDidAppear(true)
             navigationItem.titleView = setTitle(title: NSLocalizedString("Filter", comment: ""), subtitle: "\(allCheeseVC!.displayedCheese.count) \(NSLocalizedString("Results", comment: ""))")
         })
     }
@@ -209,21 +216,21 @@ class FilterViewController: UITableViewController {
         // .checkmark or .none
         let currentAccessory = cell.accessoryType
         let selectedFilter = cell.filter.text!
-        let sectionTitle = (tableView.headerView(forSection: indexPath.section)?.textLabel?.text)!
+        let filterCategory = (tableView.headerView(forSection: indexPath.section)?.textLabel?.text)!
         
         // if the filter is already applied, remove it
         if currentAccessory == .checkmark {
-//            tempFilters["\(sectionTitle)"]!.remove(selectedFilter)
             allCheeseVC?.activeFilters.removeAll(where: { $0 == selectedFilter })
-            FilterViewController.activeFilters[sectionTitle]?.remove(selectedFilter)
+            FilterViewController.activeFilters[filterCategory]?.remove(selectedFilter)
+            
             allCheeseVC?.displayedCheese = allCheeseVC!.filterCheese()
             allCheeseVC?.tableView.reloadData()
             
             self.navigationItem.titleView = setTitle(title: NSLocalizedString("Filter", comment: "Filter sheet navigation header text"), subtitle: "\(allCheeseVC!.displayedCheese.count) \(NSLocalizedString("Results", comment: ""))")
         } else {
-//            tempFilters["\(sectionTitle)"]!.insert(selectedFilter)
             allCheeseVC?.activeFilters.append(selectedFilter)
-            FilterViewController.activeFilters[sectionTitle]?.insert(selectedFilter)
+            FilterViewController.activeFilters[filterCategory]?.insert(selectedFilter)
+            
             allCheeseVC?.displayedCheese = allCheeseVC!.filterCheese()
             allCheeseVC?.tableView.reloadData()
             
@@ -233,6 +240,7 @@ class FilterViewController: UITableViewController {
         // change the cell accessory to be the opposite of what it currently is
         cell.accessoryType = (currentAccessory == .none ? .checkmark : .none)
         tableView.reloadData()
+        
         // Add this selected cell to the set of recently selected cells,
         // allowing us to toggle the cell's accessory if the user presses cancel
         recentlySelectedCells.insert(cell)
