@@ -243,6 +243,14 @@ class FilterViewController: UITableViewController {
         
         // Add this selected cell to the set of recently selected cells,
         // allowing us to toggle the cell's accessory if the user presses cancel
-        recentlySelectedCells.insert(cell)
+        //
+        // Note: recentlySelectedCells is a set, i.e. each cell is in there at most once
+        // but we want to remove the cell if the recentlySelectedCells already contains the cell
+        // because the user is undoing their first selection
+        if !recentlySelectedCells.contains(cell) {
+            recentlySelectedCells.insert(cell)
+        } else {
+            recentlySelectedCells.remove(cell)
+        }
     }
 }
