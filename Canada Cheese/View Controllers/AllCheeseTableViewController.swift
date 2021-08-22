@@ -157,19 +157,21 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     func updateSearchResults(for searchController: UISearchController) {
         // if there is no text then all cheese match because there's no text!
         guard let text = searchController.searchBar.text else {
-            displayedCheese = CanadianCheeses.allCheeses!
+            displayedCheese = filterCheese()
             tableView.reloadData()
             return
         }
         
         // if there is text but it is just an empty string
-        if searchController.searchBar.text!.isEmpty {
-            displayedCheese = CanadianCheeses.allCheeses!
+        if text.isEmpty {
+            displayedCheese = filterCheese()
             tableView.reloadData()
             return
         }
-        // search the cheese for the given text
-        displayedCheese = CanadianCheeses.allCheeses!.filter({searchCheese(for: text, on: $0)})
+        
+        // search the cheese for the given text after applying the current filters
+        displayedCheese = filterCheese()
+        displayedCheese = displayedCheese.filter({ searchCheese(for: text, on: $0) })
         tableView.reloadData()
     }
     
