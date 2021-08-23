@@ -28,6 +28,8 @@ class Canada_CheeseTests: XCTestCase {
     //        }
     //    }
     
+    // MARK: - Test Parsing JSON
+    
     /// Test that we can parse the cheese directory JSON file
     func testParseJSON() throws {
         let vc = AllCheeseTableViewController()
@@ -45,10 +47,14 @@ class Canada_CheeseTests: XCTestCase {
         }
     }
     
+    // MARK: - Filtering Tests
+    
     /// Test filtering that should result in zero results
     func testZeroFilterResults() throws {
-        // veined, nb
         let vc = AllCheeseTableViewController()
+        
+        // first test
+        // veined, nb
         
         FilterViewController.activeFilters[NSLocalizedString("Cheese type", comment: "")] = [NSLocalizedString("Veined Cheeses", comment: "")]
         FilterViewController.activeFilters[NSLocalizedString("Manufacturer province", comment: "")] = ["NB"]
@@ -62,7 +68,9 @@ class Canada_CheeseTests: XCTestCase {
         XCTAssert(allCheese == vc.displayedCheese, "Got unexpected filter results when filtering for New Brunswick veined cheeses")
         XCTAssert(vc.displayedCheese.count == 0, "Was expecting zero filter results when filtering for New Brunswick veined cheeses but got \(vc.displayedCheese.count)")
         
+        // second test
         // cow and goat, thermised
+        
         FilterViewController.activeFilters = defaultFilters
         FilterViewController.activeFilters[NSLocalizedString("Milk type", comment: "")] = [NSLocalizedString("Cow and Goat", comment: "")]
         FilterViewController.activeFilters[NSLocalizedString("Milk treatment", comment: "")] = [NSLocalizedString("Thermised", comment: "")]
@@ -82,6 +90,8 @@ class Canada_CheeseTests: XCTestCase {
     func testFewFilterResults() throws {
         let vc = AllCheeseTableViewController()
         
+        // first test
+        
         FilterViewController.activeFilters[NSLocalizedString("Manufacturing type", comment: "")] = [NSLocalizedString("Farmstead", comment: "")]
         FilterViewController.activeFilters[NSLocalizedString("Manufacturer province", comment: "")] = ["MB", "NB"]
         FilterViewController.activeFilters[NSLocalizedString("Organic", comment: "")] = [NSLocalizedString("Organic", comment: "")]
@@ -94,6 +104,8 @@ class Canada_CheeseTests: XCTestCase {
         })
         
         XCTAssert(allCheese == vc.displayedCheese, "Got unexepected filter results when filtering for New Brunswick or Manitoba organic farmstead cheese")
+        
+        // second test
         
         FilterViewController.activeFilters = defaultFilters
         FilterViewController.activeFilters[NSLocalizedString("Cheese type", comment: "")] = [NSLocalizedString("Soft Cheese", comment: "")]
@@ -115,6 +127,8 @@ class Canada_CheeseTests: XCTestCase {
     func testManyFilterResults() throws {
         let vc = AllCheeseTableViewController()
         
+        // first test
+        
         FilterViewController.activeFilters[NSLocalizedString("Milk type", comment: "")] = [
             NSLocalizedString("Goat", comment: ""),
             NSLocalizedString("Cow", comment: ""),
@@ -129,6 +143,8 @@ class Canada_CheeseTests: XCTestCase {
         })
         
         XCTAssert(allCheese == vc.displayedCheese, "Got unexpected filter results when filtering for goat, cow, or buffalo cow cheese")
+        
+        // second test
         
         FilterViewController.activeFilters = defaultFilters
         FilterViewController.activeFilters[NSLocalizedString("Manufacturing type", comment: "")] = [
@@ -154,10 +170,14 @@ class Canada_CheeseTests: XCTestCase {
     func testAllCheeseSatisfyFilterConditions() throws {
         let vc = AllCheeseTableViewController()
         
+        // first test
+        
         FilterViewController.activeFilters["Manufacturing type"] = ["Artisan", "Farmstead", "Industrial"]
         vc.displayedCheese = vc.filterCheese()
         
         XCTAssert(allCheese == vc.displayedCheese, "All cheese should satisfy when filtering with all possible manufacturing types")
+        
+        // second test
         
         FilterViewController.activeFilters = defaultFilters
         FilterViewController.activeFilters["Organic"] = ["Organic", "Non-organic"]
@@ -167,6 +187,8 @@ class Canada_CheeseTests: XCTestCase {
         XCTAssert(allCheese == vc.displayedCheese, "All cheese should satisfy when filtering with both organic and non-organic")
     }
     
+    // MARK: - Searching Tests
+    
     /// Test where a cheese search returns no results
     func testZeroSearchResults() throws {
         let vc = AllCheeseTableViewController()
@@ -174,10 +196,10 @@ class Canada_CheeseTests: XCTestCase {
         let words = ["Eggplant", "Aubergine"]
         
         for word in words {
-            allCheese = CanadianCheeses.allCheeses!
             vc.displayedCheese = CanadianCheeses.allCheeses!
             vc.displayedCheese = vc.displayedCheese.filter({ vc.searchCheese(for: word, on: $0) })
-            allCheese = allCheese.filter({
+            
+            allCheese = CanadianCheeses.allCheeses!.filter({
                 $0.cheeseNameEn.lowercased().contains(word.lowercased())
                     || $0.cheeseNameFr.lowercased().contains(word.lowercased())
                     || $0.flavourEn.lowercased().contains(word.lowercased())
@@ -202,10 +224,10 @@ class Canada_CheeseTests: XCTestCase {
         let words = ["Goat Cheddar (Fifth Town Artisan Cheese)", "Fleurmier"]
         
         for word in words {
-            allCheese = CanadianCheeses.allCheeses!
             vc.displayedCheese = CanadianCheeses.allCheeses!
             vc.displayedCheese = vc.displayedCheese.filter({ vc.searchCheese(for: word, on: $0) })
-            allCheese = allCheese.filter({
+            
+            allCheese = CanadianCheeses.allCheeses!.filter({
                 $0.cheeseNameEn.lowercased().contains(word.lowercased())
                     || $0.cheeseNameFr.lowercased().contains(word.lowercased())
                     || $0.flavourEn.lowercased().contains(word.lowercased())
@@ -230,10 +252,10 @@ class Canada_CheeseTests: XCTestCase {
         let words = ["Tangy", "Provolone"]
         
         for word in words {
-            allCheese = CanadianCheeses.allCheeses!
             vc.displayedCheese = CanadianCheeses.allCheeses!
             vc.displayedCheese = vc.displayedCheese.filter({ vc.searchCheese(for: word, on: $0) })
-            allCheese = allCheese.filter({
+            
+            allCheese = CanadianCheeses.allCheeses!.filter({
                 $0.cheeseNameEn.lowercased().contains(word.lowercased())
                     || $0.cheeseNameFr.lowercased().contains(word.lowercased())
                     || $0.flavourEn.lowercased().contains(word.lowercased())
