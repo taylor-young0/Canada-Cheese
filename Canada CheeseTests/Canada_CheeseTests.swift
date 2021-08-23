@@ -272,4 +272,101 @@ class Canada_CheeseTests: XCTestCase {
         XCTAssert(version2 == version3, "Search results should be case insensitive")
     }
     
+    // MARK: - Filtering and Searching Tests
+    
+    /// Test where a cheese filter and search returns no results
+    func testZeroFilterAndSearchResults() throws {
+        let vc = AllCheeseTableViewController()
+        
+        // first test
+        
+        let firstWord = "Mountain"
+        
+        FilterViewController.activeFilters[NSLocalizedString("Manufacturer province", comment: "")] = [NSLocalizedString("MB", comment: "")]
+            
+        vc.displayedCheese = CanadianCheeses.allCheeses!
+        vc.displayedCheese = vc.filterCheese()
+        vc.displayedCheese = vc.displayedCheese.filter({ vc.searchCheese(for: firstWord, on: $0) })
+            
+        XCTAssert(vc.displayedCheese.count == 0, "No cheese search and filter result from Manitoba should contain '\(firstWord)', found \(vc.displayedCheese.count)")
+        
+        // second test
+        
+        let secondWord = "Madawaska"
+        
+        FilterViewController.activeFilters = defaultFilters
+        FilterViewController.activeFilters[NSLocalizedString("Milk type", comment: "")] = [NSLocalizedString("Goat", comment: "")]
+        
+        vc.displayedCheese = CanadianCheeses.allCheeses!
+        vc.displayedCheese = vc.filterCheese()
+        vc.displayedCheese = vc.displayedCheese.filter({ vc.searchCheese(for: secondWord, on: $0) })
+        
+        XCTAssert(vc.displayedCheese.count == 0, "No goat cheese search and filter result should contain '\(secondWord)', found \(vc.displayedCheese.count)")
+    }
+    
+    func testFewFilterAndSearchResults() throws {
+        let vc = AllCheeseTableViewController()
+        
+        // first test
+        
+        let firstWord = "Mozzarella"
+        
+        FilterViewController.activeFilters[NSLocalizedString("Milk type", comment: "")] = [NSLocalizedString("Buffalo", comment: "")]
+            
+        vc.displayedCheese = CanadianCheeses.allCheeses!
+        vc.displayedCheese = vc.filterCheese()
+        vc.displayedCheese = vc.displayedCheese.filter({ vc.searchCheese(for: firstWord, on: $0) })
+            
+        for cheese in vc.displayedCheese {
+            XCTAssert(cheese.milkTypeEn == "Buffalo", "All searches for \(firstWord) cheese should be buffalo when buffalo milk type filtering is applied")
+        }
+        
+        // second test
+        
+        let secondWord = "Cheddar"
+        
+        FilterViewController.activeFilters = defaultFilters
+        FilterViewController.activeFilters[NSLocalizedString("Milk treatment", comment: "")] = [NSLocalizedString("Raw Milk", comment: "")]
+        
+        vc.displayedCheese = CanadianCheeses.allCheeses!
+        vc.displayedCheese = vc.filterCheese()
+        vc.displayedCheese = vc.displayedCheese.filter({ vc.searchCheese(for: secondWord, on: $0) })
+        
+        for cheese in vc.displayedCheese {
+            XCTAssert(cheese.milkTreatmentTypeEn == "Raw Milk", "All searches for \(secondWord) should be raw milk when raw milk filtering is applied")
+        }
+    }
+    
+    func testManyFilterAndSearchResults() throws {
+        let vc = AllCheeseTableViewController()
+        
+        // first test
+        
+        let firstWord = "Colo"
+        
+        FilterViewController.activeFilters[NSLocalizedString("Manufacturing type", comment: "")] = [NSLocalizedString("Artisan", comment: ""), NSLocalizedString("Farmstead", comment: "")]
+            
+        vc.displayedCheese = CanadianCheeses.allCheeses!
+        vc.displayedCheese = vc.filterCheese()
+        vc.displayedCheese = vc.displayedCheese.filter({ vc.searchCheese(for: firstWord, on: $0) })
+            
+        for cheese in vc.displayedCheese {
+            XCTAssert(cheese.manufacturingTypeEn == "Artisan" || cheese.manufacturingTypeEn == "Farmstead", "All searches for \(firstWord) cheese should be artisan or farmstead when artisan and farmstead filtering is applied")
+        }
+        
+        // second test
+        
+        let secondWord = "Pepper"
+        
+        FilterViewController.activeFilters = defaultFilters
+        FilterViewController.activeFilters[NSLocalizedString("Cheese type", comment: "")] = [NSLocalizedString("Firm Cheese", comment: ""), NSLocalizedString("Soft Cheese", comment: "")]
+        
+        vc.displayedCheese = CanadianCheeses.allCheeses!
+        vc.displayedCheese = vc.filterCheese()
+        vc.displayedCheese = vc.displayedCheese.filter({ vc.searchCheese(for: secondWord, on: $0) })
+        
+        for cheese in vc.displayedCheese {
+            XCTAssert(cheese.categoryTypeEn == "Firm Cheese" || cheese.categoryTypeEn == "Soft Cheese", "All searches for \(secondWord) should be firm or soft cheese when firm and soft cheese filtering is applied")
+        }
+    }
 }
