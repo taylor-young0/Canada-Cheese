@@ -45,13 +45,6 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         
         refreshControl?.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         
-        // load up the favourite cheeses or use an empty String array if there are none
-        let userDefaults = UserDefaults.standard
-        let allCheeses = CanadianCheeses.allCheeses
-
-        CanadianCheeses.favouriteCheesesIDs = userDefaults.array(forKey: "favouriteCheesesIDs") as? [String] ?? [String]()
-        CanadianCheeses.favouriteCheeses = allCheeses?.filter({ CanadianCheeses.favouriteCheesesIDs.contains($0.cheeseId) }) ?? [CanadianCheese]()
-        
         // prepare a settings and filtering view controllers
         settingsVC = (storyboard?.instantiateViewController(identifier: "settingsViewController"))! as SettingsViewController
         filterVC = (storyboard?.instantiateViewController(identifier: "filterViewController"))! as FilterViewController
@@ -69,6 +62,13 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
                 displayedCheese = [CanadianCheese]()
             }
         }
+        
+        // load up the favourite cheeses or use an empty String array if there are none
+        let userDefaults = UserDefaults.standard
+        let allCheeses = CanadianCheeses.allCheeses
+
+        CanadianCheeses.favouriteCheesesIDs = userDefaults.array(forKey: "favouriteCheesesIDs") as? [String] ?? [String]()
+        CanadianCheeses.favouriteCheeses = allCheeses?.filter({ CanadianCheeses.favouriteCheesesIDs.contains($0.cheeseId) }) ?? [CanadianCheese]()
     }
     
     @objc func refresh(_ sender: AnyObject) {
