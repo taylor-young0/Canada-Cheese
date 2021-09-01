@@ -30,6 +30,7 @@
 		EFF683AA26DFC48B00FDAB62 /* Canada Cheese screenshots.004.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EFF683A526DFC48B00FDAB62 /* Canada Cheese screenshots.004.jpeg */; };
 		EFF683AB26DFC48B00FDAB62 /* Canada Cheese screenshots.002.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EFF683A626DFC48B00FDAB62 /* Canada Cheese screenshots.002.jpeg */; };
 		EFF683AC26DFC48B00FDAB62 /* Canada Cheese screenshots.003.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EFF683A726DFC48B00FDAB62 /* Canada Cheese screenshots.003.jpeg */; };
+		EFF683AE26DFCC4D00FDAB62 /* canada-cheese.png in Resources */ = {isa = PBXBuildFile; fileRef = EFF683AD26DFCC4D00FDAB62 /* canada-cheese.png */; };
 		EFFA0F6025A2987600A475F0 /* Canada_CheeseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFA0F5F25A2987600A475F0 /* Canada_CheeseTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,7 @@
 		EFF683A526DFC48B00FDAB62 /* Canada Cheese screenshots.004.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Canada Cheese screenshots.004.jpeg"; sourceTree = "<group>"; };
 		EFF683A626DFC48B00FDAB62 /* Canada Cheese screenshots.002.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Canada Cheese screenshots.002.jpeg"; sourceTree = "<group>"; };
 		EFF683A726DFC48B00FDAB62 /* Canada Cheese screenshots.003.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Canada Cheese screenshots.003.jpeg"; sourceTree = "<group>"; };
+		EFF683AD26DFCC4D00FDAB62 /* canada-cheese.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "canada-cheese.png"; sourceTree = "<group>"; };
 		EFFA0F5D25A2987600A475F0 /* Canada CheeseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Canada CheeseTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFFA0F5F25A2987600A475F0 /* Canada_CheeseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canada_CheeseTests.swift; sourceTree = "<group>"; };
 		EFFA0F6125A2987600A475F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				EFF683A726DFC48B00FDAB62 /* Canada Cheese screenshots.003.jpeg */,
 				EFF683A526DFC48B00FDAB62 /* Canada Cheese screenshots.004.jpeg */,
 				EFF683A426DFC48B00FDAB62 /* Canada Cheese screenshots.005.jpeg */,
+				EFF683AD26DFCC4D00FDAB62 /* canada-cheese.png */,
 			);
 			path = Screenshots;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				EFF025BA250138A5007FC111 /* LaunchScreen.storyboard in Resources */,
 				EFF683A826DFC48B00FDAB62 /* Canada Cheese screenshots.001.jpeg in Resources */,
 				EFF683AC26DFC48B00FDAB62 /* Canada Cheese screenshots.003.jpeg in Resources */,
+				EFF683AE26DFCC4D00FDAB62 /* canada-cheese.png in Resources */,
 				EFF025C825014CBC007FC111 /* canadianCheeseDirectory.json in Resources */,
 				EFF025B7250138A5007FC111 /* Assets.xcassets in Resources */,
 				EFF025B5250138A3007FC111 /* Main.storyboard in Resources */,
