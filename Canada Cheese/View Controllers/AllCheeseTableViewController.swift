@@ -15,7 +15,6 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     // all the cheese that is currently displayed, i.e., might be filtered, searched, etc
     var displayedCheese = [CanadianCheese]()
     var navigationBarOffset: CGFloat = 0.0
-    var activeFilters = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -250,7 +249,9 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return activeFilters.joined(separator: ", ")
+        let activeFilters: [Set<String>] = Array(FilterViewController.activeFilters.values)
+        let title = activeFilters.joined()
+        return title.joined(separator: ", ")
     }
     
     // MARK: - Tab bar reselect

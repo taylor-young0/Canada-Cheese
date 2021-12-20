@@ -107,8 +107,6 @@ class FilterViewController: UITableViewController {
         self.navigationItem.rightBarButtonItems = [done]
     }
     
-    // TODO: this messes up when user spams a cell a multiple of two times (enabling, then disabling) the filter
-    // reverse also breaks it too, enable one, done, disable, enable, cancel results in it being applied (as expected), but doesn't have up to date header
     /// Dismiss the FilterViewController and cancels the newly applied filters.
     @objc func dismissAndCancel() {
         // Toggle the cell accessory as we actually don't want to apply these filters
@@ -116,16 +114,6 @@ class FilterViewController: UITableViewController {
         for filterCell in recentlySelectedCells {
             let currAccessory = filterCell.accessoryType
             filterCell.accessoryType = (currAccessory == .none ? .checkmark : .none)
-            
-            if filterCell.accessoryType == .checkmark {
-                // activeFilters is a String array of the applied filters that is displayed to the user
-                // we need to remove these recent filters that are no longer active
-                //allCheeseVC?.activeFilters.removeAll(where: { $0 == filterCell.filter.text })
-                allCheeseVC?.activeFilters.append(filterCell.filter.text!)
-            } else {
-                // must be .none
-                allCheeseVC?.activeFilters.removeAll(where: { $0 == filterCell.filter.text })
-            }
         }
         
         // Since the filter VC is about to be dismissed there are no longer any recently selected cells in the current viewing of the filter VC
@@ -220,7 +208,6 @@ class FilterViewController: UITableViewController {
         
         // if the filter is already applied, remove it
         if currentAccessory == .checkmark {
-            allCheeseVC?.activeFilters.removeAll(where: { $0 == selectedFilter })
             FilterViewController.activeFilters[filterCategory]?.remove(selectedFilter)
             
             allCheeseVC?.displayedCheese = allCheeseVC!.filterCheese()
@@ -228,7 +215,6 @@ class FilterViewController: UITableViewController {
             
             self.navigationItem.titleView = setTitle(title: NSLocalizedString("Filter", comment: "Filter sheet navigation header text"), subtitle: "\(allCheeseVC!.displayedCheese.count) \(NSLocalizedString("Results", comment: ""))")
         } else {
-            allCheeseVC?.activeFilters.append(selectedFilter)
             FilterViewController.activeFilters[filterCategory]?.insert(selectedFilter)
             
             allCheeseVC?.displayedCheese = allCheeseVC!.filterCheese()
