@@ -33,13 +33,6 @@
 		EFF025C225013CB1007FC111 /* AllCheeseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF025C125013CB1007FC111 /* AllCheeseTableViewController.swift */; };
 		EFF025C425013CDB007FC111 /* FavouritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF025C325013CDB007FC111 /* FavouritesTableViewController.swift */; };
 		EFF025C62501418C007FC111 /* CheeseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF025C52501418C007FC111 /* CheeseCell.swift */; };
-		EFF025C825014CBC007FC111 /* canadianCheeseDirectory.json in Resources */ = {isa = PBXBuildFile; fileRef = EFF025C725014CBC007FC111 /* canadianCheeseDirectory.json */; };
-		EFF683A826DFC48B00FDAB62 /* Canada Cheese screenshots.001.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EFF683A326DFC48A00FDAB62 /* Canada Cheese screenshots.001.jpeg */; };
-		EFF683A926DFC48B00FDAB62 /* Canada Cheese screenshots.005.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EFF683A426DFC48B00FDAB62 /* Canada Cheese screenshots.005.jpeg */; };
-		EFF683AA26DFC48B00FDAB62 /* Canada Cheese screenshots.004.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EFF683A526DFC48B00FDAB62 /* Canada Cheese screenshots.004.jpeg */; };
-		EFF683AB26DFC48B00FDAB62 /* Canada Cheese screenshots.002.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EFF683A626DFC48B00FDAB62 /* Canada Cheese screenshots.002.jpeg */; };
-		EFF683AC26DFC48B00FDAB62 /* Canada Cheese screenshots.003.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EFF683A726DFC48B00FDAB62 /* Canada Cheese screenshots.003.jpeg */; };
-		EFF683AE26DFCC4D00FDAB62 /* canada-cheese.png in Resources */ = {isa = PBXBuildFile; fileRef = EFF683AD26DFCC4D00FDAB62 /* canada-cheese.png */; };
 		EFFA0F6025A2987600A475F0 /* Canada_CheeseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFA0F5F25A2987600A475F0 /* Canada_CheeseTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -390,14 +383,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFF683AB26DFC48B00FDAB62 /* Canada Cheese screenshots.002.jpeg in Resources */,
-				EFF683AA26DFC48B00FDAB62 /* Canada Cheese screenshots.004.jpeg in Resources */,
-				EFF683A926DFC48B00FDAB62 /* Canada Cheese screenshots.005.jpeg in Resources */,
 				EFF025BA250138A5007FC111 /* LaunchScreen.storyboard in Resources */,
-				EFF683A826DFC48B00FDAB62 /* Canada Cheese screenshots.001.jpeg in Resources */,
-				EFF683AC26DFC48B00FDAB62 /* Canada Cheese screenshots.003.jpeg in Resources */,
-				EFF683AE26DFCC4D00FDAB62 /* canada-cheese.png in Resources */,
-				EFF025C825014CBC007FC111 /* canadianCheeseDirectory.json in Resources */,
 				EFF025B7250138A5007FC111 /* Assets.xcassets in Resources */,
 				EFF025B5250138A3007FC111 /* Main.storyboard in Resources */,
 			);
