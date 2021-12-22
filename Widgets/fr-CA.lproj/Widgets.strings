@@ -1,0 +1,54 @@
+"1zfz8y" = "Pâte dure";
+
+"4m5xVg" = "Toutes les catégories";
+
+"5Bcly8" = "Catégorie de fromage";
+
+"AfHGp5-1zfz8y" = "Il y a ${count} options qui correspondent ‘Pâte dure’.";
+
+"AfHGp5-4m5xVg" = "Il y a ${count} options qui correspondent ‘Toutes les catégories’.";
+
+"AfHGp5-F9f4PE" = "Il y a ${count} options qui correspondent ‘Pâte ferme’.";
+
+"AfHGp5-ID8J9c" = "Il y a ${count} options qui correspondent ‘Toutes les catégories’.";
+
+"AfHGp5-TXwox3" = "Il y a ${count} options qui correspondent ‘Pâte fraîche’.";
+
+"AfHGp5-a8sWK6" = "Il y a ${count} options qui correspondent ‘Pâte molle’.";
+
+"AfHGp5-f7tECc" = "Il y a ${count} options qui correspondent ‘Pâte persillée’.";
+
+"AfHGp5-y6Yah7" = "Il y a ${count} options qui correspondent ‘Pâte demi-ferme’.";
+
+"F9f4PE" = "Pâte ferme";
+
+"ID8J9c" = "Toutes les catégories";
+
+"JWaC14" = "Catégorie de fromage";
+
+"TXwox3" = "Pâte fraîche";
+
+"a8sWK6" = "Pâte molle";
+
+"f7tECc" = "Pâte persillée";
+
+"gpCwrM" = "Configuration";
+
+"kQxuPJ-1zfz8y" = "Juste pour confirmer, vous vouliez du ‘Pâte dure’?";
+
+"kQxuPJ-4m5xVg" = "Juste pour confirmer, vous vouliez ‘Toutes les catégories’?";
+
+"kQxuPJ-F9f4PE" = "Juste pour confirmer, vous vouliez du ‘Pâte ferme’?";
+
+"kQxuPJ-ID8J9c" = "Juste pour confirmer, vous vouliez du ‘Toutes les catégories’?";
+
+"kQxuPJ-TXwox3" = "Juste pour confirmer, vous vouliez du ‘Pâte fraîche’?";
+
+"kQxuPJ-a8sWK6" = "Juste pour confirmer, vous vouliez du ‘Pâte molle’?";
+
+"kQxuPJ-f7tECc" = "Juste pour confirmer, vous vouliez du ‘Pâte persillée’?";
+
+"kQxuPJ-y6Yah7" = "Juste pour confirmer, vous vouliez du ‘Pâte demi-ferme’?";
+
+"y6Yah7" = "Pâte demi-ferme";
+

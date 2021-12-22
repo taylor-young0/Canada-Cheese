@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  Canada Cheese
+
+  Created by Taylor Young on 2021-12-21.
+  Copyright © 2021 Taylor Young. All rights reserved.
+*/
+
+"Random cheese" = "Un fromage aléatoire";
+
+"Showcases a random cheese." = "Présente un fromage aléatoire.";

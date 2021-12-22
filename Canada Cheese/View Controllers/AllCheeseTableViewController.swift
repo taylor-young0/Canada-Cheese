@@ -105,6 +105,27 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         }
     }
     
+    /// Displays cheese data when tapping cheese widget
+    func displayCheeseDetail(for id: String, loaded: Bool = true) {
+        // scene(_:willConnectTo:options:)
+        // data won't be loaded if the app has yet to be launched
+        if !loaded {
+            let urlString = "https://od-do.agr.gc.ca/canadianCheeseDirectory.json"
+            
+            if let url = URL(string: urlString) {
+                if let data = try? Data(contentsOf: url) {
+                    parse(json: data)
+                }
+            }
+        }
+        
+        // load up a cheese detail vc
+        if let vc = storyboard?.instantiateViewController(identifier: "cheeseDetail") as? CheeseDetailViewController {
+            vc.selectedCheese = CanadianCheeses.allCheeses?.first(where: { $0.cheeseId == id })
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     /// Displays the filter view controller
     @objc func displayFilters() {
         let navController = UINavigationController(rootViewController: filterVC!)

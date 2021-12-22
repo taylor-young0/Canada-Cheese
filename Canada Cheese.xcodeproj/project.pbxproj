@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		EF09DAAF2501757400459D6C /* CanadianCheese.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF09DAAE2501757400459D6C /* CanadianCheese.swift */; };
+		EF4FD96E27729C0C0088CECB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF4FD96D27729C0C0088CECB /* WidgetKit.framework */; };
+		EF4FD97027729C0C0088CECB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF4FD96F27729C0C0088CECB /* SwiftUI.framework */; };
+		EF4FD97327729C0C0088CECB /* Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4FD97227729C0C0088CECB /* Widgets.swift */; };
+		EF4FD97627729C120088CECB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF4FD97527729C120088CECB /* Assets.xcassets */; };
+		EF4FD97C27729C120088CECB /* WidgetsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EF4FD96B27729C0C0088CECB /* WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EF4FD98127729CDD0088CECB /* CanadianCheese.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF09DAAE2501757400459D6C /* CanadianCheese.swift */; };
+		EF4FD9822772B9670088CECB /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EF4FD9852772B9670088CECB /* Widgets.intentdefinition */; };
+		EF4FD9832772B9670088CECB /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EF4FD9852772B9670088CECB /* Widgets.intentdefinition */; };
+		EF4FD98A2772C2570088CECB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EF4FD98C2772C2570088CECB /* Localizable.strings */; };
 		EF7C485026A0934F00AA41FE /* Localizable.strings in Sources */ = {isa = PBXBuildFile; fileRef = EF389D1226A0815D00316E3F /* Localizable.strings */; };
 		EF7D010226B2FCAF00DC9A5E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D010126B2FCAF00DC9A5E /* TabBarController.swift */; };
 		EF8D6E3826A866DF0070AE80 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8D6E3726A866DF0070AE80 /* SettingsViewController.swift */; };
@@ -35,6 +44,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		EF4FD97A27729C120088CECB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EFF025A0250138A3007FC111 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF4FD96A27729C0C0088CECB;
+			remoteInfo = WidgetsExtension;
+		};
 		EFFA0F6225A2987600A475F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EFF025A0250138A3007FC111 /* Project object */;
@@ -44,10 +60,33 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		EF4FD97D27729C120088CECB /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EF4FD97C27729C120088CECB /* WidgetsExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		EF09DAAE2501757400459D6C /* CanadianCheese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanadianCheese.swift; sourceTree = "<group>"; };
 		EF389D0E26A07EBB00316E3F /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Main.strings"; sourceTree = "<group>"; };
 		EF389D1126A0815D00316E3F /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		EF4FD96B27729C0C0088CECB /* WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF4FD96D27729C0C0088CECB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		EF4FD96F27729C0C0088CECB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		EF4FD97227729C0C0088CECB /* Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widgets.swift; sourceTree = "<group>"; };
+		EF4FD97527729C120088CECB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EF4FD97727729C120088CECB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF4FD9842772B9670088CECB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/Widgets.intentdefinition; sourceTree = "<group>"; };
+		EF4FD9872772B96B0088CECB /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Widgets.strings"; sourceTree = "<group>"; };
+		EF4FD98B2772C2570088CECB /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		EF7D010126B2FCAF00DC9A5E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EF8D6E3726A866DF0070AE80 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EFA28ACE2502B38A00FF1D0F /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +118,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EF4FD96827729C0C0088CECB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF4FD97027729C0C0088CECB /* SwiftUI.framework in Frameworks */,
+				EF4FD96E27729C0C0088CECB /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFF025A5250138A3007FC111 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -96,6 +144,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF4FD96C27729C0C0088CECB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EF4FD96D27729C0C0088CECB /* WidgetKit.framework */,
+				EF4FD96F27729C0C0088CECB /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF4FD97127729C0C0088CECB /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				EF4FD97227729C0C0088CECB /* Widgets.swift */,
+				EF4FD9852772B9670088CECB /* Widgets.intentdefinition */,
+				EF4FD97527729C120088CECB /* Assets.xcassets */,
+				EF4FD97727729C120088CECB /* Info.plist */,
+				EF4FD98C2772C2570088CECB /* Localizable.strings */,
+			);
+			path = Widgets;
+			sourceTree = "<group>";
+		};
+		EF4FD98D2772CA9D0088CECB /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				EF4FD98E2772CAAB0088CECB /* Model */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		EF4FD98E2772CAAB0088CECB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EF09DAAE2501757400459D6C /* CanadianCheese.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		EFAED6BC25696CA200894081 /* Screenshots */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,7 +211,6 @@
 			isa = PBXGroup;
 			children = (
 				EFB177DC2507E9A300DE2FBA /* Cell */,
-				EF09DAAE2501757400459D6C /* CanadianCheese.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -149,6 +233,9 @@
 				EFAED6BB25696B6000894081 /* README.md */,
 				EFF025AA250138A3007FC111 /* Canada Cheese */,
 				EFFA0F5E25A2987600A475F0 /* Canada CheeseTests */,
+				EF4FD98D2772CA9D0088CECB /* Shared */,
+				EF4FD97127729C0C0088CECB /* Widgets */,
+				EF4FD96C27729C0C0088CECB /* Frameworks */,
 				EFF025A9250138A3007FC111 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -158,6 +245,7 @@
 			children = (
 				EFF025A8250138A3007FC111 /* Canada Cheese.app */,
 				EFFA0F5D25A2987600A475F0 /* Canada CheeseTests.xctest */,
+				EF4FD96B27729C0C0088CECB /* WidgetsExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -191,6 +279,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EF4FD96A27729C0C0088CECB /* WidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF4FD98027729C120088CECB /* Build configuration list for PBXNativeTarget "WidgetsExtension" */;
+			buildPhases = (
+				EF4FD96727729C0C0088CECB /* Sources */,
+				EF4FD96827729C0C0088CECB /* Frameworks */,
+				EF4FD96927729C0C0088CECB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WidgetsExtension;
+			productName = WidgetsExtension;
+			productReference = EF4FD96B27729C0C0088CECB /* WidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		EFF025A7250138A3007FC111 /* Canada Cheese */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EFF025BE250138A5007FC111 /* Build configuration list for PBXNativeTarget "Canada Cheese" */;
@@ -198,10 +303,12 @@
 				EFF025A4250138A3007FC111 /* Sources */,
 				EFF025A5250138A3007FC111 /* Frameworks */,
 				EFF025A6250138A3007FC111 /* Resources */,
+				EF4FD97D27729C120088CECB /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EF4FD97B27729C120088CECB /* PBXTargetDependency */,
 			);
 			name = "Canada Cheese";
 			productName = "Canada Cheese";
@@ -232,10 +339,13 @@
 		EFF025A0250138A3007FC111 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1230;
+				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Taylor Young";
 				TargetAttributes = {
+					EF4FD96A27729C0C0088CECB = {
+						CreatedOnToolsVersion = 13.1;
+					};
 					EFF025A7250138A3007FC111 = {
 						CreatedOnToolsVersion = 11.7;
 					};
@@ -261,11 +371,21 @@
 			targets = (
 				EFF025A7250138A3007FC111 /* Canada Cheese */,
 				EFFA0F5C25A2987600A475F0 /* Canada CheeseTests */,
+				EF4FD96A27729C0C0088CECB /* WidgetsExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EF4FD96927729C0C0088CECB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF4FD97627729C120088CECB /* Assets.xcassets in Resources */,
+				EF4FD98A2772C2570088CECB /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFF025A6250138A3007FC111 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -293,6 +413,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EF4FD96727729C0C0088CECB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF4FD9832772B9670088CECB /* Widgets.intentdefinition in Sources */,
+				EF4FD97327729C0C0088CECB /* Widgets.swift in Sources */,
+				EF4FD98127729CDD0088CECB /* CanadianCheese.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFF025A4250138A3007FC111 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -307,6 +437,7 @@
 				EFB177D92507D38000DE2FBA /* CheeseDetailCell.swift in Sources */,
 				EFF025AE250138A3007FC111 /* SceneDelegate.swift in Sources */,
 				EFB177D72507CAE100DE2FBA /* FavouriteCheeseCell.swift in Sources */,
+				EF4FD9822772B9670088CECB /* Widgets.intentdefinition in Sources */,
 				EF8D6E3826A866DF0070AE80 /* SettingsViewController.swift in Sources */,
 				EF7D010226B2FCAF00DC9A5E /* TabBarController.swift in Sources */,
 				EF09DAAF2501757400459D6C /* CanadianCheese.swift in Sources */,
@@ -325,6 +456,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		EF4FD97B27729C120088CECB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF4FD96A27729C0C0088CECB /* WidgetsExtension */;
+			targetProxy = EF4FD97A27729C120088CECB /* PBXContainerItemProxy */;
+		};
 		EFFA0F6325A2987600A475F0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EFF025A7250138A3007FC111 /* Canada Cheese */;
@@ -337,6 +473,23 @@
 			isa = PBXVariantGroup;
 			children = (
 				EF389D1126A0815D00316E3F /* fr-CA */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		EF4FD9852772B9670088CECB /* Widgets.intentdefinition */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF4FD9842772B9670088CECB /* Base */,
+				EF4FD9872772B96B0088CECB /* fr-CA */,
+			);
+			name = Widgets.intentdefinition;
+			sourceTree = "<group>";
+		};
+		EF4FD98C2772C2570088CECB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF4FD98B2772C2570088CECB /* fr-CA */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -361,6 +514,66 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		EF4FD97E27729C120088CECB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6JTMH9S5KE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Taylor Young. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.taylor-young0.Canada-Cheese.Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EF4FD97F27729C120088CECB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6JTMH9S5KE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Taylor Young. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.taylor-young0.Canada-Cheese.Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		EFF025BC250138A5007FC111 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -482,6 +695,7 @@
 		EFF025BF250138A5007FC111 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -503,6 +717,7 @@
 		EFF025C0250138A5007FC111 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -566,6 +781,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EF4FD98027729C120088CECB /* Build configuration list for PBXNativeTarget "WidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF4FD97E27729C120088CECB /* Debug */,
+				EF4FD97F27729C120088CECB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EFF025A3250138A3007FC111 /* Build configuration list for PBXProject "Canada Cheese" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
