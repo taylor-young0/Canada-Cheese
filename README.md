@@ -11,3 +11,4 @@ Canada Cheese is an independent iOS application project I worked on to showcase 
 | <img src="Screenshots/Canada Cheese screenshots.003.jpeg" alt="View cheese" width="450"/> | <img src="Screenshots/Canada Cheese screenshots.002.jpeg" alt="Favourites" width="450"/> |
 | ------------- |---------------|
 | <img src="Screenshots/Canada Cheese screenshots.004.jpeg" alt="Filtering" width="450"/> | <img src="Screenshots/Canada Cheese screenshots.005.jpeg" alt="Searching" width="450"/> |
+| <img src="Screenshots/Canada Cheese screenshots.006.jpeg" alt="Filtering" width="450"/> | <img src="Screenshots/Canada Cheese screenshots.007.jpeg" alt="Searching" width="450"/> |

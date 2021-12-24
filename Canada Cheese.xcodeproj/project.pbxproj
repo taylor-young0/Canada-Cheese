@@ -80,6 +80,8 @@
 		EF4FD9842772B9670088CECB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/Widgets.intentdefinition; sourceTree = "<group>"; };
 		EF4FD9872772B96B0088CECB /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Widgets.strings"; sourceTree = "<group>"; };
 		EF4FD98B2772C2570088CECB /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		EF5ACC1127756E42006BB4F7 /* Canada Cheese screenshots.006.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Canada Cheese screenshots.006.jpeg"; sourceTree = "<group>"; };
+		EF5ACC1227756E42006BB4F7 /* Canada Cheese screenshots.007.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Canada Cheese screenshots.007.jpeg"; sourceTree = "<group>"; };
 		EF7D010126B2FCAF00DC9A5E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EF8D6E3726A866DF0070AE80 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EFA28ACE2502B38A00FF1D0F /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +184,8 @@
 				EFF683A726DFC48B00FDAB62 /* Canada Cheese screenshots.003.jpeg */,
 				EFF683A526DFC48B00FDAB62 /* Canada Cheese screenshots.004.jpeg */,
 				EFF683A426DFC48B00FDAB62 /* Canada Cheese screenshots.005.jpeg */,
+				EF5ACC1127756E42006BB4F7 /* Canada Cheese screenshots.006.jpeg */,
+				EF5ACC1227756E42006BB4F7 /* Canada Cheese screenshots.007.jpeg */,
 				EFF683AD26DFCC4D00FDAB62 /* canada-cheese.png */,
 			);
 			path = Screenshots;
