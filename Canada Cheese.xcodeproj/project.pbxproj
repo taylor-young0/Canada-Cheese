@@ -20,6 +20,8 @@
 		EF7C485026A0934F00AA41FE /* Localizable.strings in Sources */ = {isa = PBXBuildFile; fileRef = EF389D1226A0815D00316E3F /* Localizable.strings */; };
 		EF7D010226B2FCAF00DC9A5E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D010126B2FCAF00DC9A5E /* TabBarController.swift */; };
 		EF8D6E3826A866DF0070AE80 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8D6E3726A866DF0070AE80 /* SettingsViewController.swift */; };
+		EF94F3872780BA6800209B13 /* RandomCheeseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF94F3852780BA1600209B13 /* RandomCheeseWidgetView.swift */; };
+		EF94F3892780BE9C00209B13 /* RandomCheeseWidgetView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF94F3882780BE9C00209B13 /* RandomCheeseWidgetView+Helpers.swift */; };
 		EFA28ACF2502B38A00FF1D0F /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA28ACE2502B38A00FF1D0F /* FilterViewController.swift */; };
 		EFA28AD12502B84E00FF1D0F /* CheeseFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA28AD02502B84E00FF1D0F /* CheeseFilterCell.swift */; };
 		EFB177D72507CAE100DE2FBA /* FavouriteCheeseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB177D62507CAE100DE2FBA /* FavouriteCheeseCell.swift */; };
@@ -84,6 +86,8 @@
 		EF5ACC1227756E42006BB4F7 /* Canada Cheese screenshots.007.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Canada Cheese screenshots.007.jpeg"; sourceTree = "<group>"; };
 		EF7D010126B2FCAF00DC9A5E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EF8D6E3726A866DF0070AE80 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		EF94F3852780BA1600209B13 /* RandomCheeseWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomCheeseWidgetView.swift; sourceTree = "<group>"; };
+		EF94F3882780BE9C00209B13 /* RandomCheeseWidgetView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RandomCheeseWidgetView+Helpers.swift"; sourceTree = "<group>"; };
 		EFA28ACE2502B38A00FF1D0F /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		EFA28AD02502B84E00FF1D0F /* CheeseFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeseFilterCell.swift; sourceTree = "<group>"; };
 		EFAED6BB25696B6000894081 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -152,6 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				EF4FD97227729C0C0088CECB /* Widgets.swift */,
+				EF94F3852780BA1600209B13 /* RandomCheeseWidgetView.swift */,
+				EF94F3882780BE9C00209B13 /* RandomCheeseWidgetView+Helpers.swift */,
 				EF4FD9852772B9670088CECB /* Widgets.intentdefinition */,
 				EF4FD97527729C120088CECB /* Assets.xcassets */,
 				EF4FD97727729C120088CECB /* Info.plist */,
@@ -407,6 +413,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF94F3892780BE9C00209B13 /* RandomCheeseWidgetView+Helpers.swift in Sources */,
+				EF94F3872780BA6800209B13 /* RandomCheeseWidgetView.swift in Sources */,
 				EF4FD9832772B9670088CECB /* Widgets.intentdefinition in Sources */,
 				EF4FD97327729C0C0088CECB /* Widgets.swift in Sources */,
 				EF4FD98127729CDD0088CECB /* CanadianCheese.swift in Sources */,
@@ -518,7 +526,7 @@
 				INFOPLIST_FILE = Widgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Taylor Young. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -548,7 +556,7 @@
 				INFOPLIST_FILE = Widgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Taylor Young. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
