@@ -12,7 +12,7 @@ import Intents
 
 struct Provider: IntentTimelineProvider {
     
-    let cheese = CanadianCheese(cheeseId: "374", cheeseNameEn: "Goat Brie (Woolwich)", cheeseNameFr: "", manufacturerNameEn: "Woolwich Dairy", manufacturerNameFr: "", manufacturerProvCode: "ON", manufacturingTypeEn: "Industrial", manufacturingTypeFr: "Industrielle", websiteEn: "http://www.woolwichdairy.com", websiteFr: "http://www.woolwichdairy.com/french.aspx", fatContentPercent: "22", moisturePercent: "52", particularitiesEn: "Rennet free, ripens from the outside in", particularitiesFr: "Sans présure, affiné en surface", flavourEn: "Rich, creamy, buttery, both subtle and tangy in taste", flavourFr: "Riche, crèmeuse, butyreuse, goût doux et piquant", characteristicsEn: "", characteristicsFr: "", ripeningEn: "Less than 1 Month", ripeningFr: "moins de 1 mois", organic: "0", categoryTypeEn: "Soft Cheese", categoryTypeFr: "Pâte molle", milkTypeEn: "Goat", milkTypeFr: "Chèvre", milkTreatmentTypeEn: "Pasteurized", milkTreatmentTypeFr: "Pasteurisé", rindTypeEn: "Bloomy Rind", rindTypeFr: "Croûte fleurie", lastUpdateDate: "2016-02-03T11:04:25-05:00")
+    let cheese = Widgets_Previews.cheese
     
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), configuration: ConfigurationIntent(), cheese: cheese)
@@ -123,7 +123,36 @@ struct Widgets: Widget {
 }
 
 struct Widgets_Previews: PreviewProvider {
-    static let cheese = CanadianCheese(cheeseId: "374", cheeseNameEn: "Goat Brie (Woolwich)", cheeseNameFr: "", manufacturerNameEn: "Woolwich Dairy", manufacturerNameFr: "", manufacturerProvCode: "ON", manufacturingTypeEn: "Industrial", manufacturingTypeFr: "Industrielle", websiteEn: "http://www.woolwichdairy.com", websiteFr: "http://www.woolwichdairy.com/french.aspx", fatContentPercent: "22", moisturePercent: "52", particularitiesEn: "Rennet free, ripens from the outside in", particularitiesFr: "Sans présure, affiné en surface", flavourEn: "Rich, creamy, buttery, both subtle and tangy in taste", flavourFr: "Riche, crèmeuse, butyreuse, goût doux et piquant", characteristicsEn: "", characteristicsFr: "", ripeningEn: "Less than 1 Month", ripeningFr: "moins de 1 mois", organic: "0", categoryTypeEn: "Soft Cheese", categoryTypeFr: "Pâte molle", milkTypeEn: "Goat", milkTypeFr: "Chèvre", milkTreatmentTypeEn: "Pasteurized", milkTreatmentTypeFr: "Pasteurisé", rindTypeEn: "Bloomy Rind", rindTypeFr: "Croûte fleurie", lastUpdateDate: "2016-02-03T11:04:25-05:00")
+    static let cheese = CanadianCheese(cheeseId: "374",
+                                       cheeseNameEn: "Goat Brie (Woolwich)",
+                                       cheeseNameFr: "",
+                                       manufacturerNameEn: "Woolwich Dairy",
+                                       manufacturerNameFr: "",
+                                       manufacturerProvCode: "ON",
+                                       manufacturingTypeEn: "Industrial",
+                                       manufacturingTypeFr: "Industrielle",
+                                       websiteEn: "http://www.woolwichdairy.com",
+                                       websiteFr: "http://www.woolwichdairy.com/french.aspx",
+                                       fatContentPercent: "22",
+                                       moisturePercent: "52",
+                                       particularitiesEn: "Rennet free, ripens from the outside in",
+                                       particularitiesFr: "Sans présure, affiné en surface",
+                                       flavourEn: "Rich, creamy, buttery, both subtle and tangy in taste",
+                                       flavourFr: "Riche, crèmeuse, butyreuse, goût doux et piquant",
+                                       characteristicsEn: "",
+                                       characteristicsFr: "",
+                                       ripeningEn: "Less than 1 Month",
+                                       ripeningFr: "moins de 1 mois",
+                                       organic: "0",
+                                       categoryTypeEn: "Soft Cheese",
+                                       categoryTypeFr: "Pâte molle",
+                                       milkTypeEn: "Goat",
+                                       milkTypeFr: "Chèvre",
+                                       milkTreatmentTypeEn: "Pasteurized",
+                                       milkTreatmentTypeFr: "Pasteurisé",
+                                       rindTypeEn: "Bloomy Rind",
+                                       rindTypeFr: "Croûte fleurie",
+                                       lastUpdateDate: "2016-02-03T11:04:25-05:00")
     
     static var previews: some View {
         

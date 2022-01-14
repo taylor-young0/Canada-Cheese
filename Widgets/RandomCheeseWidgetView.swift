@@ -66,25 +66,30 @@ struct RandomCheeseWidgetView : View {
     // MARK: large
     
     var large: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(NSLocalizedString("Random cheese", comment: "").uppercased())
-                    .font(.caption.bold())
-                    .foregroundColor(.orange)
-                Text(propertyValue("Cheese", on: entry.cheese!, inLocale: entry.locale))
-                    .fontWeight(.bold)
-                    .lineLimit(3)
-                Text(propertyValue("Manufacturer", on: entry.cheese!, inLocale: entry.locale))
-                    .lineLimit(3)
-                    .foregroundColor(.gray)
-                    .padding(.bottom)
-                
-                largeInformation
+        GeometryReader { geometry in
+            ZStack {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(NSLocalizedString("Random cheese", comment: "").uppercased())
+                            .font(.caption.bold())
+                            .foregroundColor(.orange)
+                        Text(propertyValue("Cheese", on: entry.cheese!, inLocale: entry.locale))
+                            .fontWeight(.bold)
+                            .lineLimit(3)
+                        Text(propertyValue("Manufacturer", on: entry.cheese!, inLocale: entry.locale))
+                            .lineLimit(3)
+                            .foregroundColor(.gray)
+                            .padding(.bottom)
+                        
+                        largeInformation(geometry: geometry)
+                    }
+                    .padding()
+                    Spacer()
+                }
+                .widgetURL(URL(string: "canadacheese:cheese?id=\(entry.cheese!.cheeseId)"))
             }
-            .padding()
-            Spacer()
+            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
         }
-        .widgetURL(URL(string: "canadacheese:cheese?id=\(entry.cheese!.cheeseId)"))
     }
     
     // MARK: extraLarge
@@ -125,35 +130,6 @@ struct RandomCheeseWidgetView : View {
             Text(propertyValue("Manufacturer", on: entry.cheese!, inLocale: entry.locale))
                 .lineLimit(3)
                 .foregroundColor(.gray)
-        }
-    }
-    
-    var largeInformation: some View {
-        Group {
-            Text(cheeseDescription)
-                .lineLimit(3)
-            Divider()
-            HStack {
-                Text(NSLocalizedString("Cheese type", tableName: nil, bundle: bundle, value: "", comment: ""))
-                Spacer()
-                Text(propertyValue("Cheese type", on: entry.cheese!, inLocale: entry.locale))
-                    .foregroundColor(.gray)
-            }
-            Divider()
-            HStack {
-                Text(NSLocalizedString("Milk type", tableName: nil, bundle: bundle, value: "", comment: ""))
-                Spacer()
-                Text(propertyValue("Milk type", on: entry.cheese!, inLocale: entry.locale))
-                    .foregroundColor(.gray)
-            }
-            Divider()
-            HStack {
-                Text(NSLocalizedString("Manufacturer province", tableName: nil, bundle: bundle, value: "", comment: ""))
-                Spacer()
-                Text(propertyValue("Manufacturer province", on: entry.cheese!, inLocale: entry.locale))
-                    .foregroundColor(.gray)
-            }
-            Divider()
         }
     }
     
@@ -230,6 +206,51 @@ struct RandomCheeseWidgetView : View {
                     .foregroundColor(.gray)
             }
             Divider()
+        }
+    }
+    
+    func largeInformation(geometry: GeometryProxy) -> some View {
+        // iPhone 12 large widget height
+        // see https://developer.apple.com/design/human-interface-guidelines/widgets/overview/design/
+        // and https://iosref.com/res
+        let largerDeviceWidgetHeight = 354.0
+        
+        return Group {
+            Text(cheeseDescription)
+                .lineLimit(3)
+            Divider()
+            HStack {
+                Text(NSLocalizedString("Cheese type", tableName: nil, bundle: bundle, value: "", comment: ""))
+                Spacer()
+                Text(propertyValue("Cheese type", on: entry.cheese!, inLocale: entry.locale))
+                    .foregroundColor(.gray)
+            }
+            Divider()
+            HStack {
+                Text(NSLocalizedString("Milk type", tableName: nil, bundle: bundle, value: "", comment: ""))
+                Spacer()
+                Text(propertyValue("Milk type", on: entry.cheese!, inLocale: entry.locale))
+                    .foregroundColor(.gray)
+            }
+            Divider()
+            HStack {
+                Text(NSLocalizedString("Manufacturer province", tableName: nil, bundle: bundle, value: "", comment: ""))
+                Spacer()
+                Text(propertyValue("Manufacturer province", on: entry.cheese!, inLocale: entry.locale))
+                    .foregroundColor(.gray)
+            }
+            Divider()
+            
+            // Any device with at least this widget height can display cheese ripening info
+            if geometry.size.height >= largerDeviceWidgetHeight {
+                HStack {
+                    Text(NSLocalizedString("Ripening", tableName: nil, bundle: bundle, value: "", comment: ""))
+                    Spacer()
+                    Text(propertyValue("Ripening", on: entry.cheese!, inLocale: entry.locale))
+                        .foregroundColor(.gray)
+                }
+                Divider()
+            }
         }
     }
 }
