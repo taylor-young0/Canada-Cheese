@@ -67,7 +67,17 @@ class FavouritesTableViewController: UITableViewController, TabBarReselectHandli
         
         if let vc = storyboard?.instantiateViewController(identifier: "cheeseDetail") as? CheeseDetailViewController {
             vc.selectedCheese = favouriteCheeses[indexPath.row]
-            navigationController?.pushViewController(vc, animated: true)
+
+            if UITraitCollection.current.horizontalSizeClass == .regular {
+                vc.navigationItem.hidesBackButton = true
+                splitViewController?.showDetailViewController(vc, sender: nil)
+                    
+                if splitViewController?.displayMode == .oneOverSecondary {
+                    splitViewController?.hide(.supplementary)
+                }
+            } else {
+                navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
     

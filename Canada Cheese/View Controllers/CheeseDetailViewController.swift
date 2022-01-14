@@ -43,8 +43,10 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
         // create a favourite button, star is either filled or not depending on its status as a favourite cheese
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: selectedCheese!.isFavourite ? "star.fill" : "star"),
+        if selectedCheese != nil {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: selectedCheese!.isFavourite ? "star.fill" : "star"),
                                                             style: .plain, target: self, action: #selector(toggleFavourite))
+        }
     }
     
     @objc func toggleFavourite() {
@@ -67,7 +69,7 @@ class CheeseDetailViewController: UITableViewController, SFSafariViewControllerD
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return properties.count
+        return selectedCheese == nil ? 0 : properties.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

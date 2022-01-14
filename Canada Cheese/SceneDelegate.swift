@@ -14,10 +14,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     /// If app not yet running, see https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        // Determine who sent the URL.
+        // Navigation bar tint color for regular size class
+        UINavigationBar.appearance().tintColor = .systemRed
+        
         if let urlContext = connectionOptions.urlContexts.first {
 
             let url = urlContext.url
@@ -31,9 +30,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             // if cheeseId given
             if let cheeseId = params.first(where: { $0.name == "id" })?.value {
-                let allCheeseVC = window?.rootViewController?.children.first?.children.first as? AllCheeseTableViewController
-
-                allCheeseVC?.displayCheeseDetail(for: cheeseId, loaded: false)
+                if UITraitCollection.current.horizontalSizeClass == .regular {
+                    let sidebarVC = window?.rootViewController?.children.first?.children.first as? SidebarViewController
+                    sidebarVC?.displayCheeseDetail(for: cheeseId, loaded: false)
+                } else {
+                    // compact size class
+                    let splitViewController = window?.rootViewController as? UISplitViewController
+                    let allCheeseVC = splitViewController?.viewController(for: .compact)?.children.first?.children.first as? AllCheeseTableViewController
+                    
+                    allCheeseVC?.displayCheeseDetail(for: cheeseId, loaded: false)
+                }
             } else {
                 print("cheeseId missing")
             }
@@ -55,12 +61,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             // if cheeseId is given
             if let cheeseId = params.first(where: { $0.name == "id" })?.value {
-                let allCheeseVC = window?.rootViewController?.children.first?.children.first as? AllCheeseTableViewController
-  
-                allCheeseVC?.displayCheeseDetail(for: cheeseId)
-                let tabBarController = window?.rootViewController as? UITabBarController
-                // Move tabBarController back to AllCheeseTableViewController
-                tabBarController?.selectedIndex = 0
+                if UITraitCollection.current.horizontalSizeClass == .regular {
+                    let sidebarVC = window?.rootViewController?.children.first?.children.first as? SidebarViewController
+                    sidebarVC?.displayCheeseDetail(for: cheeseId)
+                } else {
+                    // compact size class
+                    let tabBarController = window?.rootViewController?.children.last as? TabBarController
+                    let allCheeseVC = tabBarController?.children.first?.children.first as? AllCheeseTableViewController
+                    // Move tabBarController back to AllCheeseTableViewController
+                    tabBarController?.selectedIndex = 0
+                    
+                    allCheeseVC?.displayCheeseDetail(for: cheeseId)
+                }
             } else {
                 print("cheeseId missing")
             }

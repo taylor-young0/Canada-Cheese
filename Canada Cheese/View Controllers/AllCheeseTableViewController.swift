@@ -35,6 +35,9 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         
         navigationBar.topItem?.leftBarButtonItems = [settings]
         navigationBar.topItem?.title = "Canada Cheese"
+        // Needed for regular size class navigation
+        navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemRed]
+        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemRed]
         navigationBar.prefersLargeTitles = true
         navigationBar.topItem?.rightBarButtonItems = [filter]
         
@@ -265,7 +268,17 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         // load up a cheese detail vc
         if let vc = storyboard?.instantiateViewController(identifier: "cheeseDetail") as? CheeseDetailViewController {
             vc.selectedCheese = displayedCheese[indexPath.row]
-            navigationController?.pushViewController(vc, animated: true)
+                
+            if UITraitCollection.current.horizontalSizeClass == .regular {
+                vc.navigationItem.hidesBackButton = true
+                splitViewController?.showDetailViewController(vc, sender: nil)
+                    
+                if splitViewController?.displayMode == .oneOverSecondary {
+                    splitViewController?.hide(.supplementary)
+                }
+            } else {
+                navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
     

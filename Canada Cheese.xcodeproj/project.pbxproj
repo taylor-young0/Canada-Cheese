@@ -17,6 +17,7 @@
 		EF4FD9822772B9670088CECB /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EF4FD9852772B9670088CECB /* Widgets.intentdefinition */; };
 		EF4FD9832772B9670088CECB /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EF4FD9852772B9670088CECB /* Widgets.intentdefinition */; };
 		EF4FD98A2772C2570088CECB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EF4FD98C2772C2570088CECB /* Localizable.strings */; };
+		EF65358E27876D69008ECDB0 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF65358D27876D69008ECDB0 /* SidebarViewController.swift */; };
 		EF7C485026A0934F00AA41FE /* Localizable.strings in Sources */ = {isa = PBXBuildFile; fileRef = EF389D1226A0815D00316E3F /* Localizable.strings */; };
 		EF7D010226B2FCAF00DC9A5E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D010126B2FCAF00DC9A5E /* TabBarController.swift */; };
 		EF8D6E3826A866DF0070AE80 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8D6E3726A866DF0070AE80 /* SettingsViewController.swift */; };
@@ -84,6 +85,7 @@
 		EF4FD98B2772C2570088CECB /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		EF5ACC1127756E42006BB4F7 /* Canada Cheese screenshots.006.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Canada Cheese screenshots.006.jpeg"; sourceTree = "<group>"; };
 		EF5ACC1227756E42006BB4F7 /* Canada Cheese screenshots.007.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Canada Cheese screenshots.007.jpeg"; sourceTree = "<group>"; };
+		EF65358D27876D69008ECDB0 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		EF7D010126B2FCAF00DC9A5E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EF8D6E3726A866DF0070AE80 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EF94F3852780BA1600209B13 /* RandomCheeseWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomCheeseWidgetView.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				EFB177DA2507D6D100DE2FBA /* CheeseDetailViewController.swift */,
 				EF8D6E3726A866DF0070AE80 /* SettingsViewController.swift */,
 				EF7D010126B2FCAF00DC9A5E /* TabBarController.swift */,
+				EF65358D27876D69008ECDB0 /* SidebarViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				EFF025C225013CB1007FC111 /* AllCheeseTableViewController.swift in Sources */,
 				EFB177DB2507D6D100DE2FBA /* CheeseDetailViewController.swift in Sources */,
 				EFA28AD12502B84E00FF1D0F /* CheeseFilterCell.swift in Sources */,
+				EF65358E27876D69008ECDB0 /* SidebarViewController.swift in Sources */,
 				EFF025C62501418C007FC111 /* CheeseCell.swift in Sources */,
 				EFB177D92507D38000DE2FBA /* CheeseDetailCell.swift in Sources */,
 				EFF025AE250138A3007FC111 /* SceneDelegate.swift in Sources */,
