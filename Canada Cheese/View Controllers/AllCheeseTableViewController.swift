@@ -53,7 +53,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         filterVC!.allCheeseVC = self
         
         // Load the JSON data
-        let urlString = "https://od-do.agr.gc.ca/canadianCheeseDirectory.json"
+        let urlString = "https://raw.githubusercontent.com/taylor-young0/Canada-Cheese/main/Canada%20Cheese/canadianCheeseDirectory.json"
         
         if let url = URL(string: urlString) {
             if let data = try? Data(contentsOf: url) {
@@ -76,7 +76,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
     @objc func refresh(_ sender: AnyObject) {
         DispatchQueue.global().async { [self] in
             // Load the JSON data
-            let urlString = "https://od-do.agr.gc.ca/canadianCheeseDirectory.json"
+            let urlString = "https://raw.githubusercontent.com/taylor-young0/Canada-Cheese/main/Canada%20Cheese/canadianCheeseDirectory.json"
             
             if let url = URL(string: urlString) {
                 if let data = try? Data(contentsOf: url) {
@@ -113,7 +113,7 @@ class AllCheeseTableViewController: UITableViewController, UISearchResultsUpdati
         // scene(_:willConnectTo:options:)
         // data won't be loaded if the app has yet to be launched
         if !loaded {
-            let urlString = "https://od-do.agr.gc.ca/canadianCheeseDirectory.json"
+            let urlString = "https://raw.githubusercontent.com/taylor-young0/Canada-Cheese/main/Canada%20Cheese/canadianCheeseDirectory.json"
             
             if let url = URL(string: urlString) {
                 if let data = try? Data(contentsOf: url) {

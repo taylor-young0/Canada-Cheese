@@ -71,7 +71,7 @@ struct Provider: IntentTimelineProvider {
     
     func fetchAllCheese() -> [CanadianCheese] {
         // Load the JSON data
-        let urlString = "https://od-do.agr.gc.ca/canadianCheeseDirectory.json"
+        let urlString = "https://raw.githubusercontent.com/taylor-young0/Canada-Cheese/main/Canada%20Cheese/canadianCheeseDirectory.json"
         
         if let url = URL(string: urlString) {
             if let data = try? Data(contentsOf: url) {
